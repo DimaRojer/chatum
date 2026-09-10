@@ -1,0 +1,20 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" width="64" height="80">
+	<style>
+		.s0 { fill: #fff7ed;stroke: #ea580c;stroke-width: 3 } 
+		.s1 { fill: #ffedd5 } 
+		.s2 { fill: none;stroke: #ea580c;stroke-linejoin: round;stroke-width: 3 } 
+		.s3 { fill: #ffedd5;stroke: #ea580c;stroke-width: 3 } 
+		.s4 { fill: none;stroke: #ea580c;stroke-width: 3 } 
+		.s5 { fill: #ea580c } 
+		.s6 { fill: none;stroke: #ea580c;stroke-linecap: round;stroke-width: 3 } 
+	</style>
+	<path class="s0" d="m11 2.5h28.5l14 14v52.5c0 4.69-3.81 8.5-8.5 8.5h-34c-4.69 0-8.5-3.81-8.5-8.5v-58c0-4.69 3.81-8.5 8.5-8.5z"/>
+	<path class="s1" d="m40 3v13h13"/>
+	<path fill-rule="evenodd" class="s2" d="m40 3v13h13"/>
+	<path class="s3" d="m12 31c0-2.21 1.79-4 4-4h24c2.21 0 4 1.79 4 4v26c0 2.21-1.79 4-4 4h-24c-2.21 0-4-1.79-4-4z"/>
+	<path fill-rule="evenodd" class="s4" d="m12 34h32"/>
+	<path fill-rule="evenodd" class="s5" d="m24.5 27h7v7h-7z"/>
+	<path fill-rule="evenodd" class="s5" d="m26 40h4c0.55 0 1 0.45 1 1v4c0 0.55-0.45 1-1 1h-4c-0.55 0-1-0.45-1-1v-4c0-0.55 0.45-1 1-1z"/>
+	<path fill-rule="evenodd" class="s6" d="m28 46v7"/>
+	<path fill-rule="evenodd" class="s6" d="m24 53h8"/>
+</svg>

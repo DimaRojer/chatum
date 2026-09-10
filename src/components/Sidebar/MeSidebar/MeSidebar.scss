@@ -1,0 +1,9 @@
+.direct-list__remove {
+    display: none;
+}
+
+.direct-list__item:hover {
+    .direct-list__remove {
+        display: block;
+    }
+}

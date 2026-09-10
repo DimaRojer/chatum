@@ -1,0 +1,39 @@
+.remove-modal {
+    &__title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.4;
+        color: var(--black);
+    }
+    &__button {
+        height: 36px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+
+        &--cancel {
+            background: transparent;
+            color: var(--black);
+
+            &:hover {
+                background: #f1f5f9;
+            }
+        }
+
+        &--remove {
+            background: #ef4444;
+            color: white;
+
+            &:hover {
+                background: #dc2626;
+            }
+        }
+    }
+}

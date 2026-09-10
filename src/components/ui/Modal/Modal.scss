@@ -1,0 +1,114 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    animation: modal-overlay 0.1s ease-out;
+    &__container {
+        width: 500px;
+        overflow-y: auto;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        animation: modal-container 0.1s ease-out;
+    }
+    &__header, &__main {
+        padding: 24px 24px 12px;
+        border-bottom: 1px solid var(--border);
+    }
+    &__footer{
+        padding: 16px 24px 20px 24px;
+        background-color: var(--side-bg);
+    }
+    &__title {
+        margin: 0;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+    &__input, &__textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        outline: none;
+        background: white;
+        font-size: 0.875rem;
+        transition: border-color 0.15s ease;
+        &:focus {
+            border-color: var(--primary);
+        }
+        &::placeholder {
+            color: var(--gray);
+        }
+    }
+    &__error{
+        color: var(--red);
+        font-size: 0.8125rem;
+    }
+
+    &__input {
+        height: 40px;
+    }
+    &__textarea {
+        min-height: 80px;
+        max-height: 160px;
+        resize: vertical;
+    }
+    &__button {
+        height: 36px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: background-color 0.15s ease, opacity 0.15s ease;
+        background: var(--primary);
+        color: white;
+        &:hover {
+            opacity: 0.9;
+        }
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        &--transparent {
+            background: transparent;
+            color: var(--black);
+            border: 1px solid var(--border);
+            &:hover {
+                background: var(--border);
+            }
+        }
+    }
+    &__input-field{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@keyframes modal-overlay {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modal-container {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
