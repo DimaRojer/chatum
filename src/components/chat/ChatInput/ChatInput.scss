@@ -1,0 +1,41 @@
+.chat-input {
+    min-height: 56px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    position: relative;
+
+    &__wrapper{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 16px;
+    }
+    &__field {
+        resize: none;
+        overflow-y: auto;
+        max-height: 200px;
+        width: 100%;
+        height: 24px;
+        border: none;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        &:focus {
+            outline: none;
+        }
+        &::placeholder {
+            color: var(--gray);
+        }
+    }
+    &__btn-send{
+        border-radius: 8px;
+        background: var(--primary);
+        color: white;
+        padding: 6px;
+        transition: background 0.15s ease;
+        &:hover{
+            background: var(--purple-dark);
+        }
+    }
+}
+

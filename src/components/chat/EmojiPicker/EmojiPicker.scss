@@ -1,0 +1,67 @@
+.chat-input {
+    &__emoji {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        &:hover {
+            .emoji-picker-wrapper {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+        }
+    }
+}
+
+.emoji-picker-wrapper {
+    position: absolute;
+    right: -45px;
+    bottom: calc(100% + 24px);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+    pointer-events: none;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -24px;
+        height: 24px;
+    }
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+.emoji-picker {
+    width: 280px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 2px;
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        font-size: 1.25rem;
+        &:hover {
+            background: var(--border);
+        }
+    }
+}

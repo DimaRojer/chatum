@@ -1,0 +1,19 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" width="64" height="80">
+	<style>
+		.s0 { fill: #f0fdf4;stroke: #16a34a;stroke-width: 3 } 
+		.s1 { fill: #dcfce7 } 
+		.s2 { fill: none;stroke: #16a34a;stroke-linejoin: round;stroke-width: 3 } 
+		.s3 { fill: #dcfce7;stroke: #16a34a;stroke-width: 3 } 
+		.s4 { fill: none;stroke: #16a34a;stroke-width: 3 } 
+		.s5 { fill: #16a34a } 
+	</style>
+	<path class="s0" d="m11 2.5h28.5l14 14v52.5c0 4.69-3.81 8.5-8.5 8.5h-34c-4.69 0-8.5-3.81-8.5-8.5v-58c0-4.69 3.81-8.5 8.5-8.5z"/>
+	<path class="s1" d="m40 3v13h13"/>
+	<path class="s2" d="m40 3v13h13"/>
+	<path fill-rule="evenodd" class="s3" d="m13 25h30c1.66 0 3 1.34 3 3v29c0 1.66-1.34 3-3 3h-30c-1.66 0-3-1.34-3-3v-29c0-1.66 1.34-3 3-3z"/>
+	<path class="s4" d="m10 36h36"/>
+	<path class="s4" d="m10 48h36"/>
+	<path class="s4" d="m22 25v35"/>
+	<path class="s4" d="m34 25v35"/>
+	<path fill-rule="evenodd" class="s5" d="m24.5 37.5h7c0.55 0 1 0.45 1 1v7c0 0.55-0.45 1-1 1h-7c-0.55 0-1-0.45-1-1v-7c0-0.55 0.45-1 1-1z"/>
+</svg>

@@ -1,0 +1,38 @@
+.group-sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 12px;
+    background-color: var(--purple);
+    height: 100%;
+    width: 64px;
+    gap: 144px;
+    &__list{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    &__link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--purple-dark);
+        transition: background 0.2s ease;
+        color: white;
+        &--active{
+            border: 2px solid white;
+            background: var(--purple-light);
+        }
+        &:hover{
+            background: var(--purple-light);
+        }
+        &--menu{
+            background: transparent;
+            color: var(--gray);
+        }
+    }
+}
