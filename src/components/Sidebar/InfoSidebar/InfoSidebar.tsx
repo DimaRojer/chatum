@@ -11,7 +11,7 @@ interface InfoSidebarProps {
     description: string;
 }
 
-export const InfoSidebar = ({isOpen, onClose, groupUsers, description,}: InfoSidebarProps) => {
+export const InfoSidebar = ({isOpen, onClose, groupUsers, description}: InfoSidebarProps) => {
     return (
         <div className={`info-sidebar ${ isOpen ? "info-sidebar--open" : ""}`}>
             <div className="info-sidebar__header">

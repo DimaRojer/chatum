@@ -77,3 +77,35 @@
 		}
 	}
 }
+
+.mobile-menu-toggle{
+	display: none;
+	svg{
+		color: var(--primary);
+	}
+	@include md{
+		display: block;
+	}
+}
+
+
+
+.head__search--mobile {
+    @include md {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+
+        width: 100%;
+    }
+}
+
+@include md {
+    .head__search {
+        display: none;
+
+        &--mobile {
+            display: flex;
+        }
+    }
+}

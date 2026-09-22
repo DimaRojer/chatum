@@ -70,7 +70,7 @@ export const groups: Group[] = [
     name: "Design",
     icon: "D",
     owner: 2,
-    memberIds: [1, 4],
+    memberIds: [1, 4, 2],
     description: "Обсуждение дизайна, UI/UX, визуальных концепций, обратной связи и дизайн-систем.",
     channels: [
       {

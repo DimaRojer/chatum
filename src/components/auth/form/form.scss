@@ -1,0 +1,51 @@
+.auth-form {
+    max-width: 560px;
+    padding: 40px 48px 48px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: white;
+    box-shadow: 5px 6px 10px rgb(0 0 0 / 8%);
+	@include md{
+		padding: 16px;
+	}
+	&__logo{
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+    &__head {
+        margin-bottom: 16px;
+    }
+    &__title {
+        color: var(--black);
+        font-size: 2rem;
+        font-weight: 600;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+	&__agreement {
+		display: flex;
+		align-items: center;
+		gap: 3px;
+		color: var(--gray);
+		font-size: 0.8125rem;
+		@include sm{
+			font-size: 0.75rem;
+		}
+	}
+	&__remember {
+		display: flex;
+		gap: 8px;
+		cursor: pointer;
+		input{
+			margin-top: 2px;
+		}
+	}
+	&__forgot {
+		color: var(--black);
+		text-decoration: underline;
+	}
+}

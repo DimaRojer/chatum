@@ -1,0 +1,25 @@
+.btn-primary{
+	font-size: 0.875rem;
+	color: white;
+	background-color: var(--primary);
+	padding: 8px 16px;
+	border-radius: 8px;
+	transition: background 0.15s ease, filter 0.15s ease;
+	&--transparent{
+		background-color: transparent;
+		color: var(--text-title);
+		border: 1px solid var(--border);
+	}
+	&--red{
+		background-color: var(--red);
+		color: white;
+	}
+	&:hover {
+		filter: brightness(0.9);
+	}
+
+	&--transparent:hover {
+		background: var(--border);
+	}
+
+}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,16 +12,31 @@ const settingsItems = [
     { title: "Внешний вид", href: "/appearance" },
     { title: "Язык", href: "/language" },
 ];
-
-export const SettingsSidebar = () => {
+interface SettingsSidebarProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+export const SettingsSidebar = ({
+    isOpen,
+    onClose,
+}: SettingsSidebarProps) => {
     const pathname = usePathname();
 
+    const isSettingsRoot = pathname === "/settings";
+
     return (
-        <aside className="settings-sidebar">
+        <aside
+            className={`settings-sidebar ${
+                isOpen
+                    ? "settings-sidebar--open"
+                    : ""
+            }`}
+        >
             <nav className="settings-sidebar__nav">
                 <ul className="settings-sidebar__list">
                     {settingsItems.map((item) => {
                         const href = `/settings${item.href}`;
+
                         return (
                             <li
                                 className="settings-sidebar__item"
@@ -29,6 +44,7 @@ export const SettingsSidebar = () => {
                             >
                                 <Link
                                     href={href}
+                                    onClick={onClose}
                                     className={`settings-sidebar__link ${
                                         pathname === href
                                             ? "settings-sidebar__link--active"

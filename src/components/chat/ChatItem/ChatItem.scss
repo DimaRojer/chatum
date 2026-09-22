@@ -120,3 +120,47 @@
 		}
 	}
 }
+.message-info__text-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.message-info__text {
+    position: relative;
+
+    margin: 0;
+    padding-right: 20px;
+}
+
+.message-info__text-wrapper svg {
+    position: absolute;
+    right: 2px;
+    bottom: 3px;
+    width: 12px;
+    height: 12px;
+    color: var(--text-title);
+    opacity: 0.7;
+}
+
+.message-info {
+    min-width: 0;
+    width: 100%;
+}
+
+.message__reply {
+    width: 100%;
+    min-width: 0;
+	font-size: 0.75rem;
+}
+
+.message__reply-text {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+

@@ -1,4 +1,10 @@
 .chats-sidebar{
+    background: var(--side-bg);
+    width: 260px;
+    height: 100%;
+    flex: 1;
+    flex-shrink: 0;
+    padding: 16px;
     &__title-head{
         display: flex;
         align-items: center;
@@ -99,4 +105,3 @@
     font-weight: 600;
     line-height: 17px;
 }
-

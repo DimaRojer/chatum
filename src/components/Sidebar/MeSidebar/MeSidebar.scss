@@ -7,3 +7,45 @@
         display: block;
     }
 }
+
+.me-sidebar__mobile-head,
+.me-sidebar__mobile-users {
+    display: none;
+}
+
+@include md {
+    .me-sidebar__desktop-create,
+    .me-sidebar__desktop-title,
+    .me-sidebar__messages {
+        display: none !important;
+    }
+
+    .me-sidebar__mobile-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .me-sidebar__mobile-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: var(--gray-light);
+    }
+
+    .me-sidebar__mobile-head .chats-sidebar__btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .me-sidebar__mobile-users {
+        display: block;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+    }
+}

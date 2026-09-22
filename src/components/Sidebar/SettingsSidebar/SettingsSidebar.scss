@@ -26,3 +26,10 @@
 		}
 	}
 }
+
+@include md {
+	.settings-sidebar--child {
+        display: none;
+	}
+}
+

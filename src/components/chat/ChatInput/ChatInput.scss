@@ -39,3 +39,37 @@
     }
 }
 
+.tooltip {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 16px 0;
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        width: 100%;
+    }
+    &__info {
+        min-width: 0;
+        width: 100%;
+    }
+    &__title {
+        color: var(--text-title);
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    &__text {
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.75rem;
+    }
+    &__icon {
+        flex-shrink: 0;
+        stroke-width: 0.1;
+        color: var(--text-title);
+    }
+}

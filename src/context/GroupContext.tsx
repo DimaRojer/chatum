@@ -8,8 +8,10 @@ import type { Channel } from "@/types/channel";
 
 interface GroupsContextType {
     groups: Group[];
-    createGroup: (name: string, description: string, memberIds: number[]) => void;
+    createGroup: ( name: string, description: string, memberIds: number[]) => void;
     createChannel: ( groupId: string, name: string) => void;
+    leaveGroup: (groupId: string) => void;
+    deleteChannel: ( groupId: string, channelId: string) => void;
 }
 
 const GroupsContext = createContext<GroupsContextType | null>(null);
@@ -42,6 +44,21 @@ export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
         setGroups((prev) => [...prev, newGroup]);
     };
 
+    const leaveGroup = (groupId: string) => {
+        setGroups((prev) =>
+            prev.map((group) =>
+                group.id === groupId
+                    ? {
+                        ...group,
+                        memberIds: group.memberIds.filter(
+                            (id) => id !== currentUserId
+                        ),
+                    }
+                    : group
+            )
+        );
+    };
+
     const createChannel = ( groupId: string, name: string) => {
         const newChannel: Channel = {id: crypto.randomUUID(), name,unreadCount: 0, messages: [],};
         setGroups((prev) =>
@@ -59,8 +76,36 @@ export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
         );
     };
 
+    const deleteChannel = (
+        groupId: string,
+        channelId: string
+    ) => {
+        setGroups((prev) =>
+            prev.map((group) =>
+                group.id === groupId
+                    ? {
+                        ...group,
+                        channels: group.channels.filter(
+                            (channel) =>
+                                channel.id !== channelId
+                        ),
+                    }
+                    : group
+            )
+        );
+    };
+
+
     return (
-        <GroupsContext.Provider value={{ groups, createGroup, createChannel}}>
+        <GroupsContext.Provider
+            value={{
+                groups,
+                createGroup,
+                createChannel,
+                deleteChannel,
+                leaveGroup,
+            }}
+        >
             {children}
         </GroupsContext.Provider>
     );

@@ -5,12 +5,22 @@
     padding: 16px 12px;
     background-color: var(--purple);
     height: 100%;
+    flex-shrink: 0;
     width: 64px;
+    flex: 0 0 64px;
     gap: 144px;
     &__list{
         display: flex;
         flex-direction: column;
         gap: 16px;
+        &--group{
+            max-height: 284px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
     }
     &__link{
         display: flex;
@@ -35,4 +45,9 @@
             color: var(--gray);
         }
     }
+}
+
+.group-sidebar {
+    flex: 0 0 64px;
+    width: 64px;
 }

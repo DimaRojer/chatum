@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { GroupsProvider } from "@/context/GroupContext";
 import { RecentProvider } from "@/context/RecentContext";
 
@@ -11,12 +13,21 @@ export default function MainLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] =
+        useState(false);
+
     return (
         <GroupsProvider>
             <RecentProvider>
                 <div className="chat-layout">
-                    <GroupSidebar />
-                    <ChatLayout>
+                    <ChatLayout
+                        isMobileMenuOpen={
+                            isMobileMenuOpen
+                        }
+                        setIsMobileMenuOpen={
+                            setIsMobileMenuOpen
+                        }
+                    >
                         {children}
                     </ChatLayout>
                 </div>

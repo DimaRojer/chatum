@@ -3,6 +3,8 @@ export interface Message {
     userId: number;
     time: string;
     text: string;
+    edited?: boolean;
+    replyToId?: number;
     attachments?: {
         name: string;
         type: string;

@@ -6,8 +6,7 @@
     align-items: center;
     justify-content: center;
     color: var(--black);
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);    
     animation: modal-overlay 0.1s ease-out;
     &__container {
         width: 500px;
@@ -16,6 +15,7 @@
         border: 1px solid var(--border);
         border-radius: 12px;
         animation: modal-container 0.1s ease-out;
+        margin: 10px;
     }
     &__header, &__main {
         padding: 24px 24px 12px;

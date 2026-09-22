@@ -15,10 +15,11 @@ import { RemoveModal } from "@/components/ui/Modal/RemoveModal/RemoveModal";
 
 interface UserListProps {
     users: User[];
+    onUserSelect?: () => void;
     variant?: "default" | "compact" | "group";
 }
 
-export const UserList = ({ users, variant = "default"}: UserListProps) => {
+export const UserList = ({ users, variant = "default", onUserSelect,}: UserListProps) => {
     const pathname = usePathname();
 
     const [removedUserIds, setRemovedUserIds] = useState<number[]>([]);
@@ -55,8 +56,11 @@ export const UserList = ({ users, variant = "default"}: UserListProps) => {
                         <li className="direct-list__item" key={user.id}>
                             <Link
                                 href={`/me/${user.id}`}
+                                onClick={() => {
+                                    onUserSelect?.();
+                                }}
                                 className={`direct-list__link ${
-                                    isActive
+                                    pathname === `/me/${user.id}`
                                         ? "direct-list__link--active"
                                         : ""
                                 }`}
@@ -99,6 +103,9 @@ export const UserList = ({ users, variant = "default"}: UserListProps) => {
                     setSelectedUserId(null);
                 }}
                 onConfirm={handleConfirmRemove}
+                title="Вы точно хотите удалить диалог?"
+                confirmText="Удалить"
+                cancelText="Отмена"
             />
         </>
     );

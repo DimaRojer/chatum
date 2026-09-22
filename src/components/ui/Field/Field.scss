@@ -1,0 +1,111 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.875rem;
+    line-height: 1;
+    &__label {
+        color: var(--text-title);
+    }
+    &__input-wrapper {
+        position: relative;
+        max-width: 640px;
+        width: 100%;
+        .field__input {
+            padding-right: 42px;
+        }
+    }
+    &__input {
+        width: 100%;
+        max-width: 640px;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--background);
+        color: var(--black);
+        outline: none;
+        transition: border-color 0.15s ease;
+        &:focus {
+            border-color: var(--primary);
+        }
+        &::placeholder {
+            color: var(--gray);
+        }
+    }
+    &__textarea {
+        height: 80px;
+        resize: none;
+    }
+    &__select {
+        position: relative;
+        max-width: 640px;
+    }
+    &__select-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        color: var(--black);
+        transition: border-color 0.15s ease;
+        &:hover {
+            border-color: var(--primary);
+        }
+    }
+    &__select-arrow {
+        transition: transform 0.15s ease;
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+    &__select-options {
+        position: absolute;
+        z-index: 10;
+        top: calc(100% + 4px);
+        left: 0;
+        width: 100%;
+        padding: 4px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+    }
+    &__select-option {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--black);
+        text-align: left;
+        cursor: pointer;
+        &:hover {
+            background: var(--hover);
+        }
+        &--active {
+            color: var(--primary);
+        }
+    }
+    &__password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border: 0;
+        background: transparent;
+        color: var(--gray);
+        cursor: pointer;
+        transform: translateY(-50%);
+        z-index: 2;
+        &:hover {
+            color: var(--black);
+        }
+    }
+}
