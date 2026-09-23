@@ -1,32 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
 import type { Message } from "@/types/message";
-
 import { EmojiPicker } from "@/components/chat/EmojiPicker/EmojiPicker";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { Attachments } from "@/components/chat/Attachments/Attachments";
+import { currentUserId } from "@/data/currentUser";
 
 import "./ChatInput.scss";
-import { currentUserId } from "@/data/currentUser";
 
 interface ChatInputProps {
     attachments: File[];
     onRemoveAttachment: (index: number) => void;
     onFiles: (files: File[]) => void;
     onClearAttachments: () => void;
-
-    setMessages: React.Dispatch<
-        React.SetStateAction<Message[]>
-    >;
-
+    setMessages: React.Dispatch< React.SetStateAction<Message[]>>;
     editingMessage: Message | null;
     onCancelEdit: () => void;
-
     message: string;
-    setMessage: React.Dispatch<
-        React.SetStateAction<string>
+    setMessage: React.Dispatch< React.SetStateAction<string>
     >;
     replyingMessage: Message | null;
     onCancelReply: () => void;
@@ -45,28 +37,18 @@ export const ChatInput = ({
     replyingMessage,
     onCancelReply,
 }: ChatInputProps) => {
-
-
     const [isEmojiOpen, setIsEmojiOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-
     const resizeTextarea = () => {
         if (!textareaRef.current)  return;
         textareaRef.current.style.height = "24px";
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     };
-
     useEffect(() => {
-        if (!editingMessage && !replyingMessage) {
-            return;
-        }
-
+        if (!editingMessage && !replyingMessage) return;
         requestAnimationFrame(() => {
-            if (editingMessage) {
-                resizeTextarea();
-            }
-
+            if (editingMessage) resizeTextarea();
             textareaRef.current?.focus();
         });
     }, [editingMessage, replyingMessage]);
@@ -74,9 +56,7 @@ export const ChatInput = ({
     const handleEmojiSelect = (emoji: string) => setMessage((prev) => prev + emoji);
     const handleChange = ( event: React.ChangeEvent<HTMLTextAreaElement>) => { 
         event.target.style.height = "24px";
-        if (event.target.value.trim()) {
-            event.target.style.height = `${event.target.scrollHeight}px`;
-        }
+        if (event.target.value.trim()) event.target.style.height = `${event.target.scrollHeight}px`;
         setMessage(event.target.value);
     };
 
@@ -86,16 +66,11 @@ export const ChatInput = ({
         event.target.value = "";
     };
 
-    const handleSubmit = (
-        event: React.FormEvent<HTMLFormElement>
+    const handleSubmit = ( event: React.FormEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
-
         if (editingMessage) {
-            if (!message.trim()) {
-                return;
-            }
-
+            if (!message.trim()) return;
             setMessages((prev) =>
                 prev.map((item) =>
                     item.id === editingMessage.id
@@ -107,24 +82,12 @@ export const ChatInput = ({
                         : item
                 )
             );
-
             setMessage("");
             onCancelEdit();
-
-            if (textareaRef.current) {
-                textareaRef.current.style.height = "24px";
-            }
-
+            if (textareaRef.current) textareaRef.current.style.height = "24px";
             return;
         }
-
-        if (
-            !message.trim() &&
-            attachments.length === 0
-        ) {
-            return;
-        }
-
+        if ( !message.trim() && attachments.length === 0) return;
         const messageAttachments = attachments.map(
             (file) => ({
                 name: file.name,
@@ -163,20 +126,15 @@ export const ChatInput = ({
                 },
             ];
         });
-
         setMessage("");
         onClearAttachments();
         onCancelReply();
-
-        if (textareaRef.current) {
-            textareaRef.current.style.height = "24px";
-        }
+        if (textareaRef.current) textareaRef.current.style.height = "24px";
     };
 
     const handleCancelEdit = () => {
         setMessage("");
         onCancelEdit();
-
         if (textareaRef.current) textareaRef.current.style.height = "24px";
     };
 

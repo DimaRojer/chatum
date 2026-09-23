@@ -6,6 +6,8 @@ import { currentUserId } from "@/data/currentUser";
 import type { Group } from "@/types/group";
 import type { Channel } from "@/types/channel";
 
+import { useEffect } from "react";
+import { groupsService } from "@/services/groups";
 interface GroupsContextType {
     groups: Group[];
     createGroup: ( name: string, description: string, memberIds: number[]) => void;
@@ -94,7 +96,6 @@ export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
             )
         );
     };
-
 
     return (
         <GroupsContext.Provider

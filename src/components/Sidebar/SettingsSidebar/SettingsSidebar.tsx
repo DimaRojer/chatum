@@ -27,6 +27,10 @@ export const SettingsSidebar = ({
     return (
         <aside
             className={`settings-sidebar ${
+                !isSettingsRoot
+                    ? "settings-sidebar--child"
+                    : ""
+            } ${
                 isOpen
                     ? "settings-sidebar--open"
                     : ""

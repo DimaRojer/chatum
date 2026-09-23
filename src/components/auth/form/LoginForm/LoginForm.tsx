@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Btn } from "@/components/ui/Btn/Btn";
 import { Field } from "@/components/ui/Field/Field";
-import { Icon } from "@/components/ui/Icon/Icon"
 import "../form.scss"
 
 export const LoginForm = () => {

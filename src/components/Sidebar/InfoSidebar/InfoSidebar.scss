@@ -6,6 +6,19 @@
 	background: var(--info-bg);
 	border-left: 0 solid var(--border);
 	transition:	width 0.25s ease, border-width 0.25s ease;
+    @include md {
+		transition:	width 0.15s ease, border-width 0.15s ease;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        width: 0;
+		right: 0;
+		left: auto;
+        height: 100vh;
+        &.info-sidebar--open {
+            width: 100%;
+        }
+    }
 	&--open {
 		width: 320px;
 		border-left-width: 1px;

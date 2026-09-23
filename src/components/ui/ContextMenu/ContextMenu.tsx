@@ -7,11 +7,13 @@ import "./ContextMenu.scss";
 interface ContextMenuProps {
     children: React.ReactNode;
     menu: React.ReactNode;
+    messageId?: number;
 }
 
 export const ContextMenu = ({
     children,
     menu,
+    messageId
 }: ContextMenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0,});

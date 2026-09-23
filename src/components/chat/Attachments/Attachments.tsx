@@ -72,9 +72,7 @@ export const Attachments = ({ files = [],onRemove}: AttachmentsProps) => {
         startX.current = event.pageX;
         scrollLeft.current = attachmentsRef.current.scrollLeft;
     };
-    const handleMouseMove = (
-        event: React.MouseEvent<HTMLDivElement>
-    ) => {
+    const handleMouseMove = ( event: React.MouseEvent<HTMLDivElement>) => {
         if (!isDragging || !attachmentsRef.current) return;
         const distance =  event.pageX - startX.current;
         attachmentsRef.current.scrollLeft = scrollLeft.current - distance;
@@ -89,9 +87,7 @@ export const Attachments = ({ files = [],onRemove}: AttachmentsProps) => {
     return (
         <div
             ref={attachmentsRef}
-            className={`attachments ${
-                isDragging ? "attachments--dragging" : ""
-            }`}
+            className={`attachments ${ isDragging ? "attachments--dragging" : ""}`}
             onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}

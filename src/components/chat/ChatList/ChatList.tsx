@@ -13,12 +13,9 @@ import "./ChatList.scss";
 interface ChatListProps {
     messages: Message[];
     users: User[];
-    setMessages: React.Dispatch<
-        React.SetStateAction<Message[]>
-    >;
+    setMessages: React.Dispatch< React.SetStateAction<Message[]>>;
     onEdit: (message: Message) => void;
     onReply: (message: Message) => void;
-    
 }
 
 export const ChatList = ({
@@ -28,31 +25,19 @@ export const ChatList = ({
     onEdit,
     onReply
 }: ChatListProps) => {
-    const [deleteMessageId, setDeleteMessageId] =
-        useState<number | null>(null);
-
-    const [isDeleteModalOpen, setIsDeleteModalOpen] =
-        useState(false);
-
+    const [deleteMessageId, setDeleteMessageId] = useState<number | null>(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const chatListRef = useRef<HTMLDivElement>(null);
-
     const handleDeleteRequest = (messageId: number) => {
         setDeleteMessageId(messageId);
         setIsDeleteModalOpen(true);
     };
-
     const handleDeleteConfirm = () => {
-        if (deleteMessageId === null) {
-            return;
-        }
-
-        setMessages((prev) =>
-            prev.filter(
-                (message) =>
-                    message.id !== deleteMessageId
-            )
-        );
-
+        if (deleteMessageId === null) return;
+        setMessages((prev) => 
+            prev.filter( 
+                (message) => message.id !== deleteMessageId
+            ));
         setIsDeleteModalOpen(false);
         setDeleteMessageId(null);
     };
@@ -64,11 +49,7 @@ export const ChatList = ({
 
     useEffect(() => {
         const chatList = chatListRef.current;
-
-        if (!chatList) {
-            return;
-        }
-
+        if (!chatList) return;
         chatList.scrollTo({
             top: chatList.scrollHeight,
             behavior: "smooth",
@@ -77,23 +58,15 @@ export const ChatList = ({
 
     return (
         <>
-            <div
-                className="chat-list"
-                ref={chatListRef}
+            <div className="chat-list" ref={chatListRef}
             >
                 {messages.map((message, index) => {
                     const user = users.find(
                         (user) =>
                             user.id === message.userId
                     );
-
-                    if (!user) {
-                        return null;
-                    }
-
-                    const previousMessage =
-                        messages[index - 1];
-
+                    if (!user) return null;
+                    const previousMessage = messages[index - 1];
                     const isGrouped =
                         !!previousMessage &&
                         previousMessage.userId ===

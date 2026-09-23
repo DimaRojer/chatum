@@ -19,7 +19,7 @@ const myChats = directChats.filter(
     const filteredUsers = chatUsers.filter((user) => user.name.toLowerCase().includes(search.toLowerCase()));
 
     return (
-        <div className="px-4">
+        <div className="px-4 pt-4">
             <Search value={search} onChange={setSearch}/>
             <div className="mt-6">
                 <UserList users={filteredUsers} variant="compact"/>

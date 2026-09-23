@@ -6,6 +6,8 @@ import type { Message } from "@/types/message";
 import type { User } from "@/types/user";
 import { ContextMenu } from "@/components/ui/ContextMenu/ContextMenu";
 import { Icon } from "@/components/ui/Icon/Icon";
+import { useRef } from "react";
+import { useMessageSelection } from "@/context/MessageSelectionContext";
 interface ChatItemProps {
     message: Message;
     user: User;
@@ -16,14 +18,7 @@ interface ChatItemProps {
     onReply: (message: Message) => void;
 }
 
-export const ChatItem = ({
-    message,
-    user,
-    isGrouped,
-    messages,
-    onDelete,
-    onEdit,
-    onReply,
+export const ChatItem = ({ message, user, isGrouped, messages, onDelete, onEdit, onReply,
 }: ChatItemProps) => {
 const replyMessage = message.replyToId ? messages.find((item) => item.id === message.replyToId): null;
     const imageAttachments = message.attachments?.filter(
@@ -32,25 +27,25 @@ const replyMessage = message.replyToId ? messages.find((item) => item.id === mes
     const fileAttachments = message.attachments?.filter(
         (attachment) => !attachment.type.startsWith("image/")
     ) ?? [];
-
+    const { selectMessage } = useMessageSelection();
+    const holdTimer = useRef<ReturnType<typeof setTimeout> | null>( null);
+    const handleTouchStart = () => {
+        holdTimer.current = setTimeout(() => { selectMessage(message.id)}, 500);
+    };
+    const handleTouchEnd = () => {
+        if (holdTimer.current) {
+            clearTimeout(holdTimer.current);
+            holdTimer.current = null;
+        }
+    };
     return (
         <ContextMenu
             menu={
                 <>
+                    <button type="button" onClick={() => onReply(message)}>Ответить</button>
                     <button
                         type="button"
-                        onClick={() => onReply(message)}
-                    >
-                        Ответить
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={() => {
-                            navigator.clipboard.writeText(
-                                message.text
-                            );
-                        }}
+                        onClick={() => { navigator.clipboard.writeText( message.text);}}
                     >
                         Копировать
                     </button>
@@ -59,18 +54,14 @@ const replyMessage = message.replyToId ? messages.find((item) => item.id === mes
                         <>
                             <button
                                 type="button"
-                                onClick={() => {
-                                    onEdit(message);
-                                }}
+                                onClick={() => { onEdit(message)}}
                             >
                                 Изменить
                             </button>
 
                             <button
                                 type="button"
-                                onClick={() => {
-                                    onDelete(message.id);
-                                }}
+                                onClick={() => {onDelete(message.id)}}
                                 className="text-red"
                             >
                                 Удалить
@@ -80,7 +71,12 @@ const replyMessage = message.replyToId ? messages.find((item) => item.id === mes
                 </>
             }
         >
-            <div className="message">
+            <div 
+                className="message"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                onTouchMove={handleTouchEnd}
+            >
                 {(!isGrouped || replyMessage) && (
                     <div className="message__image">
                         <Image
@@ -97,49 +93,29 @@ const replyMessage = message.replyToId ? messages.find((item) => item.id === mes
                 <div className="message-info">
                     {replyMessage && (
                         <div className="message__reply">
-                            <p className="message__reply-text">
-                                {replyMessage.text}
-                            </p>
+                            <p className="message__reply-text">{replyMessage.text}</p>
                         </div>
                     )}
-
                     {(!isGrouped || replyMessage) && (
                         <div className="message-info__header">
-                            <div className="message-info__name">
-                                {user.name}
-                            </div>
-
-                            <span className="message-info__time">
-                                {message.time}
-                            </span>
+                            <div className="message-info__name">{user.name}</div>
+                            <span className="message-info__time">{message.time}</span>
                         </div>
                     )}
-
                     <div className="message-info__content">
                         <div className="message-info__text-time">
                             {isGrouped && !replyMessage && (
-                                <span className="message-info__time">
-                                    {message.time}
-                                </span>
+                                <span className="message-info__time">{message.time}</span>
                             )}
-
                             <div className="message-item">
                                 {message.text && (
                                     <div className="message-info__text-wrapper">
-                                        <p className="message-info__text">
-                                            {message.text}
-                                        </p>
-
+                                        <p className="message-info__text">{message.text}</p>
                                         {message.edited && (
-                                            <Icon
-                                                name="edit"
-                                                width={14}
-                                                height={14}
-                                            />
+                                            <Icon name="edit" width={14} height={14}/>
                                         )}
                                     </div>
                                 )}
-
                                 {imageAttachments.length > 0 && (
                                     <div className="attachment-container attachment-container--images">
                                         {imageAttachments.map(
@@ -167,12 +143,7 @@ const replyMessage = message.replyToId ? messages.find((item) => item.id === mes
                                     <div className="attachment-container attachment-container--files">
                                         {fileAttachments.map(
                                             (attachment, index) => {
-                                                const extension =
-                                                    attachment.name
-                                                        .split(".")
-                                                        .pop()
-                                                        ?.toLowerCase();
-
+                                                const extension = attachment.name .split(".").pop()?.toLowerCase();
                                                 const iconName =
                                                     extension === "doc" ||
                                                     extension === "docx"
@@ -201,10 +172,7 @@ const replyMessage = message.replyToId ? messages.find((item) => item.id === mes
                                                             width={24}
                                                             height={24}
                                                         />
-
-                                                        <span className="message__attachment-name">
-                                                            {attachment.name}
-                                                        </span>
+                                                        <span className="message__attachment-name">{attachment.name}</span>
                                                     </a>
                                                 );
                                             }

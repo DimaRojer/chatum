@@ -21,6 +21,11 @@ interface UserContextType {
     setCurrentPassword: (value: string) => void;
     setNewPassword: (value: string) => void;
     setConfirmPassword: (value: string) => void;
+
+    changePassword: () => {
+        success: boolean;
+        error?: string;
+    };
 }
 
 const UserContext =
@@ -39,7 +44,11 @@ export const UserProvider = ({
         throw new Error("Current user not found");
     }
 
-    const [user, setUser] = useState<User>(initialUser);
+    const [user, setUser] =
+        useState<User>(initialUser);
+
+    const [password, setPassword] =
+        useState("Chatum123!");
 
     const [currentPassword, setCurrentPassword] =
         useState("");
@@ -57,6 +66,62 @@ export const UserProvider = ({
         }));
     };
 
+    const changePassword = () => {
+        if (!currentPassword) {
+            return {
+                success: false,
+                error: "Введите текущий пароль",
+            };
+        }
+
+        if (currentPassword !== password) {
+            return {
+                success: false,
+                error: "Неверный текущий пароль",
+            };
+        }
+
+        if (!newPassword) {
+            return {
+                success: false,
+                error: "Введите новый пароль",
+            };
+        }
+
+        if (newPassword.length < 8) {
+            return {
+                success: false,
+                error:
+                    "Новый пароль должен содержать минимум 8 символов",
+            };
+        }
+
+        if (newPassword === currentPassword) {
+            return {
+                success: false,
+                error:
+                    "Новый пароль должен отличаться от текущего",
+            };
+        }
+
+        if (newPassword !== confirmPassword) {
+            return {
+                success: false,
+                error: "Пароли не совпадают",
+            };
+        }
+
+        setPassword(newPassword);
+
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+
+        return {
+            success: true,
+        };
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -70,6 +135,8 @@ export const UserProvider = ({
                 setCurrentPassword,
                 setNewPassword,
                 setConfirmPassword,
+
+                changePassword,
             }}
         >
             {children}

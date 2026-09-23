@@ -24,10 +24,7 @@ export default function SettingsLayout({
 }) {
     const router = useRouter();
     const pathname = usePathname();
-
-    const [isMobileMenuOpen, setIsMobileMenuOpen] =
-        useState(false);
-
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const isSettingsRoot = pathname === "/settings";
     const title = settingsTitles[pathname] ?? "Настройки";
 
@@ -43,10 +40,7 @@ export default function SettingsLayout({
                     <Icon name="arrow" />
                 </button>
                 ) : (
-                    <Link
-                        href="/settings"
-                        className="block md:hidden"
-                    >
+                    <Link href="/settings" className="block md:hidden">
                         <Icon name="arrow" />
                     </Link>
                 )}
@@ -55,36 +49,23 @@ export default function SettingsLayout({
                     <span className="hidden md:block">
                         Настройки
                     </span>
-
                     <span className="block md:hidden">
                         {title}
                     </span>
                 </h1>
             </header>
-
             <div className="page-wrapper">
                 <SettingsSidebar
                     isOpen={isMobileMenuOpen}
-                    onClose={() =>
-                        setIsMobileMenuOpen(false)
-                    }
+                    onClose={() => setIsMobileMenuOpen(false)}
                 />
-
                 {!isSettingsRoot && (
                     <form className="form-settings">
                         <div className="page-content settings">
-                            <div className="settings__body">
-                                {children}
-                            </div>
-
+                            <div className="settings__body">{children}</div>
                             <div className="settings__footer">
-                                <Btn type="submit">
-                                    Сохранить
-                                </Btn>
-
-                                <Btn variant="transparent">
-                                    Отмена
-                                </Btn>
+                                <Btn type="submit">Сохранить</Btn>
+                                <Btn variant="transparent">Отмена</Btn>
                             </div>
                         </div>
                     </form>

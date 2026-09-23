@@ -4,8 +4,6 @@ import { useState } from "react";
 
 import { GroupsProvider } from "@/context/GroupContext";
 import { RecentProvider } from "@/context/RecentContext";
-
-import { GroupSidebar } from "@/components/Sidebar/GroupSidebar/GroupSidebar";
 import ChatLayout from "@/layouts/ChatLayout";
 
 export default function MainLayout({

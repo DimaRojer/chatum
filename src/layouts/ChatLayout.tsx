@@ -10,7 +10,7 @@ import { GroupSidebar } from "@/components/Sidebar/GroupSidebar/GroupSidebar";
 import { ChatsSidebar } from "@/components/Sidebar/ChatsSidebar/ChatsSidebar";
 import { Header } from "@/components/chat/Header/Header";
 import { InfoSidebar } from "@/components/Sidebar/InfoSidebar/InfoSidebar";
-
+import { MessageSelectionProvider } from "@/context/MessageSelectionContext";
 import { useGroups } from "@/context/GroupContext";
 import { useRecent } from "@/context/RecentContext";
 
@@ -106,63 +106,50 @@ export default function ChatLayout({
                 )}
             </div>
 
-            <div
-                className={`chat-main ${
-                    isMePage
-                        ? "chat-main--me-page"
-                        : ""
-                }`}
-            >
-                {user && (
-                    <Header
-                        data={user}
-                        onInfoClick={() =>
-                            setIsInfoOpen(
-                                (prev) => !prev
-                            )
-                        }
-                        isMobileMenuOpen={
-                            isMobileMenuOpen
-                        }
-                        setIsMobileMenuOpen={
-                            setIsMobileMenuOpen
-                        }
-                    />
-                )}
+            <MessageSelectionProvider>
+                <div
+                    className={`chat-main ${
+                        isMePage
+                            ? "chat-main--me-page"
+                            : ""
+                    }`}
+                >
+                    {user && (
+                        <Header
+                            data={user}
+                            onInfoClick={() =>
+                                setIsInfoOpen((prev) => !prev)
+                            }
+                            isMobileMenuOpen={isMobileMenuOpen}
+                            setIsMobileMenuOpen={setIsMobileMenuOpen}
+                        />
+                    )}
 
-                {group && (
-                    <Header
-                        data={group}
-                        channel={channel}
-                        onInfoClick={() =>
-                            setIsInfoOpen(
-                                (prev) => !prev
-                            )
-                        }
-                        isMobileMenuOpen={
-                            isMobileMenuOpen
-                        }
-                        setIsMobileMenuOpen={
-                            setIsMobileMenuOpen
-                        }
-                    />
-                )}
+                    {group && (
+                        <Header
+                            data={group}
+                            channel={channel}
+                            onInfoClick={() =>
+                                setIsInfoOpen((prev) => !prev)
+                            }
+                            isMobileMenuOpen={isMobileMenuOpen}
+                            setIsMobileMenuOpen={setIsMobileMenuOpen}
+                        />
+                    )}
 
-                <div className="chat-wrapper">
-                    {children}
+                    <div className="chat-wrapper">
+                        {children}
+                    </div>
                 </div>
-            </div>
-
-            <InfoSidebar
-                isOpen={isInfoOpen}
-                onClose={() =>
-                    setIsInfoOpen(false)
-                }
-                groupUsers={groupUsers}
-                description={
-                    group?.description ?? ""
-                }
-            />
+            </MessageSelectionProvider>
+        <InfoSidebar
+            isOpen={isInfoOpen}
+            onClose={() => setIsInfoOpen(false)}
+            groupUsers={groupUsers}
+            description={group?.description ?? ""}
+            users={users}
+            memberIds={group?.memberIds ?? []}
+        />
         </>
     );
 }
