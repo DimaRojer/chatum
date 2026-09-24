@@ -1,26 +1,63 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import {
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
+
 import { groups as initialGroups } from "@/data/groups";
 import { currentUserId } from "@/data/currentUser";
+
+import { groupsService } from "@/services/groups";
+
 import type { Group } from "@/types/group";
 import type { Channel } from "@/types/channel";
 
-import { useEffect } from "react";
-import { groupsService } from "@/services/groups";
 interface GroupsContextType {
     groups: Group[];
-    createGroup: ( name: string, description: string, memberIds: number[]) => void;
-    createChannel: ( groupId: string, name: string) => void;
+    createGroup: (
+        name: string,
+        description: string,
+        memberIds: number[]
+    ) => void;
+    createChannel: (
+        groupId: string,
+        name: string
+    ) => void;
     leaveGroup: (groupId: string) => void;
-    deleteChannel: ( groupId: string, channelId: string) => void;
+    deleteChannel: (
+        groupId: string,
+        channelId: string
+    ) => void;
 }
 
-const GroupsContext = createContext<GroupsContextType | null>(null);
+const GroupsContext =
+    createContext<GroupsContextType | null>(null);
 
-export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
-    const [groups, setGroups] = useState(initialGroups);
-    const createGroup = ( name: string,description: string, memberIds: number[]) => {
+export const GroupsProvider = ({
+    children,
+}: {
+    children: React.ReactNode;
+}) => {
+    const [groups, setGroups] =
+        useState<Group[]>(initialGroups);
+
+    useEffect(() => {
+        groupsService
+            .getAll()
+            .then(setGroups)
+            .catch(() => {
+                setGroups(initialGroups);
+            });
+    }, []);
+
+    const createGroup = (
+        name: string,
+        description: string,
+        memberIds: number[]
+    ) => {
         const newGroup: Group = {
             id: crypto.randomUUID(),
             name,
@@ -51,18 +88,30 @@ export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
             prev.map((group) =>
                 group.id === groupId
                     ? {
-                        ...group,
-                        memberIds: group.memberIds.filter(
-                            (id) => id !== currentUserId
-                        ),
-                    }
+                          ...group,
+                          memberIds:
+                              group.memberIds.filter(
+                                  (id) =>
+                                      id !==
+                                      currentUserId
+                              ),
+                      }
                     : group
             )
         );
     };
 
-    const createChannel = ( groupId: string, name: string) => {
-        const newChannel: Channel = {id: crypto.randomUUID(), name,unreadCount: 0, messages: [],};
+    const createChannel = (
+        groupId: string,
+        name: string
+    ) => {
+        const newChannel: Channel = {
+            id: crypto.randomUUID(),
+            name,
+            unreadCount: 0,
+            messages: [],
+        };
+
         setGroups((prev) =>
             prev.map((group) =>
                 group.id === groupId
@@ -86,12 +135,14 @@ export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
             prev.map((group) =>
                 group.id === groupId
                     ? {
-                        ...group,
-                        channels: group.channels.filter(
-                            (channel) =>
-                                channel.id !== channelId
-                        ),
-                    }
+                          ...group,
+                          channels:
+                              group.channels.filter(
+                                  (channel) =>
+                                      channel.id !==
+                                      channelId
+                              ),
+                      }
                     : group
             )
         );
@@ -114,6 +165,12 @@ export const GroupsProvider = ({ children,}: { children: React.ReactNode;}) => {
 
 export const useGroups = () => {
     const context = useContext(GroupsContext);
-    if (!context) throw new Error("useGroups must be used inside GroupsProvider");
+
+    if (!context) {
+        throw new Error(
+            "useGroups must be used inside GroupsProvider"
+        );
+    }
+
     return context;
 };
