@@ -12,6 +12,8 @@ interface FieldOption {
 }
 
 interface FieldProps {
+    id: string;
+    name: string;
     label: string;
     value: string;
     onChange: (value: string) => void;
@@ -21,6 +23,8 @@ interface FieldProps {
 }
 
 export const Field = ({
+    id,
+    name,
     label,
     value,
     onChange,

@@ -7,10 +7,8 @@ import {
     useState,
 } from "react";
 
-import { groups as initialGroups } from "@/data/groups";
-import { currentUserId } from "@/data/currentUser";
-
 import { groupsService } from "@/services/groups";
+import { useUser } from "@/context/UserContext";
 
 import type { Group } from "@/types/group";
 import type { Channel } from "@/types/channel";
@@ -23,13 +21,15 @@ interface GroupsContextType {
         memberIds: number[]
     ) => void;
     createChannel: (
-        groupId: string,
+        groupId: number,
         name: string
     ) => void;
-    leaveGroup: (groupId: string) => void;
+    leaveGroup: (
+        groupId: number
+    ) => void;
     deleteChannel: (
-        groupId: string,
-        channelId: string
+        groupId: number,
+        channelId: number
     ) => void;
 }
 
@@ -41,15 +41,20 @@ export const GroupsProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
+    const { user: currentUser } = useUser();
+
     const [groups, setGroups] =
-        useState<Group[]>(initialGroups);
+        useState<Group[]>([]);
 
     useEffect(() => {
         groupsService
             .getAll()
             .then(setGroups)
-            .catch(() => {
-                setGroups(initialGroups);
+            .catch((error) => {
+                console.error(
+                    "GROUPS ERROR:",
+                    error
+                );
             });
     }, []);
 
@@ -58,21 +63,24 @@ export const GroupsProvider = ({
         description: string,
         memberIds: number[]
     ) => {
+        if (!currentUser) return;
+
         const newGroup: Group = {
-            id: crypto.randomUUID(),
+            id: Date.now(),
             name,
             description,
             icon: "",
-            owner: currentUserId,
+            owner: currentUser.id,
             memberIds: [
-                currentUserId,
+                currentUser.id,
                 ...memberIds.filter(
-                    (id) => id !== currentUserId
+                    (id) =>
+                        id !== currentUser.id
                 ),
             ],
             channels: [
                 {
-                    id: "general",
+                    id: Date.now(),
                     name: "general",
                     unreadCount: 0,
                     messages: [],
@@ -80,10 +88,17 @@ export const GroupsProvider = ({
             ],
         };
 
-        setGroups((prev) => [...prev, newGroup]);
+        setGroups((prev) => [
+            ...prev,
+            newGroup,
+        ]);
     };
 
-    const leaveGroup = (groupId: string) => {
+    const leaveGroup = (
+        groupId: number
+    ) => {
+        if (!currentUser) return;
+
         setGroups((prev) =>
             prev.map((group) =>
                 group.id === groupId
@@ -93,7 +108,7 @@ export const GroupsProvider = ({
                               group.memberIds.filter(
                                   (id) =>
                                       id !==
-                                      currentUserId
+                                      currentUser.id
                               ),
                       }
                     : group
@@ -102,11 +117,11 @@ export const GroupsProvider = ({
     };
 
     const createChannel = (
-        groupId: string,
+        groupId: number,
         name: string
     ) => {
         const newChannel: Channel = {
-            id: crypto.randomUUID(),
+            id: Date.now(),
             name,
             unreadCount: 0,
             messages: [],
@@ -128,8 +143,8 @@ export const GroupsProvider = ({
     };
 
     const deleteChannel = (
-        groupId: string,
-        channelId: string
+        groupId: number,
+        channelId: number
     ) => {
         setGroups((prev) =>
             prev.map((group) =>
@@ -164,7 +179,9 @@ export const GroupsProvider = ({
 };
 
 export const useGroups = () => {
-    const context = useContext(GroupsContext);
+    const context = useContext(
+        GroupsContext
+    );
 
     if (!context) {
         throw new Error(

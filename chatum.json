@@ -1,0 +1,1268 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chatum",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001/"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Dmitry\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\r\n    \"id\": 6,\r\n    \"name\": \"Ivan Mihai\",\r\n    \"email\": \"ivan@main.ru\",\r\n    \"role\": \"\",\r\n    \"avatar\": \"\",\r\n    \"description\": \"\",\r\n    \"status\": \"online\",\r\n    \"settings\": {\r\n        \"account\": {\r\n            \"twoFactorEnabled\": false\r\n        },\r\n        \"language\": {\r\n            \"language\": \"ru\",\r\n            \"dateFormat\": \"31.12.2000\",\r\n            \"timeFormat\": \"14:30\"\r\n        }\r\n    }\r\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\r\n  \"detail\": \"Invalid or expired token.\"\r\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 6,\n    \"name\": \"Ivan Mihai\",\n    \"email\": \"ivan@main.ru\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\r\n  \"detail\": \"Неверный email или пароль\"\r\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "description": "Get all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new item",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Partially update all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Get item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "put": {
+        "description": "Update item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "patch": {
+        "description": "Partially update item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    "/direct-chats": {
+      "get": {
+        "description": "Get all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new item",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Partially update all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/direct-chats/{id}": {
+      "get": {
+        "description": "Get item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "put": {
+        "description": "Update item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "patch": {
+        "description": "Partially update item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"message\": \"Logged out successfully\"\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups": {
+      "get": {
+        "description": "Get all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new item",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Partially update all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete all items",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{id}": {
+      "get": {
+        "description": "Get item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "put": {
+        "description": "Update item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "patch": {
+        "description": "Partially update item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete item by ID",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    "/register": {
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": "{\r\n  \"access\": \"fake-access-token-sara\",\r\n  \"refresh\": \"fake-refresh-token-sara\",\r\n  \"user\": {\r\n      \"id\": 1,\r\n      \"name\": \"Сара Ким\",\r\n      \"email\": \"sara.kim@acmecorp.com\",\r\n      \"avatar\": \"/2.jpg\",\r\n      \"status\": \"online\"\r\n  }\r\n}"
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "*"
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

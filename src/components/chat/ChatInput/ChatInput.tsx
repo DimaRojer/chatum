@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Message } from "@/types/message";
+import type { User } from "@/types/user";
+
 import { EmojiPicker } from "@/components/chat/EmojiPicker/EmojiPicker";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { Attachments } from "@/components/chat/Attachments/Attachments";
-import { currentUserId } from "@/data/currentUser";
+
+import { meService } from "@/services/me";
 
 import "./ChatInput.scss";
 
@@ -14,12 +17,11 @@ interface ChatInputProps {
     onRemoveAttachment: (index: number) => void;
     onFiles: (files: File[]) => void;
     onClearAttachments: () => void;
-    setMessages: React.Dispatch< React.SetStateAction<Message[]>>;
+    setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
     editingMessage: Message | null;
     onCancelEdit: () => void;
     message: string;
-    setMessage: React.Dispatch< React.SetStateAction<string>
-    >;
+    setMessage: React.Dispatch<React.SetStateAction<string>>;
     replyingMessage: Message | null;
     onCancelReply: () => void;
 }
@@ -38,39 +40,82 @@ export const ChatInput = ({
     onCancelReply,
 }: ChatInputProps) => {
     const [isEmojiOpen, setIsEmojiOpen] = useState(false);
+    const [currentUser, setCurrentUser] =
+        useState<User | null>(null);
+
     const inputRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        meService
+            .get()
+            .then((user) => {
+                console.log("CURRENT USER:", user);
+                setCurrentUser(user);
+            })
+            .catch((error) => {
+                console.error("ME ERROR:", error);
+            });
+    }, []);
+
     const resizeTextarea = () => {
-        if (!textareaRef.current)  return;
+        if (!textareaRef.current) return;
+
         textareaRef.current.style.height = "24px";
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        textareaRef.current.style.height =
+            `${textareaRef.current.scrollHeight}px`;
     };
+
     useEffect(() => {
         if (!editingMessage && !replyingMessage) return;
+
         requestAnimationFrame(() => {
-            if (editingMessage) resizeTextarea();
+            if (editingMessage) {
+                resizeTextarea();
+            }
+
             textareaRef.current?.focus();
         });
     }, [editingMessage, replyingMessage]);
 
-    const handleEmojiSelect = (emoji: string) => setMessage((prev) => prev + emoji);
-    const handleChange = ( event: React.ChangeEvent<HTMLTextAreaElement>) => { 
+    const handleEmojiSelect = (emoji: string) => {
+        setMessage((prev) => prev + emoji);
+    };
+
+    const handleChange = (
+        event: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
         event.target.style.height = "24px";
-        if (event.target.value.trim()) event.target.style.height = `${event.target.scrollHeight}px`;
+
+        if (event.target.value.trim()) {
+            event.target.style.height =
+                `${event.target.scrollHeight}px`;
+        }
+
         setMessage(event.target.value);
     };
 
-    const handleFileChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         if (!event.target.files) return;
+
         onFiles(Array.from(event.target.files));
         event.target.value = "";
     };
 
-    const handleSubmit = ( event: React.FormEvent<HTMLFormElement>
+    const handleSubmit = (
+        event: React.FormEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
+
+        if (!currentUser) {
+            return;
+        }
+
         if (editingMessage) {
             if (!message.trim()) return;
+
             setMessages((prev) =>
                 prev.map((item) =>
                     item.id === editingMessage.id
@@ -82,20 +127,31 @@ export const ChatInput = ({
                         : item
                 )
             );
+
             setMessage("");
             onCancelEdit();
-            if (textareaRef.current) textareaRef.current.style.height = "24px";
+
+            if (textareaRef.current) {
+                textareaRef.current.style.height = "24px";
+            }
+
             return;
         }
-        if ( !message.trim() && attachments.length === 0) return;
-        const messageAttachments = attachments.map(
-            (file) => ({
+
+        if (
+            !message.trim() &&
+            attachments.length === 0
+        ) {
+            return;
+        }
+
+        const messageAttachments =
+            attachments.map((file) => ({
                 name: file.name,
                 type: file.type,
                 size: file.size,
                 url: URL.createObjectURL(file),
-            })
-        );
+            }));
 
         setMessages((prev) => {
             const id = prev.length
@@ -110,7 +166,7 @@ export const ChatInput = ({
                 ...prev,
                 {
                     id,
-                    userId: currentUserId,
+                    userId: currentUser.id,
                     time: new Date().toLocaleTimeString(
                         [],
                         {
@@ -126,20 +182,32 @@ export const ChatInput = ({
                 },
             ];
         });
+
         setMessage("");
         onClearAttachments();
         onCancelReply();
-        if (textareaRef.current) textareaRef.current.style.height = "24px";
+
+        if (textareaRef.current) {
+            textareaRef.current.style.height = "24px";
+        }
     };
 
     const handleCancelEdit = () => {
         setMessage("");
         onCancelEdit();
-        if (textareaRef.current) textareaRef.current.style.height = "24px";
+
+        if (textareaRef.current) {
+            textareaRef.current.style.height = "24px";
+        }
     };
 
-    const handleKeyDown = ( event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if ( event.key === "Enter" && !event.shiftKey) {
+    const handleKeyDown = (
+        event: React.KeyboardEvent<HTMLTextAreaElement>
+    ) => {
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
             event.preventDefault();
             event.currentTarget.form?.requestSubmit();
         }
@@ -150,32 +218,70 @@ export const ChatInput = ({
             {editingMessage && (
                 <div className="tooltip">
                     <div className="tooltip__wrapper">
-                        <Icon className="tooltip__icon" name="edit" width={20} height={20}/>
+                        <Icon
+                            className="tooltip__icon"
+                            name="edit"
+                            width={20}
+                            height={20}
+                        />
+
                         <div className="tooltip__info">
-                            <div className="tooltip__title">Редактирование сообщения</div>
-                            <p className="tooltip__text">{editingMessage.text}</p>
+                            <div className="tooltip__title">
+                                Редактирование сообщения
+                            </div>
+
+                            <p className="tooltip__text">
+                                {editingMessage.text}
+                            </p>
                         </div>
                     </div>
-                    <button type="button" onClick={handleCancelEdit} className="btn-svg">
+
+                    <button
+                        type="button"
+                        onClick={handleCancelEdit}
+                        className="btn-svg"
+                    >
                         <Icon name="close" />
                     </button>
                 </div>
             )}
+
             {replyingMessage && (
                 <div className="tooltip">
                     <div className="tooltip__wrapper">
-                        <Icon className="tooltip__icon" name="reply" width={20} height={20}/>
+                        <Icon
+                            className="tooltip__icon"
+                            name="reply"
+                            width={20}
+                            height={20}
+                        />
+
                         <div className="tooltip__info">
-                            <div className="tooltip__title">Ответ на сообщение</div>
-                            <p className="tooltip__text">{replyingMessage.text}</p>
+                            <div className="tooltip__title">
+                                Ответ на сообщение
+                            </div>
+
+                            <p className="tooltip__text">
+                                {replyingMessage.text}
+                            </p>
                         </div>
                     </div>
-                    <button type="button" onClick={onCancelReply} className="btn-svg">
+
+                    <button
+                        type="button"
+                        onClick={onCancelReply}
+                        className="btn-svg"
+                    >
                         <Icon name="close" />
                     </button>
                 </div>
             )}
-            <Attachments files={attachments} onRemove={onRemoveAttachment}/>
+
+            <Attachments
+                files={attachments}
+                onRemove={onRemoveAttachment}
+            />
+
             <form onSubmit={handleSubmit}>
                 <div className="chat-input__wrapper">
                     <button

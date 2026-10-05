@@ -1,12 +1,22 @@
 "use client";
 
-import { use, useState } from "react";
-import { notFound } from "next/navigation";
+import {
+    use,
+    useEffect,
+    useState,
+} from "react";
+
+import {
+    notFound,
+    useSearchParams,
+} from "next/navigation";
 
 import { useGroups } from "@/context/GroupContext";
-import { users } from "@/data/users";
+import { usersService } from "@/services/users";
 
+import type { User } from "@/types/user";
 import type { Message } from "@/types/message";
+import type { Channel } from "@/types/channel";
 
 import { FileUpload } from "@/components/chat/FileUpload/FileUpload";
 import { ChatList } from "@/components/chat/ChatList/ChatList";
@@ -19,46 +29,54 @@ interface ChannelPageProps {
     }>;
 }
 
-export default function ChannelPage({
-    params,
-}: ChannelPageProps) {
+interface ChannelContentProps {
+    channel: Channel;
+    users: User[];
+}
 
-    const { groupId, channelId } = use(params);
-    const { groups } = useGroups();
-    const group = groups.find(
-        (group) => group.id === groupId
-    );
-
-    const channel = group?.channels.find(
-        (channel) => channel.id === channelId
-    );
-
-    if (!channel) {
-        notFound();
-    }
+const ChannelContent = ({
+    channel,
+    users,
+}: ChannelContentProps) => {
 
     const [messages, setMessages] =
-        useState<Message[]>(channel.messages);
+        useState<Message[]>(
+            channel.messages
+        );
+    const [message, setMessage] =
+        useState("");
 
-    const [message, setMessage] = useState("");
+    const [
+        editingMessage,
+        setEditingMessage,
+    ] = useState<Message | null>(
+        null
+    );
 
-    const [editingMessage, setEditingMessage] =
-        useState<Message | null>(null);
+    const [
+        attachments,
+        setAttachments,
+    ] = useState<File[]>([]);
 
-    const [attachments, setAttachments] =
-        useState<File[]>([]);
+    const [
+        replyingMessage,
+        setReplyingMessage,
+    ] = useState<Message | null>(
+        null
+    );
 
-    const [replyingMessage, setReplyingMessage] =
-        useState<Message | null>(null);
-
-    const addAttachments = (files: File[]) => {
+    const addAttachments = (
+        files: File[]
+    ) => {
         setAttachments((prev) => [
             ...prev,
             ...files,
         ]);
     };
 
-    const removeAttachment = (index: number) => {
+    const removeAttachment = (
+        index: number
+    ) => {
         setAttachments((prev) =>
             prev.filter(
                 (_, fileIndex) =>
@@ -71,7 +89,9 @@ export default function ChannelPage({
         setAttachments([]);
     };
 
-    const handleEdit = (message: Message) => {
+    const handleEdit = (
+        message: Message
+    ) => {
         setEditingMessage(message);
         setReplyingMessage(null);
         setMessage(message.text);
@@ -82,7 +102,9 @@ export default function ChannelPage({
         setMessage("");
     };
 
-    const handleReply = (message: Message) => {
+    const handleReply = (
+        message: Message
+    ) => {
         setReplyingMessage(message);
         setEditingMessage(null);
         setMessage("");
@@ -91,6 +113,7 @@ export default function ChannelPage({
     const handleCancelReply = () => {
         setReplyingMessage(null);
     };
+
     return (
         <>
             <FileUpload
@@ -109,17 +132,82 @@ export default function ChannelPage({
                 onFiles={addAttachments}
                 setMessages={setMessages}
                 attachments={attachments}
-                onRemoveAttachment={removeAttachment}
+                onRemoveAttachment={
+                    removeAttachment
+                }
                 onClearAttachments={
                     clearAttachments
                 }
-                editingMessage={editingMessage}
-                onCancelEdit={handleCancelEdit}
-                replyingMessage={replyingMessage}
-                onCancelReply={handleCancelReply}
+                editingMessage={
+                    editingMessage
+                }
+                onCancelEdit={
+                    handleCancelEdit
+                }
+                replyingMessage={
+                    replyingMessage
+                }
+                onCancelReply={
+                    handleCancelReply
+                }
                 message={message}
                 setMessage={setMessage}
             />
         </>
+    );
+};
+
+export default function ChannelPage({
+    params,
+}: ChannelPageProps) {
+    const { groupId, channelId } =
+        use(params);
+
+    const { groups } = useGroups();
+
+    const [users, setUsers] =
+        useState<User[]>([]);
+
+    useEffect(() => {
+        usersService
+            .getAll()
+            .then((users) => {
+                setUsers(users);
+            })
+            .catch((error) => {
+                console.error(
+                    "USERS ERROR:",
+                    error
+                );
+            });
+    }, []);
+
+    const group = groups.find(
+        (group) =>
+            group.id ===
+            Number(groupId)
+    );
+
+    const channel =
+        group?.channels.find(
+            (channel) =>
+                channel.id ===
+                Number(channelId)
+        );
+
+    if (groups.length === 0) {
+        return null;
+    }
+
+    if (!group || !channel) {
+        notFound();
+    }
+
+    return (
+        <ChannelContent
+            key={channel.id}
+            channel={channel}
+            users={users}
+        />
     );
 }

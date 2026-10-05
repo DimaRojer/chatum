@@ -1,7 +1,7 @@
 import { Message } from "./message";
 
 export interface Channel {
-    id: string;
+    id: number;
     name: string;
     unreadCount: number;
     messages: Message[];

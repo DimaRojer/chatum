@@ -208,6 +208,7 @@ input[type="checkbox"]:checked::after {
     width: 100%;
     &__container{
         margin: auto;
+        padding: 0 10px;
     }
 }
 
@@ -233,4 +234,12 @@ input[type="checkbox"]:checked::after {
     .chat-main--me-page {
         display: none;
     }
+}
+
+.error-block{
+    background-color: var(--bg-red);
+    color: var(--red);
+    font-size: 0.875rem;
+    padding: 9px 16px;
+    border-radius: 8px;
 }

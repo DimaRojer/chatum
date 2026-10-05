@@ -1,7 +1,7 @@
 import type { Channel } from "./channel";
 
 export interface Group {
-    id: string;
+    id: number;
     name: string;
     owner: number;
     admin?: number[];

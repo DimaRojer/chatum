@@ -1,12 +1,22 @@
 "use client";
 
-import { use, useState } from "react";
-import { notFound } from "next/navigation";
+import {
+    use,
+    useEffect,
+    useState,
+} from "react";
+import {
+    notFound,
+    useSearchParams,
+} from "next/navigation";
 
-import { users } from "@/data/users";
-import { directChats } from "@/data/directChats";
-import { currentUserId } from "@/data/currentUser";
+import { usersService } from "@/services/users";
+import { directChatsService } from "@/services/directChats";
 
+import { useUser } from "@/context/UserContext";
+
+import type { User } from "@/types/user";
+import type { DirectChat } from "@/types/direct-chat";
 import type { Message } from "@/types/message";
 
 import { FileUpload } from "@/components/chat/FileUpload/FileUpload";
@@ -19,37 +29,24 @@ interface UserPageProps {
     }>;
 }
 
-export default function UserPage({
-    params,
-}: UserPageProps) {
+interface DirectChatContentProps {
+    chat: DirectChat;
+    users: User[];
+}
+
+const DirectChatContent = ({
+    chat,
+    users,
+}: DirectChatContentProps) => {
+
+    const [messages, setMessages] =
+        useState<Message[]>(chat.messages);
+
     const [replyingMessage, setReplyingMessage] =
-    useState<Message | null>(null);
-    
-    const { userId } = use(params);
+        useState<Message | null>(null);
 
-    const user = users.find(
-        (user) => user.id === Number(userId)
-    );
-
-    if (!user) {
-        notFound();
-    }
-
-    const chat = directChats.find(
-        (chat) =>
-            chat.userIds.includes(currentUserId) &&
-            chat.userIds.includes(user.id)
-    );
-
-    if (!chat) {
-        notFound();
-    }
-
-    const [messages, setMessages] = useState<Message[]>(
-        chat.messages
-    );
-
-    const [message, setMessage] = useState("");
+    const [message, setMessage] =
+        useState("");
 
     const [editingMessage, setEditingMessage] =
         useState<Message | null>(null);
@@ -57,14 +54,18 @@ export default function UserPage({
     const [attachments, setAttachments] =
         useState<File[]>([]);
 
-    const addAttachments = (files: File[]) => {
+    const addAttachments = (
+        files: File[]
+    ) => {
         setAttachments((prev) => [
             ...prev,
             ...files,
         ]);
     };
 
-    const removeAttachment = (index: number) => {
+    const removeAttachment = (
+        index: number
+    ) => {
         setAttachments((prev) =>
             prev.filter(
                 (_, fileIndex) =>
@@ -77,21 +78,27 @@ export default function UserPage({
         setAttachments([]);
     };
 
-    const handleEdit = (message: Message) => {
+    const handleEdit = (
+        message: Message
+    ) => {
         setEditingMessage(message);
         setReplyingMessage(null);
         setMessage(message.text);
     };
+
     const handleCancelEdit = () => {
         setEditingMessage(null);
         setMessage("");
     };
 
-    const handleReply = (message: Message) => {
+    const handleReply = (
+        message: Message
+    ) => {
         setReplyingMessage(message);
         setEditingMessage(null);
         setMessage("");
     };
+
     const handleCancelReply = () => {
         setReplyingMessage(null);
     };
@@ -112,17 +119,102 @@ export default function UserPage({
 
             <ChatInput
                 attachments={attachments}
-                onRemoveAttachment={removeAttachment}
+                onRemoveAttachment={
+                    removeAttachment
+                }
                 onFiles={addAttachments}
-                onClearAttachments={clearAttachments}
+                onClearAttachments={
+                    clearAttachments
+                }
                 setMessages={setMessages}
-                editingMessage={editingMessage}
-                onCancelEdit={handleCancelEdit}
-                replyingMessage={replyingMessage}
-                onCancelReply={handleCancelReply}
+                editingMessage={
+                    editingMessage
+                }
+                onCancelEdit={
+                    handleCancelEdit
+                }
+                replyingMessage={
+                    replyingMessage
+                }
+                onCancelReply={
+                    handleCancelReply
+                }
                 message={message}
                 setMessage={setMessage}
             />
         </>
+    );
+};
+
+export default function UserPage({
+    params,
+}: UserPageProps) {
+    const { user: currentUser } =
+        useUser();
+
+    const { userId } = use(params);
+
+    const [users, setUsers] =
+        useState<User[]>([]);
+
+    const [directChats, setDirectChats] =
+        useState<DirectChat[]>([]);
+
+    const [isLoading, setIsLoading] =
+        useState(true);
+
+    useEffect(() => {
+        Promise.all([
+            usersService.getAll(),
+            directChatsService.getAll(),
+        ])
+            .then(([users, chats]) => {
+                setUsers(users);
+                setDirectChats(chats);
+            })
+            .catch((error) => {
+                console.error(
+                    "USER PAGE ERROR:",
+                    error
+                );
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }, []);
+
+    if (isLoading || !currentUser) {
+        return null;
+    }
+
+    const user = users.find(
+        (user) =>
+            user.id === Number(userId)
+    );
+
+    if (!user) {
+        notFound();
+    }
+
+    const chat = directChats.find(
+        (chat) =>
+            chat.userIds.includes(
+                currentUser.id
+            ) &&
+            chat.userIds.includes(
+                user.id
+            )
+    );
+
+    if (!chat) {
+        notFound();
+    }
+
+    return (
+        <DirectChatContent
+            key={chat.id}
+            chat={chat}
+            users={users}
+        />
     );
 }

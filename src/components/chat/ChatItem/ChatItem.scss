@@ -4,6 +4,9 @@
 	line-height: 1;
 	padding: 12px 12px;
 	border-radius: 8px;
+	&--highlight {
+		background: var(--hover) !important;
+	}
 	.avatar-image-wrapper {
 		position: relative;
 		width: 36px;

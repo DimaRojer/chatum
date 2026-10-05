@@ -4,52 +4,13 @@ import "./Sessions.scss";
 
 import { useState } from "react";
 
+import { useUser } from "@/context/UserContext";
+
 import { Btn } from "@/components/ui/Btn/Btn";
 import { RemoveModal } from "@/components/ui/Modal/RemoveModal/RemoveModal";
 
-interface Session {
-    id: number;
-    device: string;
-    browser: string;
-    location: string;
-    ip: string;
-    lastActive: string;
-    current: boolean;
-}
-
-const initialSessions: Session[] = [
-    {
-        id: 1,
-        device: "Windows PC",
-        browser: "Chrome",
-        location: "Москва, Россия",
-        ip: "192.168.1.10",
-        lastActive: "Сейчас",
-        current: true,
-    },
-    {
-        id: 2,
-        device: "iPhone 15",
-        browser: "Safari",
-        location: "Москва, Россия",
-        ip: "192.168.1.24",
-        lastActive: "2 часа назад",
-        current: false,
-    },
-    {
-        id: 3,
-        device: "MacBook Pro",
-        browser: "Chrome",
-        location: "Санкт-Петербург, Россия",
-        ip: "192.168.1.35",
-        lastActive: "3 дня назад",
-        current: false,
-    },
-];
-
 export const Sessions = () => {
-    const [sessions, setSessions] =
-        useState<Session[]>(initialSessions);
+    const { user, updateUser, logout } = useUser();
 
     const [selectedSessionId, setSelectedSessionId] =
         useState<number | null>(null);
@@ -60,8 +21,13 @@ export const Sessions = () => {
     const [isRemoveAllOpen, setIsRemoveAllOpen] =
         useState(false);
 
-    const selectedSession = sessions.find(
-        (session) => session.id === selectedSessionId
+    if (!user) {
+        return null;
+    }
+
+    const selectedSession = user.sessions.find(
+        (session) =>
+            session.id === selectedSessionId
     );
 
     const handleLogout = (id: number) => {
@@ -74,23 +40,15 @@ export const Sessions = () => {
             return;
         }
 
-        setSessions((prev) =>
-            prev.filter(
+        updateUser({
+            sessions: user.sessions.filter(
                 (session) =>
                     session.id !== selectedSessionId
-            )
-        );
+            ),
+        });
 
         setSelectedSessionId(null);
         setIsRemoveOpen(false);
-    };
-
-    const handleConfirmRemoveAll = () => {
-        setSessions((prev) =>
-            prev.filter((session) => session.current)
-        );
-
-        setIsRemoveAllOpen(false);
     };
 
     return (
@@ -109,7 +67,7 @@ export const Sessions = () => {
             </div>
 
             <div className="sessions__list">
-                {sessions.map((session) => (
+                {user.sessions.map((session) => (
                     <div
                         className="sessions__item"
                         key={session.id}
@@ -171,7 +129,7 @@ export const Sessions = () => {
                         setIsRemoveAllOpen(true)
                     }
                 >
-                    Завершить все остальные
+                    Выйти
                 </Btn>
             </div>
 
@@ -182,7 +140,9 @@ export const Sessions = () => {
                     setSelectedSessionId(null);
                 }}
                 onConfirm={handleConfirmLogout}
-                title={`Завершить сессию ${selectedSession?.device ?? ""}?`}
+                title={`Завершить сессию ${
+                    selectedSession?.device ?? ""
+                }?`}
                 confirmText="Завершить"
                 cancelText="Отмена"
             />
@@ -192,9 +152,12 @@ export const Sessions = () => {
                 onClose={() =>
                     setIsRemoveAllOpen(false)
                 }
-                onConfirm={handleConfirmRemoveAll}
-                title="Завершить все остальные сессии?"
-                confirmText="Завершить"
+                onConfirm={() => {
+                    setIsRemoveAllOpen(false);
+                    logout();
+                }}
+                title="Выйти из аккаунта?"
+                confirmText="Выйти"
                 cancelText="Отмена"
             />
         </section>

@@ -44,6 +44,7 @@ export default function AccountPage() {
                         onChange={setNewPassword}
                     />
                     <Field
+                        
                         label="Подтвердите новый пароль"
                         type="password"
                         value={confirmPassword}

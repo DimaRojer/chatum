@@ -6,6 +6,15 @@ export interface User {
     avatar: string;
     description: string;
     status: "online" | "offline" | "away";
+    sessions: {
+        id: number;
+        device: string;
+        browser: string;
+        location: string;
+        ip: string;
+        lastActive: string;
+        current: boolean;
+    }[];
     settings: {
         account: {
             twoFactorEnabled: boolean;

@@ -9,14 +9,14 @@ import Link from "next/link";
 import type { Group } from "@/types/group";
 import type { User } from "@/types/user";
 
-import { currentUserId } from "@/data/currentUser";
+import { useUser } from "@/context/UserContext";
+import { useGroups } from "@/context/GroupContext";
 
 import { AddChannelModal } from "@/components/ui/Modal/AddChatModal/AddChatModal";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { UserList } from "@/components/UserList/UserList";
 import { ContextMenu } from "@/components/ui/ContextMenu/ContextMenu";
-import {RemoveModal} from "@/components/ui/Modal/RemoveModal/RemoveModal"
-import { useGroups } from "@/context/GroupContext";
+import { RemoveModal } from "@/components/ui/Modal/RemoveModal/RemoveModal";
 
 interface ChatsSidebarProps {
     group: Group;
@@ -32,25 +32,48 @@ export const ChatsSidebar = ({
     onChannelSelect,
 }: ChatsSidebarProps) => {
     const pathname = usePathname();
-    const [isNewChannelOpen, setIsNewChannelOpen] = useState(false);
 
-    const [channelToDelete, setChannelToDelete] = useState<string | null>(null);
-    const { createChannel,  deleteChannel} = useGroups();
+    const { user: currentUser } =
+        useUser();
+
+    const [isNewChannelOpen, setIsNewChannelOpen] =
+        useState(false);
+
+    const [channelToDelete, setChannelToDelete] =
+        useState<number | null>(null);
+
+    const {
+        createChannel,
+        deleteChannel,
+    } = useGroups();
+
     const canManageChannel =
-        group.owner === currentUserId ||
-        group.admin?.includes(currentUserId);
+        currentUser
+            ? group.owner ===
+                  currentUser.id ||
+              group.admin?.includes(
+                  currentUser.id
+              )
+            : false;
 
     const groupUsers = users.filter(
         (user) =>
-            group.memberIds.includes(user.id) &&
+            group.memberIds.includes(
+                user.id
+            ) &&
             user.status === "online"
     );
 
-    const countUsersOnline = groupUsers.length;
+    const countUsersOnline =
+        groupUsers.length;
 
-    const channelToDeleteData = group.channels.find(
-        (channel) => channel.id === channelToDelete
-    );
+    const channelToDeleteData =
+        group.channels.find(
+            (channel) =>
+                channel.id ===
+                channelToDelete
+        );
+
     return (
         <div
             className={`chats-sidebar ${
@@ -65,69 +88,115 @@ export const ChatsSidebar = ({
                         <span className="flex justify-between">
                             Список чатов
                         </span>
-                        {group.owner === currentUserId && (
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    setIsNewChannelOpen(
-                                        true
-                                    )
-                                }
-                            >
-                                <Icon
-                                    name="plus"
-                                    className="rotate-45"
-                                    width={16}
-                                    height={16}
-                                />
-                            </button>
-                        )}
+
+                        {currentUser &&
+                            group.owner ===
+                                currentUser.id && (
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        setIsNewChannelOpen(
+                                            true
+                                        )
+                                    }
+                                >
+                                    <Icon
+                                        name="plus"
+                                        className="rotate-45"
+                                        width={16}
+                                        height={16}
+                                    />
+                                </button>
+                            )}
                     </div>
 
                     <ul className="channels-list">
                         {group.channels.map(
-                            (channel) => (
-                                <li
-                                    className="channels-list__item"
-                                    key={channel.id}
-                                >
-                                    {canManageChannel ? (
-                                        <ContextMenu
-                                            menu={
-                                                <>
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => {
-                                                            console.log(
-                                                                "Переименовать",
-                                                                channel.id
-                                                            );
-                                                        }}
-                                                    >
-                                                        Переименовать
-                                                    </button>
+                            (channel) => {
+                                const href =
+                                    `/${group.id}/${channel.id}`;
 
-                                                    {channel.id !==
-                                                        "general" && (
+                                return (
+                                    <li
+                                        className="channels-list__item"
+                                        key={
+                                            channel.id
+                                        }
+                                    >
+                                        {canManageChannel ? (
+                                            <ContextMenu
+                                                menu={
+                                                    <>
                                                         <button
                                                             type="button"
-                                                            className="context-menu__item--danger"
                                                             onClick={() => {
-                                                                setChannelToDelete(channel.id);
+                                                                console.log(
+                                                                    "Переименовать",
+                                                                    channel.id
+                                                                );
                                                             }}
                                                         >
-                                                            Удалить
+                                                            Переименовать
                                                         </button>
+
+                                                        {channel.name !==
+                                                            "general" && (
+                                                            <button
+                                                                type="button"
+                                                                className="context-menu__item--danger"
+                                                                onClick={() => {
+                                                                    setChannelToDelete(
+                                                                        channel.id
+                                                                    );
+                                                                }}
+                                                            >
+                                                                Удалить
+                                                            </button>
+                                                        )}
+                                                    </>
+                                                }
+                                            >
+                                                <Link
+                                                    href={
+                                                        href
+                                                    }
+                                                    onClick={
+                                                        onChannelSelect
+                                                    }
+                                                    className={`channels-list__link ${
+                                                        pathname ===
+                                                        href
+                                                            ? "channels-list__link--active"
+                                                            : ""
+                                                    }`}
+                                                >
+                                                    <span className="channels-list__name">
+                                                        {
+                                                            channel.name
+                                                        }
+                                                    </span>
+
+                                                    {channel.unreadCount >
+                                                        0 && (
+                                                        <span className="badge-count">
+                                                            {
+                                                                channel.unreadCount
+                                                            }
+                                                        </span>
                                                     )}
-                                                </>
-                                            }
-                                        >
+                                                </Link>
+                                            </ContextMenu>
+                                        ) : (
                                             <Link
-                                                href={`/${group.id}/${channel.id}`}
-                                                onClick={onChannelSelect}
+                                                href={
+                                                    href
+                                                }
+                                                onClick={
+                                                    onChannelSelect
+                                                }
                                                 className={`channels-list__link ${
                                                     pathname ===
-                                                    `/${group.id}/${channel.id}`
+                                                    href
                                                         ? "channels-list__link--active"
                                                         : ""
                                                 }`}
@@ -147,36 +216,10 @@ export const ChatsSidebar = ({
                                                     </span>
                                                 )}
                                             </Link>
-                                        </ContextMenu>
-                                    ) : (
-                                        <Link
-                                            href={`/${group.id}/${channel.id}`}
-                                            onClick={onChannelSelect}
-                                            className={`channels-list__link ${
-                                                pathname ===
-                                                `/${group.id}/${channel.id}`
-                                                    ? "channels-list__link--active"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <span className="channels-list__name">
-                                                {
-                                                    channel.name
-                                                }
-                                            </span>
-
-                                            {channel.unreadCount >
-                                                0 && (
-                                                <span className="badge-count">
-                                                    {
-                                                        channel.unreadCount
-                                                    }
-                                                </span>
-                                            )}
-                                        </Link>
-                                    )}
-                                </li>
-                            )
+                                        )}
+                                    </li>
+                                );
+                            }
                         )}
                     </ul>
                 </div>
@@ -185,7 +228,10 @@ export const ChatsSidebar = ({
                     <div className="chats-sidebar__title-head">
                         <span>
                             Онлайн (
-                            {countUsersOnline})
+                            {
+                                countUsersOnline
+                            }
+                            )
                         </span>
                     </div>
 
@@ -193,17 +239,25 @@ export const ChatsSidebar = ({
                         key={group.id}
                         users={groupUsers}
                         variant="group"
-                        onUserSelect={onChannelSelect}
+                        onUserSelect={
+                            onChannelSelect
+                        }
                     />
                 </div>
             </div>
 
             <AddChannelModal
-                isOpen={isNewChannelOpen}
-                onClose={() =>
-                    setIsNewChannelOpen(false)
+                isOpen={
+                    isNewChannelOpen
                 }
-                channels={group.channels}
+                onClose={() =>
+                    setIsNewChannelOpen(
+                        false
+                    )
+                }
+                channels={
+                    group.channels
+                }
                 onConfirm={(name) => {
                     createChannel(
                         group.id,
@@ -211,16 +265,33 @@ export const ChatsSidebar = ({
                     );
                 }}
             />
+
             <RemoveModal
-                isOpen={channelToDelete !== null}
-                onClose={() => setChannelToDelete(null)}
+                isOpen={
+                    channelToDelete !==
+                    null
+                }
+                onClose={() =>
+                    setChannelToDelete(
+                        null
+                    )
+                }
                 onConfirm={() => {
-                    if (!channelToDelete) {
+                    if (
+                        channelToDelete ===
+                        null
+                    ) {
                         return;
                     }
 
-                    deleteChannel(group.id, channelToDelete);
-                    setChannelToDelete(null);
+                    deleteChannel(
+                        group.id,
+                        channelToDelete
+                    );
+
+                    setChannelToDelete(
+                        null
+                    );
                 }}
                 title={`Вы уверены, что хотите удалить канал «${channelToDeleteData?.name}»?`}
                 confirmText="Удалить"

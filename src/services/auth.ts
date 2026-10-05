@@ -1,13 +1,26 @@
 import { api } from "./api";
 
 interface LoginData {
-    username: string;
+    email: string;
+    password: string;
+}
+
+interface RegisterData {
+    name: string;
+    email: string;
     password: string;
 }
 
 interface AuthResponse {
     access: string;
     refresh: string;
+    user: {
+        id: number;
+        name: string;
+        email: string;
+        avatar: string;
+        status: "online" | "offline" | "away";
+    };
 }
 
 export const authService = {
@@ -15,7 +28,7 @@ export const authService = {
         data: LoginData
     ): Promise<AuthResponse> {
         return api<AuthResponse>(
-            "/auth/login/",
+            "/auth/login",
             {
                 method: "POST",
                 body: JSON.stringify(data),
@@ -23,11 +36,14 @@ export const authService = {
         );
     },
 
-    async logout(): Promise<void> {
-        await api(
-            "/auth/logout/",
+    async register(
+        data: RegisterData
+    ): Promise<AuthResponse> {
+        return api<AuthResponse>(
+            "/register/",
             {
                 method: "POST",
+                body: JSON.stringify(data),
             }
         );
     },

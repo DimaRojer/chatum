@@ -9,6 +9,7 @@ const excludedIcons = new Set([
     "pdf",
     "xls",
     "zip",
+    "create-group",
 ]);
 
 if (!fs.existsSync(iconsDir)) {

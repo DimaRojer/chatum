@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-import { users } from "@/data/users";
-
+import { usersService } from "@/services/users";
 import { MeSidebar } from "@/components/Sidebar/MeSidebar/MeSidebar";
 import { GroupSidebar } from "@/components/Sidebar/GroupSidebar/GroupSidebar";
 import { ChatsSidebar } from "@/components/Sidebar/ChatsSidebar/ChatsSidebar";
@@ -13,6 +12,8 @@ import { InfoSidebar } from "@/components/Sidebar/InfoSidebar/InfoSidebar";
 import { MessageSelectionProvider } from "@/context/MessageSelectionContext";
 import { useGroups } from "@/context/GroupContext";
 import { useRecent } from "@/context/RecentContext";
+
+import type { User } from "@/types/user";
 
 interface ChatLayoutProps {
     children: React.ReactNode;
@@ -28,50 +29,99 @@ export default function ChatLayout({
     setIsMobileMenuOpen,
 }: ChatLayoutProps) {
     const pathname = usePathname();
-    const isSettings = pathname.startsWith("/settings");
 
     const { groups } = useGroups();
     const { addRecentUser } = useRecent();
 
+    const [users, setUsers] =
+        useState<User[]>([]);
+
     const [isInfoOpen, setIsInfoOpen] =
         useState(false);
 
-    const [search, setSearch] = useState("");
+    const isMe =
+        pathname === "/me" ||
+        pathname.startsWith("/me/");
 
-    const isMe = pathname.startsWith("/me");
-    const isMePage = pathname === "/me";
+    const isMePage =
+        pathname === "/me";
+
+    const isSettings =
+        pathname === "/settings" ||
+        pathname.startsWith("/settings/");
+
+    const pathParts =
+        pathname.split("/");
+
+    const groupId = Number(
+        pathParts[1]
+    );
+
+    const channelId = Number(
+        pathParts[2]
+    );
+
+    const isGroupPage =
+        !isMe &&
+        !isSettings &&
+        !Number.isNaN(groupId);
+
+    const group = isGroupPage
+        ? groups.find(
+              (group) =>
+                  group.id === groupId
+          )
+        : undefined;
+
+    const channel = group
+        ? group.channels.find(
+              (channel) =>
+                  channel.id === channelId
+          )
+        : undefined;
 
     const userId = Number(
-        pathname.split("/")[2]
+        pathParts[2]
     );
 
-    const user = users.find(
-        (user) => user.id === userId
-    );
-
-    const groupId = pathname.split("/")[1];
-
-    const group = groups.find(
-        (group) => group.id === groupId
-    );
+    const user = isMe
+        ? users.find(
+              (user) =>
+                  user.id === userId
+          )
+        : undefined;
 
     const groupUsers = group
         ? users.filter((user) =>
-              group.memberIds.includes(user.id)
+              group.memberIds.includes(
+                  user.id
+              )
           )
         : [];
 
-    const channelId = pathname.split("/")[2];
-
-    const channel = group?.channels.find(
-        (channel) => channel.id === channelId
-    );
+    useEffect(() => {
+        usersService
+            .getAll()
+            .then((users) => {
+                setUsers(users);
+            })
+            .catch((error) => {
+                console.error(
+                    "USERS ERROR:",
+                    error
+                );
+            });
+    }, []);
 
     useEffect(() => {
         if (isMe && user) {
             addRecentUser(user.id);
         }
-    }, [isMe, user, addRecentUser]);
+    }, [
+        isMe,
+        user,
+        addRecentUser,
+    ]);
 
     return (
         <>
@@ -90,7 +140,11 @@ export default function ChatLayout({
                     <MeSidebar
                         users={users}
                         isOpen={isMobileMenuOpen}
-                        onUserSelect={() => setIsMobileMenuOpen(false)}
+                        onUserSelect={() =>
+                            setIsMobileMenuOpen(
+                                false
+                            )
+                        }
                     />
                 )}
 
@@ -100,7 +154,9 @@ export default function ChatLayout({
                         users={users}
                         isOpen={isMobileMenuOpen}
                         onChannelSelect={() =>
-                            setIsMobileMenuOpen(false)
+                            setIsMobileMenuOpen(
+                                false
+                            )
                         }
                     />
                 )}
@@ -118,10 +174,17 @@ export default function ChatLayout({
                         <Header
                             data={user}
                             onInfoClick={() =>
-                                setIsInfoOpen((prev) => !prev)
+                                setIsInfoOpen(
+                                    (prev) =>
+                                        !prev
+                                )
                             }
-                            isMobileMenuOpen={isMobileMenuOpen}
-                            setIsMobileMenuOpen={setIsMobileMenuOpen}
+                            isMobileMenuOpen={
+                                isMobileMenuOpen
+                            }
+                            setIsMobileMenuOpen={
+                                setIsMobileMenuOpen
+                            }
                         />
                     )}
 
@@ -130,10 +193,17 @@ export default function ChatLayout({
                             data={group}
                             channel={channel}
                             onInfoClick={() =>
-                                setIsInfoOpen((prev) => !prev)
+                                setIsInfoOpen(
+                                    (prev) =>
+                                        !prev
+                                )
                             }
-                            isMobileMenuOpen={isMobileMenuOpen}
-                            setIsMobileMenuOpen={setIsMobileMenuOpen}
+                            isMobileMenuOpen={
+                                isMobileMenuOpen
+                            }
+                            setIsMobileMenuOpen={
+                                setIsMobileMenuOpen
+                            }
                         />
                     )}
 
@@ -142,14 +212,21 @@ export default function ChatLayout({
                     </div>
                 </div>
             </MessageSelectionProvider>
-        <InfoSidebar
-            isOpen={isInfoOpen}
-            onClose={() => setIsInfoOpen(false)}
-            groupUsers={groupUsers}
-            description={group?.description ?? ""}
-            users={users}
-            memberIds={group?.memberIds ?? []}
-        />
+
+            <InfoSidebar
+                isOpen={isInfoOpen}
+                onClose={() =>
+                    setIsInfoOpen(false)
+                }
+                groupUsers={groupUsers}
+                description={
+                    group?.description ?? ""
+                }
+                users={users}
+                memberIds={
+                    group?.memberIds ?? []
+                }
+            />
         </>
     );
 }

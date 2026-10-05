@@ -68,7 +68,7 @@ export const UserList = ({ users, variant = "default", onUserSelect,}: UserListP
                                 <div className="direct-list__user">
                                     <div className="avatar-image-wrapper">
                                         <Image
-                                            src={user.avatar}
+                                            src={user.avatar || "/default-avatar.jpg"}
                                             alt={user.name}
                                             width={24}
                                             height={24}

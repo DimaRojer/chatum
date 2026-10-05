@@ -3,16 +3,17 @@
 import {
     createContext,
     useContext,
+    useEffect,
     useState,
 } from "react";
 
-import { users } from "@/data/users";
-import { currentUserId } from "@/data/currentUser";
 import type { User } from "@/types/user";
+import { meService } from "@/services/me";
 
 interface UserContextType {
-    user: User;
+    user: User | null;
     updateUser: (data: Partial<User>) => void;
+    logout: () => void;
 
     currentPassword: string;
     newPassword: string;
@@ -36,16 +37,8 @@ export const UserProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const initialUser = users.find(
-        (user) => user.id === currentUserId
-    );
-
-    if (!initialUser) {
-        throw new Error("Current user not found");
-    }
-
     const [user, setUser] =
-        useState<User>(initialUser);
+        useState<User | null>(null);
 
     const [password, setPassword] =
         useState("Chatum123!");
@@ -59,11 +52,39 @@ export const UserProvider = ({
     const [confirmPassword, setConfirmPassword] =
         useState("");
 
+    useEffect(() => {
+        meService
+            .get()
+            .then((user) => {
+                console.log("AUTH USER:", user);
+                setUser(user);
+            })
+            .catch((error) => {
+                console.error(
+                    "AUTH USER ERROR:",
+                    error
+                );
+            });
+    }, []);
+
     const updateUser = (data: Partial<User>) => {
-        setUser((prev) => ({
-            ...prev,
-            ...data,
-        }));
+        setUser((prev) => {
+            if (!prev) return prev;
+
+            return {
+                ...prev,
+                ...data,
+            };
+        });
+    };
+
+    const logout = () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+
+        setUser(null);
+
+        window.location.href = "/login";
     };
 
     const changePassword = () => {
@@ -127,6 +148,7 @@ export const UserProvider = ({
             value={{
                 user,
                 updateUser,
+                logout,
 
                 currentPassword,
                 newPassword,

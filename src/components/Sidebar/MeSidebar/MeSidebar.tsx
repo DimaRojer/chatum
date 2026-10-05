@@ -2,16 +2,11 @@
 
 import "./MeSidebar.scss";
 
-import { useState } from "react";
-
 import { Icon } from "@/components/ui/Icon/Icon";
 import type { User } from "@/types/user";
 
 import { UserList } from "@/components/UserList/UserList";
 import { useRecent } from "@/context/RecentContext";
-import { useGroups } from "@/context/GroupContext";
-
-import { AddGroupModal } from "@/components/ui/Modal/AddGroupModal/AddGroupModal";
 
 interface MeSidebarProps {
     users: User[];
@@ -25,16 +20,17 @@ export const MeSidebar = ({
     onUserSelect,
 }: MeSidebarProps) => {
     const { recentUserIds } = useRecent();
-    const { createGroup } = useGroups();
-
-    const [isNewGroupOpen, setIsNewGroupOpen] =
-        useState(false);
 
     const recentUsers = recentUserIds
         .map((userId) =>
-            users.find((user) => user.id === userId)
+            users.find(
+                (user) => user.id === userId
+            )
         )
-        .filter((user): user is User => Boolean(user));
+        .filter(
+            (user): user is User =>
+                Boolean(user)
+        );
 
     return (
         <div
@@ -56,41 +52,7 @@ export const MeSidebar = ({
                             height={18}
                         />
                     </button>
-
-                    <button
-                        type="button"
-                        className="chats-sidebar__btn"
-                        onClick={() =>
-                            setIsNewGroupOpen(true)
-                        }
-                    >
-                        <Icon
-                            name="plus"
-                            className="rotate-45"
-                            width={16}
-                            height={16}
-                        />
-
-                        <span>Создать беседу</span>
-                    </button>
                 </div>
-
-                <button
-                    type="button"
-                    className="chats-sidebar__btn w-full mb-2 me-sidebar__desktop-create"
-                    onClick={() =>
-                        setIsNewGroupOpen(true)
-                    }
-                >
-                    <Icon
-                        name="plus"
-                        className="rotate-45"
-                        width={16}
-                        height={16}
-                    />
-
-                    <span>Создать беседу</span>
-                </button>
 
                 <div className="chats-sidebar__messages me-sidebar__messages">
                     <div className="chats-sidebar__title-head me-sidebar__desktop-title">
@@ -98,27 +60,18 @@ export const MeSidebar = ({
                     </div>
 
                     <UserList
-                        users={users}
+                        users={recentUsers}
                         onUserSelect={onUserSelect}
                     />
                 </div>
 
                 <div className="me-sidebar__mobile-users">
                     <UserList
-                        users={users}
+                        users={recentUsers}
                         onUserSelect={onUserSelect}
                     />
                 </div>
             </div>
-
-            <AddGroupModal
-                isOpen={isNewGroupOpen}
-                onClose={() =>
-                    setIsNewGroupOpen(false)
-                }
-                users={users}
-                onConfirm={createGroup}
-            />
         </div>
     );
 };
