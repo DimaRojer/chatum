@@ -6,10 +6,14 @@ import { useUser } from "@/context/UserContext";
 
 export default function LanguagePage() {
     const { user, updateUser } = useUser();
-
+    if (!user) {
+        return null;
+    }
     return (
         <div className="flex flex-col gap-4 my-4">
             <Field
+                id="language"
+                name="language"
                 label="Язык интерфейса"
                 type="select"
                 value={user.settings.language.language}
@@ -37,6 +41,8 @@ export default function LanguagePage() {
             />
 
             <Field
+                id="date-format"
+                name="date-format"
                 label="Формат даты"
                 type="select"
                 value={user.settings.language.dateFormat}
@@ -68,6 +74,8 @@ export default function LanguagePage() {
             />
 
             <Field
+                id="time-format"
+                name="time-format"
                 label="Формат времени"
                 type="select"
                 value={user.settings.language.timeFormat}

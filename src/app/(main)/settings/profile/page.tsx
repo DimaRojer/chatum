@@ -15,6 +15,8 @@ export default function ProfilePage() {
         <UserIcon avatar={user.avatar} />
             <div className="flex flex-col gap-4 my-4">
                 <Field
+                    id="full-name"
+                    name="full-name"
                     label="Full Name"
                     value={user.name}
                     onChange={(value) =>
@@ -22,6 +24,8 @@ export default function ProfilePage() {
                     }
                 />
                 <Field
+                    id="email"
+                    name="email"
                     label="Email Address"
                     type="email"
                     value={user.email}
@@ -30,6 +34,8 @@ export default function ProfilePage() {
                     }
                 />
                 <Field
+                    id="role"
+                    name="role"
                     label="Role"
                     value={user.role}
                     onChange={(value) =>
@@ -37,6 +43,8 @@ export default function ProfilePage() {
                     }
                 />
                 <Field
+                    id="bio"
+                    name="bio"
                     type="textarea"
                     label="Bio"
                     value={user.description}

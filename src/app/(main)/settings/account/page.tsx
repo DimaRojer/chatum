@@ -32,19 +32,24 @@ export default function AccountPage() {
                 <h2 className="settings__subtitle">Смена пароля</h2>
                 <div className="flex flex-col gap-4 my-4">
                     <Field
+                        id="current-password"
+                        name="current-password"
                         label="Текущий пароль"
                         type="password"
                         value={currentPassword}
                         onChange={setCurrentPassword}
                     />
                     <Field
+                        id="new-password"
+                        name="new-password"
                         label="Новый пароль"
                         type="password"
                         value={newPassword}
                         onChange={setNewPassword}
                     />
                     <Field
-                        
+                        id="confirm-new-password"
+                        name="confirm-new-password"
                         label="Подтвердите новый пароль"
                         type="password"
                         value={confirmPassword}
