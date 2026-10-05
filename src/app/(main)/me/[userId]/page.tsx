@@ -7,7 +7,6 @@ import {
 } from "react";
 import {
     notFound,
-    useSearchParams,
 } from "next/navigation";
 
 import { usersService } from "@/services/users";
@@ -38,7 +37,6 @@ const DirectChatContent = ({
     chat,
     users,
 }: DirectChatContentProps) => {
-
     const [messages, setMessages] =
         useState<Message[]>(chat.messages);
 
@@ -108,15 +106,19 @@ const DirectChatContent = ({
             <FileUpload
                 onFiles={addAttachments}
             />
-
-            <ChatList
-                messages={messages}
-                users={users}
-                setMessages={setMessages}
-                onEdit={handleEdit}
-                onReply={handleReply}
-            />
-
+            {messages.length === 0 ? (
+                <div className="chat-empty">
+                    Начните диалог
+                </div>
+            ) : (
+                <ChatList
+                    messages={messages}
+                    users={users}
+                    setMessages={setMessages}
+                    onEdit={handleEdit}
+                    onReply={handleReply}
+                />
+            )}
             <ChatInput
                 attachments={attachments}
                 onRemoveAttachment={
@@ -207,7 +209,19 @@ export default function UserPage({
     );
 
     if (!chat) {
-        notFound();
+        return (
+            <DirectChatContent
+                chat={{
+                    id: 0,
+                    userIds: [
+                        currentUser.id,
+                        user.id,
+                    ],
+                    messages: [],
+                }}
+                users={users}
+            />
+        );
     }
 
     return (

@@ -2,33 +2,25 @@
 
 import "./Filter.scss";
 
+interface FilterItem {
+    value: string;
+    label: string;
+}
+
 interface FilterProps {
     value: string;
     onChange: (value: string) => void;
+    children: FilterItem[];
 }
 
 export const Filter = ({
     value,
     onChange,
+    children,
 }: FilterProps) => {
-    const filters = [
-        {
-            value: "all",
-            label: "Все",
-        },
-        {
-            value: "groups",
-            label: "Группы",
-        },
-        {
-            value: "people",
-            label: "Люди",
-        },
-    ];
-
     return (
         <div className="filter">
-            {filters.map((filter) => (
+            {children.map((filter) => (
                 <button
                     key={filter.value}
                     type="button"

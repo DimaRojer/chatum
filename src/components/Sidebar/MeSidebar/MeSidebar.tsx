@@ -7,6 +7,7 @@ import type { User } from "@/types/user";
 
 import { UserList } from "@/components/UserList/UserList";
 import { useRecent } from "@/context/RecentContext";
+import { useUser } from "@/context/UserContext";
 
 interface MeSidebarProps {
     users: User[];
@@ -20,7 +21,8 @@ export const MeSidebar = ({
     onUserSelect,
 }: MeSidebarProps) => {
     const { recentUserIds } = useRecent();
-
+    const { user: currentUser } = useUser();
+    if (!currentUser) return null;
     const recentUsers = recentUserIds
         .map((userId) =>
             users.find(
@@ -29,7 +31,8 @@ export const MeSidebar = ({
         )
         .filter(
             (user): user is User =>
-                Boolean(user)
+                user !== undefined &&
+                user.id !== currentUser.id
         );
 
     return (

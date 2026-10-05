@@ -80,9 +80,16 @@ export const Header = ({
                             <h1 className="head__title">{data.name}</h1>
                             <div className="flex">
                                 <h2 className="head__description">
+                                    <span className="head__description-text">
                                     {"status" in data
                                         ? data.description
                                         : channel?.name}
+                                    </span>
+                                    <span className="head__description-separator">
+                                    {"status" in data
+                                        ? data.role
+                                        : null}
+                                    </span>
                                 </h2>
                                 {!isUser && (
                                     <div className="head__members">

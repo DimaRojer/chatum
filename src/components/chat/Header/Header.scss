@@ -13,6 +13,11 @@
 		display: flex;
 		gap: 12px;
 		align-items: center;
+	}
+	&__description-text {
+		display: flex;
+		gap: 12px;
+		align-items: center;
 		&::after {
 			content: "";
 			width: 4px;

@@ -17,6 +17,7 @@ interface InfoSidebarProps {
     description: string;
     users: User[];
     memberIds: number[];
+    isGroup: boolean;
 }
 
 export const InfoSidebar = ({
@@ -26,6 +27,7 @@ export const InfoSidebar = ({
     description,
     users,
     memberIds,
+    isGroup,
 }: InfoSidebarProps) => {
     const [isAddMembersOpen, setIsAddMembersOpen] =
         useState(false);
@@ -67,7 +69,7 @@ export const InfoSidebar = ({
                             {description}
                         </div>
                     </div>
-
+                    {isGroup && (
                     <div className="info-content__block">
                         <h4 className="info-content__title">
                             Members ({groupUsers.length})
@@ -92,7 +94,7 @@ export const InfoSidebar = ({
                             variant="group"
                         />
                     </div>
-
+                    )}
                     <div className="info-content__block">
                         <h4 className="info-content__title">
                             Shared Files

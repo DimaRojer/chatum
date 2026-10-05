@@ -12,6 +12,7 @@ import type { User } from "@/types/user";
 
 import { Icon } from "@/components/ui/Icon/Icon";
 import { RemoveModal } from "@/components/ui/Modal/RemoveModal/RemoveModal";
+import { useUser } from "@/context/UserContext";
 
 interface UserListProps {
     users: User[];
@@ -19,16 +20,39 @@ interface UserListProps {
     variant?: "default" | "compact" | "group";
 }
 
-export const UserList = ({ users, variant = "default", onUserSelect,}: UserListProps) => {
+export const UserList = ({
+    users,
+    variant = "default",
+    onUserSelect,
+}: UserListProps) => {
     const pathname = usePathname();
 
-    const [removedUserIds, setRemovedUserIds] = useState<number[]>([]);
-    const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-    const [isRemoveOpen, setIsRemoveOpen] = useState(false);
+    const { user: currentUser } = useUser();
 
-    const userList = users.filter((user) => !removedUserIds.includes(user.id));
-    const handleRemove = (userId: number) => {setRemovedUserIds((prev) => [...prev, userId]);};
-    const handleRemoveClick = (userId: number) => {
+    const [removedUserIds, setRemovedUserIds] =
+        useState<number[]>([]);
+
+    const [selectedUserId, setSelectedUserId] =
+        useState<number | null>(null);
+
+    const [isRemoveOpen, setIsRemoveOpen] =
+        useState(false);
+
+    const userList = users.filter(
+        (user) =>
+            !removedUserIds.includes(user.id)
+    );
+
+    const handleRemove = (userId: number) => {
+        setRemovedUserIds((prev) => [
+            ...prev,
+            userId,
+        ]);
+    };
+
+    const handleRemoveClick = (
+        userId: number
+    ) => {
         if (variant === "default") {
             handleRemove(userId);
             return;
@@ -41,7 +65,10 @@ export const UserList = ({ users, variant = "default", onUserSelect,}: UserListP
     };
 
     const handleConfirmRemove = () => {
-        if (selectedUserId === null) return;
+        if (selectedUserId === null) {
+            return;
+        }
+
         handleRemove(selectedUserId);
         setIsRemoveOpen(false);
         setSelectedUserId(null);
@@ -49,18 +76,36 @@ export const UserList = ({ users, variant = "default", onUserSelect,}: UserListP
 
     return (
         <>
-            <ul className={`direct-list ${variant === "compact"? "direct-list--compact": ""}`}>
+            <ul
+                className={`direct-list ${
+                    variant === "compact"
+                        ? "direct-list--compact"
+                        : ""
+                }`}
+            >
                 {userList.map((user) => {
-                    const isActive = pathname === `/me/${user.id}`;
+                    const isCurrentUser =
+                        user.id === currentUser?.id;
+
+                    const userHref = isCurrentUser
+                        ? "/me"
+                        : `/me/${user.id}`;
+
+                    const isActive =
+                        pathname === userHref;
+
                     return (
-                        <li className="direct-list__item" key={user.id}>
+                        <li
+                            className="direct-list__item"
+                            key={user.id}
+                        >
                             <Link
-                                href={`/me/${user.id}`}
+                                href={userHref}
                                 onClick={() => {
                                     onUserSelect?.();
                                 }}
                                 className={`direct-list__link ${
-                                    pathname === `/me/${user.id}`
+                                    isActive
                                         ? "direct-list__link--active"
                                         : ""
                                 }`}
@@ -68,29 +113,46 @@ export const UserList = ({ users, variant = "default", onUserSelect,}: UserListP
                                 <div className="direct-list__user">
                                     <div className="avatar-image-wrapper">
                                         <Image
-                                            src={user.avatar || "/default-avatar.jpg"}
+                                            src={
+                                                user.avatar ||
+                                                "/default-avatar.jpg"
+                                            }
                                             alt={user.name}
                                             width={24}
                                             height={24}
                                             unoptimized
                                             className="avatar-image"
                                         />
-                                        <span className={`network__status network__status--${user.status}`}/>
+
+                                        <span
+                                            className={`network__status network__status--${user.status}`}
+                                        />
                                     </div>
-                                    <span className="direct-list__name">{user.name}</span>
+
+                                    <span className="direct-list__name">
+                                        {user.name}
+                                    </span>
                                 </div>
                             </Link>
-                            {variant !== "group" && (
-                                <button
-                                    type="button"
-                                    className="btn-svg direct-list__remove"
-                                    onClick={() =>
-                                        handleRemoveClick(user.id)
-                                    }
-                                >
-                                    <Icon name="close" width={24} height={24}/>
-                                </button>
-                            )}
+
+                            {!isCurrentUser &&
+                                variant !== "group" && (
+                                    <button
+                                        type="button"
+                                        className="btn-svg direct-list__remove"
+                                        onClick={() =>
+                                            handleRemoveClick(
+                                                user.id
+                                            )
+                                        }
+                                    >
+                                        <Icon
+                                            name="close"
+                                            width={24}
+                                            height={24}
+                                        />
+                                    </button>
+                                )}
                         </li>
                     );
                 })}
@@ -102,7 +164,9 @@ export const UserList = ({ users, variant = "default", onUserSelect,}: UserListP
                     setIsRemoveOpen(false);
                     setSelectedUserId(null);
                 }}
-                onConfirm={handleConfirmRemove}
+                onConfirm={
+                    handleConfirmRemove
+                }
                 title="Вы точно хотите удалить диалог?"
                 confirmText="Удалить"
                 cancelText="Отмена"

@@ -10,6 +10,7 @@ import { Search } from "@/components/ui/Search/Search";
 import { AddGroupModal } from "@/components/ui/Modal/AddGroupModal/AddGroupModal";
 import { Filter } from "@/components/ui/Filter/Filter";
 import { MessageList } from "@/components/me/MessageList/MessageList";
+import { DirectList } from "@/components/me/DirectList/DirectList";
 
 import { useGroups } from "@/context/GroupContext";
 
@@ -43,6 +44,9 @@ export const SearchList = ({
     const [isSearchOpen, setIsSearchOpen] =
         useState(false);
 
+    const [isDirectOpen, setIsDirectOpen] =
+        useState(false);
+
     const [search, setSearch] =
         useState("");
 
@@ -56,7 +60,10 @@ export const SearchList = ({
             title: "Новый диалог",
             description:
                 "Быстро начать разговор и перейти к новому диалогу",
-            onClick: () => {},
+            onClick: () => {
+                setIsDirectOpen(true);
+                onSearchOpen(true);
+            },
         },
         {
             id: "find-user",
@@ -83,6 +90,21 @@ export const SearchList = ({
     const normalizedSearch =
         search.trim().toLowerCase();
 
+    const filters = [
+        {
+            value: "all",
+            label: "Все",
+        },
+        {
+            value: "groups",
+            label: "Группа",
+        },
+        {
+            value: "people",
+            label: "Диалог",
+        },
+    ];
+
     const filteredMessages =
         messages
             .filter((item) => {
@@ -107,24 +129,39 @@ export const SearchList = ({
                     a.message.id
             );
 
-    if (isSearchOpen) {
+    const filteredUsers = users.filter(
+        (user) => {
+            return (
+                user.name
+                    .toLowerCase()
+                    .includes(normalizedSearch) ||
+                user.email
+                    .toLowerCase()
+                    .includes(normalizedSearch) ||
+                String(user.id).includes(
+                    normalizedSearch
+                )
+            );
+        }
+    );
+
+    if (isDirectOpen) {
         return (
-            <>
-                <div className="search-list__search">
+            <div className="search-list__search">
+                <div className="flex items-center gap-2">
                     <button
                         type="button"
+                        className="back-button"
                         onClick={() => {
-                            setIsSearchOpen(false);
+                            setIsDirectOpen(false);
                             setSearch("");
-                            setFilter("all");
                             onSearchOpen(false);
                         }}
                     >
                         <Icon
                             name="arrow"
-                            width={20}
-                            height={20}
-                            className="rotate-180"
+                            width={24}
+                            height={24}
                         />
                     </button>
 
@@ -133,10 +170,62 @@ export const SearchList = ({
                         onChange={setSearch}
                     />
 
+                </div>
+
+                <div className="search-list__results">
+                    {search.length > 0 &&
+                        filteredUsers.length > 0 && (
+                            <DirectList
+                                users={filteredUsers}
+                            />
+                        )}
+
+                    {search.length > 0 &&
+                        filteredUsers.length === 0 && (
+                            <div className="search-list__empty">
+                                Пользователи не найдены
+                            </div>
+                        )}
+                </div>
+            </div>
+        );
+    }
+
+    if (isSearchOpen) {
+        return (
+            <>
+                <div className="search-list__search">
+                    <div className="flex items-center gap-2">
+                        <button
+                            type="button"
+                            className="back-button"
+                            onClick={() => {
+                                setIsSearchOpen(false);
+                                setSearch("");
+                                setFilter("all");
+                                onSearchOpen(false);
+                            }}
+                        >
+                            <Icon
+                                name="arrow"
+                                width={20}
+                                height={20}
+                            />
+                        </button>
+
+                        <Search
+                            value={search}
+                            onChange={setSearch}
+                        />
+                    </div>
+
+
                     <Filter
                         value={filter}
                         onChange={setFilter}
-                    />
+                    >
+                        {filters}
+                    </Filter>
                 </div>
 
                 <div className="search-list__results">

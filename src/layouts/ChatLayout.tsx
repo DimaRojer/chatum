@@ -226,6 +226,7 @@ export default function ChatLayout({
                 memberIds={
                     group?.memberIds ?? []
                 }
+                isGroup={Boolean(group)}
             />
         </>
     );
