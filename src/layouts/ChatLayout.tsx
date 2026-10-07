@@ -130,38 +130,29 @@ export default function ChatLayout({
                     isMobileMenuOpen || isMePage
                         ? "sidebar--open"
                         : ""
+                } ${
+                    isMePage
+                        ? "sidebar--me"
+                        : ""
                 }`}
             >
-                <GroupSidebar
-                    isOpen={isMobileMenuOpen}
-                />
-
+                <GroupSidebar isOpen={isMobileMenuOpen}/>
                 {isMe && (
                     <MeSidebar
                         users={users}
                         isOpen={isMobileMenuOpen}
-                        onUserSelect={() =>
-                            setIsMobileMenuOpen(
-                                false
-                            )
-                        }
+                        onUserSelect={() =>setIsMobileMenuOpen(false)}
                     />
                 )}
-
                 {group && (
                     <ChatsSidebar
                         group={group}
                         users={users}
                         isOpen={isMobileMenuOpen}
-                        onChannelSelect={() =>
-                            setIsMobileMenuOpen(
-                                false
-                            )
-                        }
+                        onChannelSelect={() => setIsMobileMenuOpen(false)}
                     />
                 )}
             </div>
-
             <MessageSelectionProvider>
                 <div
                     className={`chat-main ${
@@ -173,40 +164,21 @@ export default function ChatLayout({
                     {user && (
                         <Header
                             data={user}
-                            onInfoClick={() =>
-                                setIsInfoOpen(
-                                    (prev) =>
-                                        !prev
-                                )
+                            onInfoClick={() =>setIsInfoOpen((prev) =>!prev)
                             }
-                            isMobileMenuOpen={
-                                isMobileMenuOpen
-                            }
-                            setIsMobileMenuOpen={
-                                setIsMobileMenuOpen
-                            }
+                            isMobileMenuOpen={isMobileMenuOpen}
+                            setIsMobileMenuOpen={setIsMobileMenuOpen}
                         />
                     )}
-
                     {group && (
                         <Header
                             data={group}
                             channel={channel}
-                            onInfoClick={() =>
-                                setIsInfoOpen(
-                                    (prev) =>
-                                        !prev
-                                )
-                            }
-                            isMobileMenuOpen={
-                                isMobileMenuOpen
-                            }
-                            setIsMobileMenuOpen={
-                                setIsMobileMenuOpen
-                            }
+                            onInfoClick={() =>setIsInfoOpen((prev) =>!prev)}
+                            isMobileMenuOpen={isMobileMenuOpen}
+                            setIsMobileMenuOpen={setIsMobileMenuOpen}
                         />
                     )}
-
                     <div className="chat-wrapper">
                         {children}
                     </div>
@@ -215,17 +187,11 @@ export default function ChatLayout({
 
             <InfoSidebar
                 isOpen={isInfoOpen}
-                onClose={() =>
-                    setIsInfoOpen(false)
-                }
+                onClose={() =>setIsInfoOpen(false)}
                 groupUsers={groupUsers}
-                description={
-                    group?.description ?? ""
-                }
+                description={group?.description ?? ""}
                 users={users}
-                memberIds={
-                    group?.memberIds ?? []
-                }
+                memberIds={group?.memberIds ?? []}
                 isGroup={Boolean(group)}
             />
         </>

@@ -158,7 +158,7 @@ export default function Page() {
     );
 
     return (
-        <div className="px-8 pt-4">
+        <div className="px-4 pt-4">
             <div className="mb-4">
                 <div>
                     Привет, {currentUser.name}

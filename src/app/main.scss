@@ -228,11 +228,16 @@ input[type="checkbox"]:checked::after {
             transform: translateX(0);
         }
     }
-}
-
-@include md {
-    .chat-main--me-page {
-        display: none;
+    &--me {
+        @include md {
+            z-index: auto;
+            width: auto;
+            height: auto;
+            transition: none;
+            position: static;
+            inset: auto;
+            transform: none;
+        }
     }
 }
 

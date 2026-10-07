@@ -1,549 +1,549 @@
 {
-    "uuid": "8a267fcb-f9e0-4fe9-8ce7-bca13f17fd8c",
-    "lastMigration": 33,
-    "name": "Chatum",
-    "endpointPrefix": "",
-    "latency": 0,
-    "port": 3001,
-    "hostname": "",
-    "folders": [],
-    "routes": [
+  "uuid": "87d71975-f327-4f12-bb63-5db46367b017",
+  "lastMigration": 33,
+  "name": "Chatum (copy)",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "0f6490e3-d414-4658-a801-03fc198440d7",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "",
+      "responses": [
         {
-            "uuid": "30798445-885e-48c5-ab17-00b245ca2d85",
-            "type": "http",
-            "documentation": "",
-            "method": "get",
-            "endpoint": "",
-            "responses": [
-                {
-                    "uuid": "d843ba7a-2bad-4e46-b813-f9964e422408",
-                    "body": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Dmitry\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "8800ed35-fcc3-4380-bf58-009d23acc252",
-            "type": "http",
-            "documentation": "",
-            "method": "post",
-            "endpoint": "auth/login",
-            "responses": [
-                {
-                    "uuid": "829d73fe-1037-4945-9b97-e607d3f2f621",
-                    "body": "{\n  \"access\": \"fake-access-token-dima\",\n  \"refresh\": \"fake-refresh-token-dima\",\n  \"user\": {\n    \"id\": 5,\n    \"name\": \"Дима Гуленков\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"role\": \"Frontend Developer\",\n    \"avatar\": \"/2.jpg\",\n    \"description\": \"Gamarjoba\",\n    \"status\": \"away\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPhone 15\",\n        \"browser\": \"Safari\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.24\",\n        \"lastActive\": \"2 часа назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"ru\",\n        \"dateFormat\": \"31.12.2000\",\n        \"timeFormat\": \"14:30\"\n      }\n    }\n  }\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [
-                        {
-                            "target": "body",
-                            "modifier": "email",
-                            "value": "gulenkov.dmitriy234@gmail.com",
-                            "invert": false,
-                            "operator": "equals"
-                        }
-                    ],
-                    "rulesOperator": "AND",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "d4b983ba-691f-41c2-bb2a-ded719923b4f",
-                    "body": "{\r\n  \"detail\": \"Неверный email или пароль\"\r\n}",
-                    "latency": 0,
-                    "statusCode": 401,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "b827747b-7d87-4c49-aed9-867271b43a98",
-                    "body": "{\r\n  \"access\": \"fake-access-token-sara\",\r\n  \"refresh\": \"fake-refresh-token-sara\",\r\n  \"user\": {\r\n    \"id\": 1,\r\n    \"name\": \"Сара Ким\",\r\n    \"email\": \"sara.kim@acmecorp.com\",\r\n    \"avatar\": \"/2.jpg\",\r\n    \"status\": \"online\"\r\n  }\r\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [
-                        {
-                            "target": "body",
-                            "modifier": "email",
-                            "value": "sara.kim@acmecorp.com",
-                            "invert": false,
-                            "operator": "equals"
-                        }
-                    ],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "f4577655-ba9b-4c5f-aaff-7bafbcf901b6",
-                    "body": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 6,\n    \"name\": \"Ivan Mihai\",\n    \"email\": \"ivan@main.ru\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [
-                        {
-                            "target": "body",
-                            "modifier": "token",
-                            "value": "Bearer fake-access-token",
-                            "invert": false,
-                            "operator": "equals"
-                        }
-                    ],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "874097b2-f678-45ab-be13-ab7d928c850d",
-            "type": "crud",
-            "documentation": "",
-            "method": "",
-            "endpoint": "users",
-            "responses": [
-                {
-                    "uuid": "f287f02d-9356-43df-852e-9f02fe2b2cd2",
-                    "body": "{}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "DATABUCKET",
-                    "filePath": "",
-                    "databucketID": "kvvx",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "cc6d0ac6-2674-4a8d-9e08-1fde05cf96bb",
-            "type": "crud",
-            "documentation": "",
-            "method": "",
-            "endpoint": "groups",
-            "responses": [
-                {
-                    "uuid": "34680b6b-8de9-4f62-b550-bf6546a11f6d",
-                    "body": "{}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "DATABUCKET",
-                    "filePath": "",
-                    "databucketID": "b2ce",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "18443d41-be05-4dee-b7ca-a9c15a35c00a",
-            "type": "http",
-            "documentation": "",
-            "method": "post",
-            "endpoint": "register",
-            "responses": [
-                {
-                    "uuid": "6878ba93-7db9-4e0b-b7a9-2f3224a9b70b",
-                    "body": "{\n    \"access\": \"fake-access-token\",\n    \"refresh\": \"fake-refresh-token\",\n    \"user\": {\n        \"id\": 6,\n        \"name\": \"Ivan Mihai\",\n        \"email\": \"ivan@main.ru\",\n        \"avatar\": \"\",\n        \"status\": \"online\"\n    }\n}",
-                    "latency": 0,
-                    "statusCode": 201,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "b97664a9-bd20-410a-963d-c8a4b80c5802",
-                    "body": "{\r\n  \"access\": \"fake-access-token-sara\",\r\n  \"refresh\": \"fake-refresh-token-sara\",\r\n  \"user\": {\r\n      \"id\": 1,\r\n      \"name\": \"Сара Ким\",\r\n      \"email\": \"sara.kim@acmecorp.com\",\r\n      \"avatar\": \"/2.jpg\",\r\n      \"status\": \"online\"\r\n  }\r\n}",
-                    "latency": 0,
-                    "statusCode": 201,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "85319998-df1b-4611-9e7b-887cc996bc7f",
-            "type": "http",
-            "documentation": "",
-            "method": "get",
-            "endpoint": "auth/me",
-            "responses": [
-                {
-                    "uuid": "bb03f199-db3f-4369-a931-48bea6c75ac8",
-                    "body": "{\n  \"id\": 5,\n  \"name\": \"Дима Гуленков\",\n  \"email\": \"gulenkov.dmitriy234@gmail.com\",\n  \"role\": \"Frontend Developer\",\n  \"avatar\": \"/2.jpg\",\n  \"description\": \"Gamarjoba\",\n  \"status\": \"away\",\n  \"sessions\": [\n    {\n      \"id\": 1,\n      \"device\": \"Windows PC\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Москва, Россия\",\n      \"ip\": \"192.168.1.10\",\n      \"lastActive\": \"Сейчас\",\n      \"current\": true\n    },\n    {\n      \"id\": 2,\n      \"device\": \"iPhone 15\",\n      \"browser\": \"Safari\",\n      \"location\": \"Москва, Россия\",\n      \"ip\": \"192.168.1.24\",\n      \"lastActive\": \"2 часа назад\",\n      \"current\": false\n    },\n    {\n      \"id\": 3,\n      \"device\": \"MacBook Pro\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Санкт-Петербург, Россия\",\n      \"ip\": \"192.168.1.35\",\n      \"lastActive\": \"3 дня назад\",\n      \"current\": false\n    }\n  ],\n  \"settings\": {\n    \"account\": {\n      \"twoFactorEnabled\": false\n    },\n    \"language\": {\n      \"language\": \"ru\",\n      \"dateFormat\": \"31.12.2000\",\n      \"timeFormat\": \"14:30\"\n    }\n  }\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [
-                        {
-                            "target": "header",
-                            "modifier": "Authorization",
-                            "value": "Bearer fake-access-token-dima",
-                            "invert": false,
-                            "operator": "equals"
-                        }
-                    ],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "d2dfd094-25a4-4cd2-99de-0c758ed41e01",
-                    "body": "{\r\n    \"id\": 1,\r\n    \"name\": \"Сара Ким\",\r\n    \"email\": \"sara.kim@acmecorp.com\",\r\n    \"role\": \"Product Designer\",\r\n    \"avatar\": \"/1.jpg\",\r\n    \"description\": \"I love India\",\r\n    \"status\": \"online\",\r\n    \"settings\": {\r\n        \"account\": {\r\n            \"twoFactorEnabled\": false\r\n        },\r\n        \"language\": {\r\n            \"language\": \"ru\",\r\n            \"dateFormat\": \"31.12.2000\",\r\n            \"timeFormat\": \"14:30\"\r\n        }\r\n    }\r\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [
-                        {
-                            "target": "header",
-                            "modifier": "Authorization",
-                            "value": "Bearer fake-access-token-sara",
-                            "invert": false,
-                            "operator": "equals"
-                        }
-                    ],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "5fbbe5c0-5ca4-4e4b-b851-87f875c4fa44",
-                    "body": "{\r\n  \"detail\": \"Invalid or expired token.\"\r\n}",
-                    "latency": 0,
-                    "statusCode": 401,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                },
-                {
-                    "uuid": "a4ba2548-76ff-4d5f-9bf7-06c3f90c5259",
-                    "body": "{\r\n    \"id\": 6,\r\n    \"name\": \"Ivan Mihai\",\r\n    \"email\": \"ivan@main.ru\",\r\n    \"role\": \"\",\r\n    \"avatar\": \"\",\r\n    \"description\": \"\",\r\n    \"status\": \"online\",\r\n    \"settings\": {\r\n        \"account\": {\r\n            \"twoFactorEnabled\": false\r\n        },\r\n        \"language\": {\r\n            \"language\": \"ru\",\r\n            \"dateFormat\": \"31.12.2000\",\r\n            \"timeFormat\": \"14:30\"\r\n        }\r\n    }\r\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [
-                        {
-                            "target": "header",
-                            "modifier": "Authorization",
-                            "value": "Bearer fake-access-token",
-                            "invert": false,
-                            "operator": "equals"
-                        }
-                    ],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": false,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "8fc7d3bb-9147-4588-bdf1-b7b118337a19",
-            "type": "http",
-            "documentation": "",
-            "method": "get",
-            "endpoint": "auth/logout",
-            "responses": [
-                {
-                    "uuid": "e2a406cb-5d6b-40f8-ae3c-3df91660864a",
-                    "body": "{\n  \"message\": \"Logged out successfully\"\n}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "INLINE",
-                    "filePath": "",
-                    "databucketID": "",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
-        },
-        {
-            "uuid": "e4feeb52-9db5-43c1-b183-a3bfff115e6c",
-            "type": "crud",
-            "documentation": "",
-            "method": "",
-            "endpoint": "direct-chats",
-            "responses": [
-                {
-                    "uuid": "f3ed490d-aad7-4df4-8c61-a4693d752fff",
-                    "body": "{}",
-                    "latency": 0,
-                    "statusCode": 200,
-                    "label": "",
-                    "headers": [],
-                    "bodyType": "DATABUCKET",
-                    "filePath": "",
-                    "databucketID": "nrc0",
-                    "sendFileAsBody": false,
-                    "rules": [],
-                    "rulesOperator": "OR",
-                    "disableTemplating": false,
-                    "fallbackTo404": false,
-                    "default": true,
-                    "crudKey": "id",
-                    "callbacks": []
-                }
-            ],
-            "responseMode": null,
-            "streamingMode": null,
-            "streamingInterval": 0
+          "uuid": "9ca2f15e-b720-4af0-94f7-c38df9ca95e8",
+          "body": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Dmitry\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
-    ],
-    "rootChildren": [
-        {
-            "type": "route",
-            "uuid": "30798445-885e-48c5-ab17-00b245ca2d85"
-        },
-        {
-            "type": "route",
-            "uuid": "85319998-df1b-4611-9e7b-887cc996bc7f"
-        },
-        {
-            "type": "route",
-            "uuid": "8800ed35-fcc3-4380-bf58-009d23acc252"
-        },
-        {
-            "type": "route",
-            "uuid": "874097b2-f678-45ab-be13-ab7d928c850d"
-        },
-        {
-            "type": "route",
-            "uuid": "e4feeb52-9db5-43c1-b183-a3bfff115e6c"
-        },
-        {
-            "type": "route",
-            "uuid": "8fc7d3bb-9147-4588-bdf1-b7b118337a19"
-        },
-        {
-            "type": "route",
-            "uuid": "cc6d0ac6-2674-4a8d-9e08-1fde05cf96bb"
-        },
-        {
-            "type": "route",
-            "uuid": "18443d41-be05-4dee-b7ca-a9c15a35c00a"
-        }
-    ],
-    "proxyMode": false,
-    "proxyHost": "",
-    "proxyRemovePrefix": false,
-    "tlsOptions": {
-        "enabled": false,
-        "type": "CERT",
-        "pfxPath": "",
-        "certPath": "",
-        "keyPath": "",
-        "caPath": "",
-        "passphrase": ""
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
-    "cors": true,
-    "headers": [
+    {
+      "uuid": "40287fd5-fec9-4fbf-9f0c-f69c6fc29b2f",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "auth/login",
+      "responses": [
         {
-            "key": "Content-Type",
-            "value": "application/json"
+          "uuid": "abe44a6b-089e-46b4-a116-0d775e1add68",
+          "body": "{\n  \"access\": \"fake-access-token-dima\",\n  \"refresh\": \"fake-refresh-token-dima\",\n  \"user\": {\n    \"id\": 5,\n    \"name\": \"Дима Гуленков\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"role\": \"Frontend Developer\",\n    \"avatar\": \"/2.jpg\",\n    \"description\": \"Gamarjoba\",\n    \"status\": \"away\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPhone 15\",\n        \"browser\": \"Safari\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.24\",\n        \"lastActive\": \"2 часа назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"ru\",\n        \"dateFormat\": \"31.12.2000\",\n        \"timeFormat\": \"14:30\"\n      }\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "gulenkov.dmitriy234@gmail.com",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
+          "uuid": "3d3faeb4-862c-4ef3-a834-25357eece072",
+          "body": "{\r\n  \"detail\": \"Неверный email или пароль\"\r\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+          "uuid": "a06e7617-68c7-41a9-b392-a161aafb6d00",
+          "body": "{\r\n  \"access\": \"fake-access-token-sara\",\r\n  \"refresh\": \"fake-refresh-token-sara\",\r\n  \"user\": {\r\n    \"id\": 1,\r\n    \"name\": \"Сара Ким\",\r\n    \"email\": \"sara.kim@acmecorp.com\",\r\n    \"avatar\": \"/2.jpg\",\r\n    \"status\": \"online\"\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "sara.kim@acmecorp.com",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
-            "key": "Access-Control-Allow-Headers",
-            "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+          "uuid": "42911fac-1f7f-4fd8-903c-43d84fda4da6",
+          "body": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 6,\n    \"name\": \"Ivan Mihai\",\n    \"email\": \"ivan@main.ru\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "token",
+              "value": "Bearer fake-access-token",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
-    ],
-    "proxyReqHeaders": [
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "eb713e2a-0a3a-43a9-b12d-df5c75175569",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "users",
+      "responses": [
         {
-            "key": "",
-            "value": ""
+          "uuid": "8769d8b5-9739-4988-b01f-d0d105ab2b20",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "kvvx",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
-    ],
-    "proxyResHeaders": [
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c62ac65a-aa6b-4af9-8df5-20fbd1379c3d",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "groups",
+      "responses": [
         {
-            "key": "",
-            "value": ""
+          "uuid": "7332ce39-6f1a-49c7-9bb8-2d6c47451ecc",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "b2ce",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
-    ],
-    "data": [
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "87447c33-8376-4d70-9721-fb767c29f589",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "register",
+      "responses": [
         {
-            "uuid": "5bba9dfb-a7a7-4e7b-af2e-66390bb7b2cd",
-            "id": "kvvx",
-            "name": "Users",
-            "documentation": "",
-            "value": "[\n  {\n    \"id\": 5,\n    \"name\": \"Дима Гуленков\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"role\": \"developer\",\n    \"avatar\": \"/dr.jpg\",\n    \"description\": \"Frontend developer\",\n    \"status\": \"online\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPhone 15\",\n        \"browser\": \"Safari\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.24\",\n        \"lastActive\": \"2 часа назад\",\n        \"current\": false\n      },\n      {\n        \"id\": 3,\n        \"device\": \"MacBook Pro\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Санкт-Петербург, Россия\",\n        \"ip\": \"192.168.1.35\",\n        \"lastActive\": \"3 дня назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"ru\",\n        \"dateFormat\": \"DD.MM.YYYY\",\n        \"timeFormat\": \"24h\"\n      }\n    }\n  },\n  {\n    \"id\": 1,\n    \"name\": \"Сара Ким\",\n    \"email\": \"sarah.kim@example.com\",\n    \"role\": \"developer\",\n    \"avatar\": \"/1.jpg\",\n    \"description\": \"Frontend developer\",\n    \"status\": \"online\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"MacBook Air\",\n        \"browser\": \"Safari\",\n        \"location\": \"Нью-Йорк, США\",\n        \"ip\": \"192.168.2.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPhone 16\",\n        \"browser\": \"Safari\",\n        \"location\": \"Нью-Йорк, США\",\n        \"ip\": \"192.168.2.24\",\n        \"lastActive\": \"1 час назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Майк Торрез\",\n    \"email\": \"mike.torres@example.com\",\n    \"role\": \"developer\",\n    \"avatar\": \"/2.jpg\",\n    \"description\": \"Backend developer\",\n    \"status\": \"offline\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Чикаго, США\",\n        \"ip\": \"192.168.3.10\",\n        \"lastActive\": \"Вчера, 22:14\",\n        \"current\": false\n      },\n      {\n        \"id\": 2,\n        \"device\": \"Android\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Чикаго, США\",\n        \"ip\": \"192.168.3.21\",\n        \"lastActive\": \"Вчера, 18:46\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Джон Дё\",\n    \"email\": \"john.doe@example.com\",\n    \"role\": \"designer\",\n    \"avatar\": \"/3.jpg\",\n    \"description\": \"UI/UX designer\",\n    \"status\": \"away\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"MacBook Pro\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Лондон, Великобритания\",\n        \"ip\": \"192.168.4.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPad Pro\",\n        \"browser\": \"Safari\",\n        \"location\": \"Лондон, Великобритания\",\n        \"ip\": \"192.168.4.25\",\n        \"lastActive\": \"4 часа назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Алекс Браун\",\n    \"email\": \"alex.brown@example.com\",\n    \"role\": \"devops\",\n    \"avatar\": \"\",\n    \"description\": \"DevOps engineer\",\n    \"status\": \"offline\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Linux PC\",\n        \"browser\": \"Firefox\",\n        \"location\": \"Берлин, Германия\",\n        \"ip\": \"192.168.5.10\",\n        \"lastActive\": \"Сегодня, 08:54\",\n        \"current\": false\n      },\n      {\n        \"id\": 2,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Edge\",\n        \"location\": \"Берлин, Германия\",\n        \"ip\": \"192.168.5.18\",\n        \"lastActive\": \"Понедельник, 19:32\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  }\n]"
+          "uuid": "66a05add-9f2e-41ac-8baf-91fb0fda4089",
+          "body": "{\n    \"access\": \"fake-access-token\",\n    \"refresh\": \"fake-refresh-token\",\n    \"user\": {\n        \"id\": 6,\n        \"name\": \"Ivan Mihai\",\n        \"email\": \"ivan@main.ru\",\n        \"avatar\": \"\",\n        \"status\": \"online\"\n    }\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
-            "uuid": "9152c311-b3a3-4b7e-afb2-826be3bdac75",
-            "id": "b2ce",
-            "name": "Groups",
-            "documentation": "",
-            "value": "[\n  {\n    \"id\": 1,\n    \"name\": \"Frontend\",\n    \"icon\": \"F\",\n    \"memberIds\": [1, 2, 3, 5],\n    \"description\": \"Разработка интерфейсов, код-ревью, реализация UI и обсуждение архитектуры.\",\n    \"owner\": 1,\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 3,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 5, \"time\": \"10:23\", \"text\": \"Всем привет! Как дела??\" },\n          { \"id\": 2, \"userId\": 2, \"time\": \"10:25\", \"text\": \"Привет! Всё отлично, сегодня разбираюсь с новым проектом.\" },\n          { \"id\": 3, \"userId\": 3, \"time\": \"10:27\", \"text\": \"Я тоже. Кто-нибудь уже посмотрел новый макет?\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"10:29\", \"text\": \"Да, выглядит хорошо. Особенно новый header.\" },\n          { \"id\": 5, \"userId\": 2, \"time\": \"10:32\", \"text\": \"Согласен, но нужно поправить отступы на мобилке.\" },\n          { \"id\": 6, \"userId\": 3, \"time\": \"10:35\", \"text\": \"Уже создал тикет в Jira.\" },\n          { \"id\": 7, \"userId\": 1, \"time\": \"10:40\", \"text\": \"Отлично, тогда сегодня после обеда займусь.\" },\n          { \"id\": 8, \"userId\": 2, \"time\": \"10:45\", \"text\": \"Кстати, кто будет ревьюить пул-реквесты?\" },\n          { \"id\": 9, \"userId\": 3, \"time\": \"10:48\", \"text\": \"Я могу, если что.\" },\n          { \"id\": 10, \"userId\": 1, \"time\": \"10:50\", \"text\": \"Договорились.\" },\n          { \"id\": 11, \"userId\": 1, \"time\": \"10:50\", \"text\": \"Кстати, а ты видел новый баг-трекер?\" },\n          { \"id\": 12, \"userId\": 2, \"time\": \"10:50\", \"text\": \"Нет, а что там?\" },\n          { \"id\": 13, \"userId\": 1, \"time\": \"10:50\", \"text\": \"Теперь можно прикреплять скриншоты.\" },\n          { \"id\": 14, \"userId\": 3, \"time\": \"10:52\", \"text\": \"Уже попробовал, удобно.\" },\n          { \"id\": 15, \"userId\": 2, \"time\": \"10:55\", \"text\": \"Тогда завтра внедрим.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"рандом\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 2, \"time\": \"12:10\", \"text\": \"Кто-нибудь сегодня играет?\" },\n          { \"id\": 2, \"userId\": 3, \"time\": \"12:12\", \"text\": \"Я вечером могу.\" },\n          { \"id\": 3, \"userId\": 1, \"time\": \"12:15\", \"text\": \"Во что играете?\" },\n          { \"id\": 4, \"userId\": 2, \"time\": \"12:18\", \"text\": \"В CS:GO, заходи.\" },\n          { \"id\": 5, \"userId\": 3, \"time\": \"12:20\", \"text\": \"Ок, буду около 21:00.\" },\n          { \"id\": 6, \"userId\": 1, \"time\": \"12:20\", \"text\": \"Я тоже присоединюсь.\" },\n          { \"id\": 7, \"userId\": 2, \"time\": \"12:20\", \"text\": \"Отлично, тогда ждём.\" },\n          { \"id\": 8, \"userId\": 3, \"time\": \"12:25\", \"text\": \"Кстати, слышали про новый патч?\" },\n          { \"id\": 9, \"userId\": 1, \"time\": \"12:25\", \"text\": \"Да, добавили новую карту.\" }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"новости\",\n        \"unreadCount\": 2,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"09:00\", \"text\": \"Вышла новая версия React 19!\" },\n          { \"id\": 2, \"userId\": 2, \"time\": \"09:05\", \"text\": \"Уже читаю документацию.\" },\n          { \"id\": 3, \"userId\": 3, \"time\": \"09:10\", \"text\": \"Говорят, серверные компоненты стали стабильными.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"09:15\", \"text\": \"Надо будет обновить наши проекты.\" },\n          { \"id\": 5, \"userId\": 2, \"time\": \"09:15\", \"text\": \"Да, но сначала проверим совместимость.\" },\n          { \"id\": 6, \"userId\": 3, \"time\": \"09:18\", \"text\": \"У меня уже есть тестовый стенд.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Design\",\n    \"icon\": \"D\",\n    \"owner\": 2,\n    \"memberIds\": [1, 4, 2],\n    \"description\": \"Обсуждение дизайна, UI/UX, визуальных концепций, обратной связи и дизайн-систем.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"09:15\", \"text\": \"Доброе утро! Сегодня покажу первые варианты дизайна.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"09:18\", \"text\": \"Отлично, жду 👌\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"09:20\", \"text\": \"Скину ссылку на Figma через час.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"09:25\", \"text\": \"Хорошо, я пока посмотрю предыдущие наброски.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"09:30\", \"text\": \"Я их немного доработал.\" },\n          { \"id\": 6, \"userId\": 1, \"time\": \"09:30\", \"text\": \"Супер, тогда жду.\" },\n          { \"id\": 7, \"userId\": 4, \"time\": \"09:32\", \"text\": \"Также добавил тёмную тему.\" },\n          { \"id\": 8, \"userId\": 1, \"time\": \"09:35\", \"text\": \"Это отлично, многие просили.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"дизайн\",\n        \"unreadCount\": 5,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"11:30\", \"text\": \"Обновил макет главной страницы.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"11:34\", \"text\": \"Сейчас посмотрю.\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"11:40\", \"text\": \"Особенно обрати внимание на карточки.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"11:45\", \"text\": \"Карточки выглядят намного лучше.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"11:48\", \"text\": \"Супер, тогда оставляем этот вариант.\" },\n          { \"id\": 6, \"userId\": 1, \"time\": \"11:50\", \"text\": \"Может, добавим тени поглубже?\" },\n          { \"id\": 7, \"userId\": 4, \"time\": \"11:52\", \"text\": \"Да, хорошая идея, поправлю.\" },\n          { \"id\": 8, \"userId\": 1, \"time\": \"11:52\", \"text\": \"И ещё кнопки сделаем более округлыми.\" },\n          { \"id\": 9, \"userId\": 4, \"time\": \"11:52\", \"text\": \"Ок, зафиксировал.\" },\n          { \"id\": 10, \"userId\": 1, \"time\": \"11:55\", \"text\": \"Отлично, тогда жду обновления.\" }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"обратная связь\",\n        \"unreadCount\": 1,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"14:00\", \"text\": \"Нужен фидбек по цветовой схеме.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"14:05\", \"text\": \"Мне нравится, особенно синий.\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"14:10\", \"text\": \"Тогда оставим.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"14:10\", \"text\": \"А что насчёт зелёных акцентов?\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"14:12\", \"text\": \"Можно попробовать в следующей итерации.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Backend\",\n    \"icon\": \"B\",\n    \"owner\": 3,\n    \"memberIds\": [2, 3, 4],\n    \"description\": \"Разработка API, базы данных, архитектура, авторизация и серверная разработка.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 4,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 2, \"time\": \"08:00\", \"text\": \"Доброе утро, коллеги!\" },\n          { \"id\": 2, \"userId\": 3, \"time\": \"08:05\", \"text\": \"Привет! Сегодня деплоим API?\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"08:10\", \"text\": \"Да, в 12:00 планируем.\" },\n          { \"id\": 4, \"userId\": 2, \"time\": \"08:15\", \"text\": \"У меня всё готово, тесты проходят.\" },\n          { \"id\": 5, \"userId\": 3, \"time\": \"08:20\", \"text\": \"Я тоже закончил с аутентификацией.\" },\n          { \"id\": 6, \"userId\": 4, \"time\": \"08:25\", \"text\": \"Отлично, тогда после деплоя проведём код-ревью.\" },\n          { \"id\": 7, \"userId\": 2, \"time\": \"08:30\", \"text\": \"Договорились.\" },\n          { \"id\": 8, \"userId\": 3, \"time\": \"08:30\", \"text\": \"Я подготовил миграции.\" },\n          { \"id\": 9, \"userId\": 4, \"time\": \"08:30\", \"text\": \"Тогда запускаем.\" },\n          { \"id\": 10, \"userId\": 2, \"time\": \"08:35\", \"text\": \"Всё прошло успешно.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"архитектура\",\n        \"unreadCount\": 2,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 3, \"time\": \"09:00\", \"text\": \"Предлагаю перейти на микросервисы.\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"09:10\", \"text\": \"Пока рано, давайте сначала оптимизируем текущий монолит.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"09:15\", \"text\": \"Согласен с @4, нужно измерить нагрузку.\" },\n          { \"id\": 4, \"userId\": 3, \"time\": \"09:20\", \"text\": \"Ок, тогда создам тикет на анализ.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"09:20\", \"text\": \"Я могу помочь с метриками.\" },\n          { \"id\": 6, \"userId\": 2, \"time\": \"09:25\", \"text\": \"Отлично, тогда встретимся после обеда.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Mobile\",\n    \"icon\": \"M\",\n    \"owner\": 4,\n    \"memberIds\": [1, 4],\n    \"description\": \"Разработка приложений для iOS и Android, архитектура, интерфейсы, тестирование и релизы.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"10:00\", \"text\": \"Привет! Обсуждаем дизайн для мобилки?\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"10:05\", \"text\": \"Да, у меня есть наброски.\" },\n          { \"id\": 3, \"userId\": 1, \"time\": \"10:10\", \"text\": \"Кидай ссылку.\" },\n          { \"id\": 4, \"userId\": 4, \"time\": \"10:15\", \"text\": \"Вот: figma.com/...\" },\n          { \"id\": 5, \"userId\": 1, \"time\": \"10:20\", \"text\": \"Выглядит круто. Навигация понятная.\" },\n          { \"id\": 6, \"userId\": 4, \"time\": \"10:20\", \"text\": \"Спасибо, я старался.\" },\n          { \"id\": 7, \"userId\": 1, \"time\": \"10:22\", \"text\": \"А как с адаптивностью?\" },\n          { \"id\": 8, \"userId\": 4, \"time\": \"10:25\", \"text\": \"Всё учтено, проверял на разных экранах.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"ios\",\n        \"unreadCount\": 1,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"11:00\", \"text\": \"Обновил Podfile.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"11:05\", \"text\": \"Запушил изменения.\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"11:10\", \"text\": \"Сборка прошла успешно.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"11:10\", \"text\": \"Отлично, тогда можно тестировать.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"11:15\", \"text\": \"Уже запустил на симуляторе.\" }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"android\",\n        \"unreadCount\": 3,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"12:00\", \"text\": \"Перешли на Compose?\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"12:05\", \"text\": \"Пока нет, но планируем.\" },\n          { \"id\": 3, \"userId\": 1, \"time\": \"12:10\", \"text\": \"Я бы начал с нового модуля.\" },\n          { \"id\": 4, \"userId\": 4, \"time\": \"12:15\", \"text\": \"Хорошая идея.\" },\n          { \"id\": 5, \"userId\": 1, \"time\": \"12:15\", \"text\": \"Тогда создадим тикет.\" },\n          { \"id\": 6, \"userId\": 4, \"time\": \"12:18\", \"text\": \"Уже создал.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 5,\n    \"name\": \"DevOps\",\n    \"icon\": \"O\",\n    \"owner\": 5,\n    \"memberIds\": [2, 3, 5],\n    \"description\": \"Инфраструктура, деплои, CI/CD, мониторинг и стабильность сервисов.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 2, \"time\": \"07:30\", \"text\": \"Упал прод вчера ночью?\" },\n          { \"id\": 2, \"userId\": 3, \"time\": \"07:35\", \"text\": \"Да, но мы перезапустили контейнеры.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"07:40\", \"text\": \"Нужно настроить мониторинг.\" },\n          { \"id\": 4, \"userId\": 3, \"time\": \"07:45\", \"text\": \"Уже добавил алерты в Prometheus.\" },\n          { \"id\": 5, \"userId\": 2, \"time\": \"07:45\", \"text\": \"Отлично, тогда больше не повторится.\" },\n          { \"id\": 6, \"userId\": 3, \"time\": \"07:50\", \"text\": \"Надеюсь.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"версии\",\n        \"unreadCount\": 2,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 3, \"time\": \"09:00\", \"text\": \"Обновил кластер до 1.28.\" },\n          { \"id\": 2, \"userId\": 2, \"time\": \"09:10\", \"text\": \"Всё работает стабильно?\" },\n          { \"id\": 3, \"userId\": 3, \"time\": \"09:15\", \"text\": \"Да, тесты прошли.\" },\n          { \"id\": 4, \"userId\": 2, \"time\": \"09:20\", \"text\": \"Отлично, тогда можно масштабировать.\" },\n          { \"id\": 5, \"userId\": 3, \"time\": \"09:20\", \"text\": \"Уже планирую добавить новые ноды.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 6,\n    \"name\": \"QA\",\n    \"icon\": \"Q\",\n    \"owner\": 5,\n    \"memberIds\": [1, 2, 4, 5],\n    \"description\": \"Тестирование, автоматизация, поиск ошибок, регрессионное тестирование и контроль качества.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 5,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"09:30\", \"text\": \"Начинаем тестирование спринта.\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"09:35\", \"text\": \"У меня есть тест-кейсы.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"09:40\", \"text\": \"Я проверил основную логику.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"09:45\", \"text\": \"Нашёл баг в форме регистрации.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"09:50\", \"text\": \"Завёл баг-репорт.\" },\n          { \"id\": 6, \"userId\": 2, \"time\": \"09:55\", \"text\": \"Исправлю сегодня.\" },\n          { \"id\": 7, \"userId\": 1, \"time\": \"09:55\", \"text\": \"Отлично, тогда ждём фикс.\" },\n          { \"id\": 8, \"userId\": 4, \"time\": \"09:58\", \"text\": \"Я ещё нашёл баг с кэшированием.\" },\n          { \"id\": 9, \"userId\": 2, \"time\": \"10:00\", \"text\": \"Ок, добавлю в список.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"автоматизация\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"11:00\", \"text\": \"Дописал Selenium-тесты.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"11:05\", \"text\": \"Запустил прогон — всё зелено.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"11:10\", \"text\": \"Супер, можно добавить в CI.\" },\n          { \"id\": 4, \"userId\": 4, \"time\": \"11:10\", \"text\": \"Уже добавил в пайплайн.\" },\n          { \"id\": 5, \"userId\": 1, \"time\": \"11:15\", \"text\": \"Тогда можно мержить.\" }\n        ]\n      }\n    ]\n  }\n]"
-        },
-        {
-            "uuid": "7a0657a2-635f-4613-a763-08ce4f033ca2",
-            "id": "hmnw",
-            "name": "Channels",
-            "documentation": "",
-            "value": "[\n  {\n    \"id\": \"general\",\n    \"groupId\": \"frontend\",\n    \"name\": \"главная\",\n    \"unreadCount\": 3\n  },\n  {\n    \"id\": \"random\",\n    \"groupId\": \"frontend\",\n    \"name\": \"рандом\",\n    \"unreadCount\": 0\n  },\n  {\n    \"id\": \"frontend-news\",\n    \"groupId\": \"frontend\",\n    \"name\": \"новости\",\n    \"unreadCount\": 2\n  },\n  {\n    \"id\": \"general-design\",\n    \"groupId\": \"design\",\n    \"name\": \"главная\",\n    \"unreadCount\": 0\n  },\n  {\n    \"id\": \"design-chat\",\n    \"groupId\": \"design\",\n    \"name\": \"дизайн\",\n    \"unreadCount\": 5\n  },\n  {\n    \"id\": \"design-feedback\",\n    \"groupId\": \"design\",\n    \"name\": \"обратная связь\",\n    \"unreadCount\": 1\n  },\n{\n    \"id\": \"general-backend\",\n    \"groupId\": \"backend\",\n    \"name\": \"главная\",\n    \"unreadCount\": 4\n  },\n  {\n    \"id\": \"backend-arch\",\n    \"groupId\": \"backend\",\n    \"name\": \"архитектура\",\n    \"unreadCount\": 2\n  },\n  {\n      \"id\": \"general-mobile\",\n      \"groupId\": \"mobile\",\n      \"name\": \"главная\",\n      \"unreadCount\": 0\n  },\n  {\n    \"id\": \"mobile-ios\",\n    \"groupId\": \"mobile\",\n    \"name\": \"ios\",\n    \"unreadCount\": 1\n  },\n  {\n    \"id\": \"mobile-android\",\n    \"groupId\": \"mobile\",\n    \"name\": \"android\",\n    \"unreadCount\": 3\n  },\n  {\n    \"id\": \"general-devops\",\n    \"groupId\": \"devops\",\n    \"name\": \"главная\",\n    \"unreadCount\": 0\n  },\n  {\n    \"id\": \"devops-k8s\",\n    \"groupId\": \"devops\",\n    \"name\": \"версии\",\n    \"unreadCount\": 2\n  },\n  {\n    \"id\": \"general-qa\",\n    \"groupId\": \"qa\",\n    \"name\": \"главная\",\n    \"unreadCount\": 5\n  },\n  {\n    \"id\": \"qa-automation\",\n    \"groupId\": \"qa\",\n    \"name\": \"автоматизация\",\n    \"unreadCount\": 0\n  }\n]"
-        },
-        {
-            "uuid": "e19fe9c5-25e0-4f5e-b4af-73b9c02c310f",
-            "id": "nrc0",
-            "name": "DirectChats",
-            "documentation": "",
-            "value": "[\n  {\n    \"id\": 1,\n    \"userIds\": [1, 2],\n    \"messages\": [\n      {\n        \"id\": 1,\n        \"userId\": 1,\n        \"text\": \"Привет! Как дела?\",\n        \"time\": \"09:15\"\n      },\n      {\n        \"id\": 2,\n        \"userId\": 2,\n        \"text\": \"Привет! Всё отлично.\",\n        \"time\": \"09:16\"\n      },\n      {\n        \"id\": 3,\n        \"userId\": 1,\n        \"text\": \"Что сегодня по задачам?\",\n        \"time\": \"09:18\"\n      },\n      {\n        \"id\": 4,\n        \"userId\": 2,\n        \"text\": \"Надо закончить авторизацию и проверить API.\",\n        \"time\": \"09:20\"\n      },\n      {\n        \"id\": 5,\n        \"userId\": 1,\n        \"text\": \"Окей, тогда вечером посмотрю.\",\n        \"time\": \"09:22\"\n      }\n    ]\n  },\n  {\n    \"id\": 2,\n    \"userIds\": [2, 3],\n    \"messages\": [\n      {\n        \"id\": 6,\n        \"userId\": 3,\n        \"text\": \"Скинул тебе макеты.\",\n        \"time\": \"10:20\"\n      },\n      {\n        \"id\": 7,\n        \"userId\": 2,\n        \"text\": \"Вижу, сейчас посмотрю.\",\n        \"time\": \"10:21\"\n      },\n      {\n        \"id\": 8,\n        \"userId\": 3,\n        \"text\": \"Особенно глянь новый header.\",\n        \"time\": \"10:21\"\n      },\n      {\n        \"id\": 9,\n        \"userId\": 2,\n        \"text\": \"Да, выглядит намного лучше.\",\n        \"time\": \"10:34\"\n      },\n      {\n        \"id\": 10,\n        \"userId\": 3,\n        \"text\": \"Тогда оставляем этот вариант.\",\n        \"time\": \"10:36\"\n      },\n      {\n        \"id\": 11,\n        \"userId\": 2,\n        \"text\": \"Договорились.\",\n        \"time\": \"10:37\"\n      }\n    ]\n  },\n  {\n    \"id\": 3,\n    \"userIds\": [1, 4],\n    \"messages\": [\n      {\n        \"id\": 12,\n        \"userId\": 4,\n        \"text\": \"Ты сегодня будешь на созвоне?\",\n        \"time\": \"11:05\"\n      },\n      {\n        \"id\": 13,\n        \"userId\": 1,\n        \"text\": \"Да, буду.\",\n        \"time\": \"11:06\"\n      },\n      {\n        \"id\": 14,\n        \"userId\": 4,\n        \"text\": \"Окей, тогда до встречи.\",\n        \"time\": \"11:07\"\n      }\n    ]\n  },\n  {\n    \"id\": 4,\n    \"userIds\": [1, 5],\n    \"messages\": [\n      {\n        \"id\": 15,\n        \"userId\": 5,\n        \"text\": \"Я закончил свою задачу.\",\n        \"time\": \"12:30\"\n      },\n      {\n        \"id\": 16,\n        \"userId\": 1,\n        \"text\": \"Отлично. Можно отправлять на ревью.\",\n        \"time\": \"12:31\"\n      },\n      {\n        \"id\": 17,\n        \"userId\": 5,\n        \"text\": \"Уже отправил 👍\",\n        \"time\": \"12:32\"\n      },\n      {\n        \"id\": 18,\n        \"userId\": 1,\n        \"text\": \"Посмотрю в течение часа.\",\n        \"time\": \"12:40\"\n      }\n    ]\n  },\n  {\n    \"id\": 5,\n    \"userIds\": [2, 5],\n    \"messages\": [\n      {\n        \"id\": 19,\n        \"userId\": 2,\n        \"text\": \"У тебя случайно нет последней версии API?\",\n        \"time\": \"13:10\"\n      },\n      {\n        \"id\": 20,\n        \"userId\": 5,\n        \"text\": \"Есть, сейчас закину.\",\n        \"time\": \"13:12\"\n      },\n      {\n        \"id\": 21,\n        \"userId\": 2,\n        \"text\": \"Спасибо.\",\n        \"time\": \"13:13\"\n      }\n    ]\n  },\n  {\n    \"id\": 6,\n    \"userIds\": [3, 5],\n    \"messages\": [\n      {\n        \"id\": 22,\n        \"userId\": 3,\n        \"text\": \"Привет, можешь помочь с CSS?\",\n        \"time\": \"14:02\"\n      },\n      {\n        \"id\": 23,\n        \"userId\": 5,\n        \"text\": \"Да, кидай код.\",\n        \"time\": \"14:04\"\n      },\n      {\n        \"id\": 24,\n        \"userId\": 3,\n        \"text\": \"Вот, проблема с flex.\",\n        \"time\": \"14:06\"\n      },\n      {\n        \"id\": 25,\n        \"userId\": 5,\n        \"text\": \"Сейчас посмотрю.\",\n        \"time\": \"14:08\"\n      }\n    ]\n  },\n  {\n    \"id\": 7,\n    \"userIds\": [4, 5],\n    \"messages\": [\n      {\n        \"id\": 26,\n        \"userId\": 5,\n        \"text\": \"Когда будет готов новый дизайн?\",\n        \"time\": \"15:15\"\n      },\n      {\n        \"id\": 27,\n        \"userId\": 4,\n        \"text\": \"Думаю, к завтрашнему утру.\",\n        \"time\": \"15:18\"\n      }\n    ]\n  },\n  {\n    \"id\": 8,\n    \"userIds\": [1, 5],\n    \"messages\": [\n      {\n        \"id\": 28,\n        \"userId\": 1,\n        \"text\": \"Кстати, не забудь про новый канал.\",\n        \"time\": \"16:20\"\n      },\n      {\n        \"id\": 29,\n        \"userId\": 5,\n        \"text\": \"Точно, вечером создам.\",\n        \"time\": \"16:22\"\n      }\n    ]\n  }\n]"
+          "uuid": "acfba2ac-dcbd-42c4-a706-2601714a6d7e",
+          "body": "{\r\n  \"access\": \"fake-access-token-sara\",\r\n  \"refresh\": \"fake-refresh-token-sara\",\r\n  \"user\": {\r\n      \"id\": 1,\r\n      \"name\": \"Сара Ким\",\r\n      \"email\": \"sara.kim@acmecorp.com\",\r\n      \"avatar\": \"/2.jpg\",\r\n      \"status\": \"online\"\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
-    ],
-    "callbacks": []
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "580a8728-1b84-4093-a4bc-2af4d9f26705",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "auth/me",
+      "responses": [
+        {
+          "uuid": "7b9db8fc-8dae-4986-8a82-695288ec5773",
+          "body": "{\n  \"id\": 5,\n  \"name\": \"Дима Гуленков\",\n  \"email\": \"gulenkov.dmitriy234@gmail.com\",\n  \"role\": \"Frontend Developer\",\n  \"avatar\": \"/2.jpg\",\n  \"description\": \"Gamarjoba\",\n  \"status\": \"away\",\n  \"sessions\": [\n    {\n      \"id\": 1,\n      \"device\": \"Windows PC\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Москва, Россия\",\n      \"ip\": \"192.168.1.10\",\n      \"lastActive\": \"Сейчас\",\n      \"current\": true\n    },\n    {\n      \"id\": 2,\n      \"device\": \"iPhone 15\",\n      \"browser\": \"Safari\",\n      \"location\": \"Москва, Россия\",\n      \"ip\": \"192.168.1.24\",\n      \"lastActive\": \"2 часа назад\",\n      \"current\": false\n    },\n    {\n      \"id\": 3,\n      \"device\": \"MacBook Pro\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Санкт-Петербург, Россия\",\n      \"ip\": \"192.168.1.35\",\n      \"lastActive\": \"3 дня назад\",\n      \"current\": false\n    }\n  ],\n  \"settings\": {\n    \"account\": {\n      \"twoFactorEnabled\": false\n    },\n    \"language\": {\n      \"language\": \"ru\",\n      \"dateFormat\": \"31.12.2000\",\n      \"timeFormat\": \"14:30\"\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Bearer fake-access-token-dima",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c7d18440-fa31-4c68-830b-ea63301c59ff",
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Сара Ким\",\n  \"email\": \"sara.kim@acmecorp.com\",\n  \"role\": \"Product Designer\",\n  \"avatar\": \"/1.jpg\",\n  \"description\": \"I love India\",\n  \"status\": \"online\",\n  \"sessions\": [\n    {\n      \"id\": 4,\n      \"device\": \"MacBook Pro\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Москва, Россия\",\n      \"ip\": \"192.168.1.42\",\n      \"lastActive\": \"Сейчас\",\n      \"current\": true\n    },\n    {\n      \"id\": 5,\n      \"device\": \"iPhone 15 Pro\",\n      \"browser\": \"Safari\",\n      \"location\": \"Москва, Россия\",\n      \"ip\": \"192.168.1.43\",\n      \"lastActive\": \"1 час назад\",\n      \"current\": false\n    }\n  ],\n  \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"ru\",\n        \"dateFormat\": \"31.12.2000\",\n        \"timeFormat\": \"14:30\"\n      }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Bearer fake-access-token-sara",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7d52ff15-14da-4bc7-9c04-25c67e210186",
+          "body": "{\r\n  \"detail\": \"Invalid or expired token.\"\r\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "26bab6b1-adb0-492f-ac53-e33fd820b6c7",
+          "body": "{\n  \"id\": 6,\n  \"name\": \"Ivan Mihai\",\n  \"email\": \"ivan@main.ru\",\n  \"role\": \"\",\n  \"avatar\": \"\",\n  \"description\": \"\",\n  \"status\": \"online\",\n  \"sessions\": [\n    {\n      \"id\": 6,\n      \"device\": \"Windows PC\",\n      \"browser\": \"Firefox\",\n      \"location\": \"Бухарест, Румыния\",\n      \"ip\": \"192.168.1.56\",\n      \"lastActive\": \"Сейчас\",\n      \"current\": true\n    },\n    {\n      \"id\": 7,\n      \"device\": \"Samsung Galaxy S24\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Бухарест, Румыния\",\n      \"ip\": \"192.168.1.57\",\n      \"lastActive\": \"Вчера\",\n      \"current\": false\n    },\n    {\n      \"id\": 8,\n      \"device\": \"MacBook Air\",\n      \"browser\": \"Chrome\",\n      \"location\": \"Клуж-Напока, Румыния\",\n      \"ip\": \"192.168.1.58\",\n      \"lastActive\": \"5 дней назад\",\n      \"current\": false\n    }\n  ],\n  \"settings\": {\n    \"account\": {\n      \"twoFactorEnabled\": false\n    },\n  \"language\": {\n    \"language\": \"ru\",\n    \"dateFormat\": \"31.12.2000\",\n    \"timeFormat\": \"14:30\"\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Bearer fake-access-token",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "d14ae427-79a8-414d-a13d-15e370dcdc72",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "auth/logout",
+      "responses": [
+        {
+          "uuid": "23bd4a85-9f14-4b59-aad4-702a40f69f05",
+          "body": "{\n  \"message\": \"Logged out successfully\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "924514f5-7f11-4597-9b03-583c45a3089e",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "direct-chats",
+      "responses": [
+        {
+          "uuid": "ac22bdc7-c211-4d8f-ba4f-cc2b78eb9af5",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "nrc0",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "0f6490e3-d414-4658-a801-03fc198440d7"
+    },
+    {
+      "type": "route",
+      "uuid": "580a8728-1b84-4093-a4bc-2af4d9f26705"
+    },
+    {
+      "type": "route",
+      "uuid": "40287fd5-fec9-4fbf-9f0c-f69c6fc29b2f"
+    },
+    {
+      "type": "route",
+      "uuid": "eb713e2a-0a3a-43a9-b12d-df5c75175569"
+    },
+    {
+      "type": "route",
+      "uuid": "924514f5-7f11-4597-9b03-583c45a3089e"
+    },
+    {
+      "type": "route",
+      "uuid": "d14ae427-79a8-414d-a13d-15e370dcdc72"
+    },
+    {
+      "type": "route",
+      "uuid": "c62ac65a-aa6b-4af9-8df5-20fbd1379c3d"
+    },
+    {
+      "type": "route",
+      "uuid": "87447c33-8376-4d70-9721-fb767c29f589"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "cf2868d2-c685-4d82-9797-fc005e8aa444",
+      "id": "kvvx",
+      "name": "Users",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": 5,\n    \"name\": \"Дима Гуленков\",\n    \"email\": \"gulenkov.dmitriy234@gmail.com\",\n    \"role\": \"developer\",\n    \"avatar\": \"/dr.jpg\",\n    \"description\": \"Frontend developer\",\n    \"status\": \"online\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPhone 15\",\n        \"browser\": \"Safari\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.24\",\n        \"lastActive\": \"2 часа назад\",\n        \"current\": false\n      },\n      {\n        \"id\": 3,\n        \"device\": \"MacBook Pro\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Санкт-Петербург, Россия\",\n        \"ip\": \"192.168.1.35\",\n        \"lastActive\": \"3 дня назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"ru\",\n        \"dateFormat\": \"DD.MM.YYYY\",\n        \"timeFormat\": \"24h\"\n      }\n    }\n  },\n  {\n    \"id\": 1,\n    \"name\": \"Сара Ким\",\n    \"email\": \"sarah.kim@example.com\",\n    \"role\": \"developer\",\n    \"avatar\": \"/1.jpg\",\n    \"description\": \"Frontend developer\",\n    \"status\": \"online\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"MacBook Air\",\n        \"browser\": \"Safari\",\n        \"location\": \"Нью-Йорк, США\",\n        \"ip\": \"192.168.2.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPhone 16\",\n        \"browser\": \"Safari\",\n        \"location\": \"Нью-Йорк, США\",\n        \"ip\": \"192.168.2.24\",\n        \"lastActive\": \"1 час назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Майк Торрез\",\n    \"email\": \"mike.torres@example.com\",\n    \"role\": \"developer\",\n    \"avatar\": \"/2.jpg\",\n    \"description\": \"Backend developer\",\n    \"status\": \"offline\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Чикаго, США\",\n        \"ip\": \"192.168.3.10\",\n        \"lastActive\": \"Вчера, 22:14\",\n        \"current\": false\n      },\n      {\n        \"id\": 2,\n        \"device\": \"Android\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Чикаго, США\",\n        \"ip\": \"192.168.3.21\",\n        \"lastActive\": \"Вчера, 18:46\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Джон Дё\",\n    \"email\": \"john.doe@example.com\",\n    \"role\": \"designer\",\n    \"avatar\": \"/3.jpg\",\n    \"description\": \"UI/UX designer\",\n    \"status\": \"away\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"MacBook Pro\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Лондон, Великобритания\",\n        \"ip\": \"192.168.4.10\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 2,\n        \"device\": \"iPad Pro\",\n        \"browser\": \"Safari\",\n        \"location\": \"Лондон, Великобритания\",\n        \"ip\": \"192.168.4.25\",\n        \"lastActive\": \"4 часа назад\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Алекс Браун\",\n    \"email\": \"alex.brown@example.com\",\n    \"role\": \"devops\",\n    \"avatar\": \"\",\n    \"description\": \"DevOps engineer\",\n    \"status\": \"offline\",\n    \"sessions\": [\n      {\n        \"id\": 1,\n        \"device\": \"Linux PC\",\n        \"browser\": \"Firefox\",\n        \"location\": \"Берлин, Германия\",\n        \"ip\": \"192.168.5.10\",\n        \"lastActive\": \"Сегодня, 08:54\",\n        \"current\": false\n      },\n      {\n        \"id\": 2,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Edge\",\n        \"location\": \"Берлин, Германия\",\n        \"ip\": \"192.168.5.18\",\n        \"lastActive\": \"Понедельник, 19:32\",\n        \"current\": false\n      }\n    ],\n    \"settings\": {\n      \"account\": {\n        \"twoFactorEnabled\": false\n      },\n      \"language\": {\n        \"language\": \"en\",\n        \"dateFormat\": \"MM/DD/YYYY\",\n        \"timeFormat\": \"12h\"\n      }\n    }\n  }\n]"
+    },
+    {
+      "uuid": "1135fb2d-3b60-43ae-8c2a-d2181fd94722",
+      "id": "b2ce",
+      "name": "Groups",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": 1,\n    \"name\": \"Frontend\",\n    \"icon\": \"F\",\n    \"memberIds\": [1, 2, 3, 5],\n    \"description\": \"Разработка интерфейсов, код-ревью, реализация UI и обсуждение архитектуры.\",\n    \"owner\": 1,\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 3,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 5, \"time\": \"10:23\", \"text\": \"Всем привет! Как дела??\" },\n          { \"id\": 2, \"userId\": 2, \"time\": \"10:25\", \"text\": \"Привет! Всё отлично, сегодня разбираюсь с новым проектом.\" },\n          { \"id\": 3, \"userId\": 3, \"time\": \"10:27\", \"text\": \"Я тоже. Кто-нибудь уже посмотрел новый макет?\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"10:29\", \"text\": \"Да, выглядит хорошо. Особенно новый header.\" },\n          { \"id\": 5, \"userId\": 2, \"time\": \"10:32\", \"text\": \"Согласен, но нужно поправить отступы на мобилке.\" },\n          { \"id\": 6, \"userId\": 3, \"time\": \"10:35\", \"text\": \"Уже создал тикет в Jira.\" },\n          { \"id\": 7, \"userId\": 1, \"time\": \"10:40\", \"text\": \"Отлично, тогда сегодня после обеда займусь.\" },\n          { \"id\": 8, \"userId\": 2, \"time\": \"10:45\", \"text\": \"Кстати, кто будет ревьюить пул-реквесты?\" },\n          { \"id\": 9, \"userId\": 3, \"time\": \"10:48\", \"text\": \"Я могу, если что.\" },\n          { \"id\": 10, \"userId\": 1, \"time\": \"10:50\", \"text\": \"Договорились.\" },\n          { \"id\": 11, \"userId\": 1, \"time\": \"10:50\", \"text\": \"Кстати, а ты видел новый баг-трекер?\" },\n          { \"id\": 12, \"userId\": 2, \"time\": \"10:50\", \"text\": \"Нет, а что там?\" },\n          { \"id\": 13, \"userId\": 1, \"time\": \"10:50\", \"text\": \"Теперь можно прикреплять скриншоты.\" },\n          { \"id\": 14, \"userId\": 3, \"time\": \"10:52\", \"text\": \"Уже попробовал, удобно.\" },\n          { \"id\": 15, \"userId\": 2, \"time\": \"10:55\", \"text\": \"Тогда завтра внедрим.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"рандом\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 2, \"time\": \"12:10\", \"text\": \"Кто-нибудь сегодня играет?\" },\n          { \"id\": 2, \"userId\": 3, \"time\": \"12:12\", \"text\": \"Я вечером могу.\" },\n          { \"id\": 3, \"userId\": 1, \"time\": \"12:15\", \"text\": \"Во что играете?\" },\n          { \"id\": 4, \"userId\": 2, \"time\": \"12:18\", \"text\": \"В CS:GO, заходи.\" },\n          { \"id\": 5, \"userId\": 3, \"time\": \"12:20\", \"text\": \"Ок, буду около 21:00.\" },\n          { \"id\": 6, \"userId\": 1, \"time\": \"12:20\", \"text\": \"Я тоже присоединюсь.\" },\n          { \"id\": 7, \"userId\": 2, \"time\": \"12:20\", \"text\": \"Отлично, тогда ждём.\" },\n          { \"id\": 8, \"userId\": 3, \"time\": \"12:25\", \"text\": \"Кстати, слышали про новый патч?\" },\n          { \"id\": 9, \"userId\": 1, \"time\": \"12:25\", \"text\": \"Да, добавили новую карту.\" }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"новости\",\n        \"unreadCount\": 2,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"09:00\", \"text\": \"Вышла новая версия React 19!\" },\n          { \"id\": 2, \"userId\": 2, \"time\": \"09:05\", \"text\": \"Уже читаю документацию.\" },\n          { \"id\": 3, \"userId\": 3, \"time\": \"09:10\", \"text\": \"Говорят, серверные компоненты стали стабильными.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"09:15\", \"text\": \"Надо будет обновить наши проекты.\" },\n          { \"id\": 5, \"userId\": 2, \"time\": \"09:15\", \"text\": \"Да, но сначала проверим совместимость.\" },\n          { \"id\": 6, \"userId\": 3, \"time\": \"09:18\", \"text\": \"У меня уже есть тестовый стенд.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Design\",\n    \"icon\": \"D\",\n    \"owner\": 2,\n    \"memberIds\": [1, 4, 2],\n    \"description\": \"Обсуждение дизайна, UI/UX, визуальных концепций, обратной связи и дизайн-систем.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"09:15\", \"text\": \"Доброе утро! Сегодня покажу первые варианты дизайна.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"09:18\", \"text\": \"Отлично, жду 👌\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"09:20\", \"text\": \"Скину ссылку на Figma через час.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"09:25\", \"text\": \"Хорошо, я пока посмотрю предыдущие наброски.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"09:30\", \"text\": \"Я их немного доработал.\" },\n          { \"id\": 6, \"userId\": 1, \"time\": \"09:30\", \"text\": \"Супер, тогда жду.\" },\n          { \"id\": 7, \"userId\": 4, \"time\": \"09:32\", \"text\": \"Также добавил тёмную тему.\" },\n          { \"id\": 8, \"userId\": 1, \"time\": \"09:35\", \"text\": \"Это отлично, многие просили.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"дизайн\",\n        \"unreadCount\": 5,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"11:30\", \"text\": \"Обновил макет главной страницы.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"11:34\", \"text\": \"Сейчас посмотрю.\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"11:40\", \"text\": \"Особенно обрати внимание на карточки.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"11:45\", \"text\": \"Карточки выглядят намного лучше.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"11:48\", \"text\": \"Супер, тогда оставляем этот вариант.\" },\n          { \"id\": 6, \"userId\": 1, \"time\": \"11:50\", \"text\": \"Может, добавим тени поглубже?\" },\n          { \"id\": 7, \"userId\": 4, \"time\": \"11:52\", \"text\": \"Да, хорошая идея, поправлю.\" },\n          { \"id\": 8, \"userId\": 1, \"time\": \"11:52\", \"text\": \"И ещё кнопки сделаем более округлыми.\" },\n          { \"id\": 9, \"userId\": 4, \"time\": \"11:52\", \"text\": \"Ок, зафиксировал.\" },\n          { \"id\": 10, \"userId\": 1, \"time\": \"11:55\", \"text\": \"Отлично, тогда жду обновления.\" }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"обратная связь\",\n        \"unreadCount\": 1,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"14:00\", \"text\": \"Нужен фидбек по цветовой схеме.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"14:05\", \"text\": \"Мне нравится, особенно синий.\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"14:10\", \"text\": \"Тогда оставим.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"14:10\", \"text\": \"А что насчёт зелёных акцентов?\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"14:12\", \"text\": \"Можно попробовать в следующей итерации.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Backend\",\n    \"icon\": \"B\",\n    \"owner\": 3,\n    \"memberIds\": [2, 3, 4],\n    \"description\": \"Разработка API, базы данных, архитектура, авторизация и серверная разработка.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 4,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 2, \"time\": \"08:00\", \"text\": \"Доброе утро, коллеги!\" },\n          { \"id\": 2, \"userId\": 3, \"time\": \"08:05\", \"text\": \"Привет! Сегодня деплоим API?\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"08:10\", \"text\": \"Да, в 12:00 планируем.\" },\n          { \"id\": 4, \"userId\": 2, \"time\": \"08:15\", \"text\": \"У меня всё готово, тесты проходят.\" },\n          { \"id\": 5, \"userId\": 3, \"time\": \"08:20\", \"text\": \"Я тоже закончил с аутентификацией.\" },\n          { \"id\": 6, \"userId\": 4, \"time\": \"08:25\", \"text\": \"Отлично, тогда после деплоя проведём код-ревью.\" },\n          { \"id\": 7, \"userId\": 2, \"time\": \"08:30\", \"text\": \"Договорились.\" },\n          { \"id\": 8, \"userId\": 3, \"time\": \"08:30\", \"text\": \"Я подготовил миграции.\" },\n          { \"id\": 9, \"userId\": 4, \"time\": \"08:30\", \"text\": \"Тогда запускаем.\" },\n          { \"id\": 10, \"userId\": 2, \"time\": \"08:35\", \"text\": \"Всё прошло успешно.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"архитектура\",\n        \"unreadCount\": 2,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 3, \"time\": \"09:00\", \"text\": \"Предлагаю перейти на микросервисы.\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"09:10\", \"text\": \"Пока рано, давайте сначала оптимизируем текущий монолит.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"09:15\", \"text\": \"Согласен с @4, нужно измерить нагрузку.\" },\n          { \"id\": 4, \"userId\": 3, \"time\": \"09:20\", \"text\": \"Ок, тогда создам тикет на анализ.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"09:20\", \"text\": \"Я могу помочь с метриками.\" },\n          { \"id\": 6, \"userId\": 2, \"time\": \"09:25\", \"text\": \"Отлично, тогда встретимся после обеда.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Mobile\",\n    \"icon\": \"M\",\n    \"owner\": 4,\n    \"memberIds\": [1, 4],\n    \"description\": \"Разработка приложений для iOS и Android, архитектура, интерфейсы, тестирование и релизы.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"10:00\", \"text\": \"Привет! Обсуждаем дизайн для мобилки?\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"10:05\", \"text\": \"Да, у меня есть наброски.\" },\n          { \"id\": 3, \"userId\": 1, \"time\": \"10:10\", \"text\": \"Кидай ссылку.\" },\n          { \"id\": 4, \"userId\": 4, \"time\": \"10:15\", \"text\": \"Вот: figma.com/...\" },\n          { \"id\": 5, \"userId\": 1, \"time\": \"10:20\", \"text\": \"Выглядит круто. Навигация понятная.\" },\n          { \"id\": 6, \"userId\": 4, \"time\": \"10:20\", \"text\": \"Спасибо, я старался.\" },\n          { \"id\": 7, \"userId\": 1, \"time\": \"10:22\", \"text\": \"А как с адаптивностью?\" },\n          { \"id\": 8, \"userId\": 4, \"time\": \"10:25\", \"text\": \"Всё учтено, проверял на разных экранах.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"ios\",\n        \"unreadCount\": 1,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"11:00\", \"text\": \"Обновил Podfile.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"11:05\", \"text\": \"Запушил изменения.\" },\n          { \"id\": 3, \"userId\": 4, \"time\": \"11:10\", \"text\": \"Сборка прошла успешно.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"11:10\", \"text\": \"Отлично, тогда можно тестировать.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"11:15\", \"text\": \"Уже запустил на симуляторе.\" }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"android\",\n        \"unreadCount\": 3,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"12:00\", \"text\": \"Перешли на Compose?\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"12:05\", \"text\": \"Пока нет, но планируем.\" },\n          { \"id\": 3, \"userId\": 1, \"time\": \"12:10\", \"text\": \"Я бы начал с нового модуля.\" },\n          { \"id\": 4, \"userId\": 4, \"time\": \"12:15\", \"text\": \"Хорошая идея.\" },\n          { \"id\": 5, \"userId\": 1, \"time\": \"12:15\", \"text\": \"Тогда создадим тикет.\" },\n          { \"id\": 6, \"userId\": 4, \"time\": \"12:18\", \"text\": \"Уже создал.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 5,\n    \"name\": \"DevOps\",\n    \"icon\": \"O\",\n    \"owner\": 5,\n    \"memberIds\": [2, 3, 5],\n    \"description\": \"Инфраструктура, деплои, CI/CD, мониторинг и стабильность сервисов.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 2, \"time\": \"07:30\", \"text\": \"Упал прод вчера ночью?\" },\n          { \"id\": 2, \"userId\": 3, \"time\": \"07:35\", \"text\": \"Да, но мы перезапустили контейнеры.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"07:40\", \"text\": \"Нужно настроить мониторинг.\" },\n          { \"id\": 4, \"userId\": 3, \"time\": \"07:45\", \"text\": \"Уже добавил алерты в Prometheus.\" },\n          { \"id\": 5, \"userId\": 2, \"time\": \"07:45\", \"text\": \"Отлично, тогда больше не повторится.\" },\n          { \"id\": 6, \"userId\": 3, \"time\": \"07:50\", \"text\": \"Надеюсь.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"версии\",\n        \"unreadCount\": 2,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 3, \"time\": \"09:00\", \"text\": \"Обновил кластер до 1.28.\" },\n          { \"id\": 2, \"userId\": 2, \"time\": \"09:10\", \"text\": \"Всё работает стабильно?\" },\n          { \"id\": 3, \"userId\": 3, \"time\": \"09:15\", \"text\": \"Да, тесты прошли.\" },\n          { \"id\": 4, \"userId\": 2, \"time\": \"09:20\", \"text\": \"Отлично, тогда можно масштабировать.\" },\n          { \"id\": 5, \"userId\": 3, \"time\": \"09:20\", \"text\": \"Уже планирую добавить новые ноды.\" }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": 6,\n    \"name\": \"QA\",\n    \"icon\": \"Q\",\n    \"owner\": 5,\n    \"memberIds\": [1, 2, 4, 5],\n    \"description\": \"Тестирование, автоматизация, поиск ошибок, регрессионное тестирование и контроль качества.\",\n    \"channels\": [\n      {\n        \"id\": 1,\n        \"name\": \"главная\",\n        \"unreadCount\": 5,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 1, \"time\": \"09:30\", \"text\": \"Начинаем тестирование спринта.\" },\n          { \"id\": 2, \"userId\": 4, \"time\": \"09:35\", \"text\": \"У меня есть тест-кейсы.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"09:40\", \"text\": \"Я проверил основную логику.\" },\n          { \"id\": 4, \"userId\": 1, \"time\": \"09:45\", \"text\": \"Нашёл баг в форме регистрации.\" },\n          { \"id\": 5, \"userId\": 4, \"time\": \"09:50\", \"text\": \"Завёл баг-репорт.\" },\n          { \"id\": 6, \"userId\": 2, \"time\": \"09:55\", \"text\": \"Исправлю сегодня.\" },\n          { \"id\": 7, \"userId\": 1, \"time\": \"09:55\", \"text\": \"Отлично, тогда ждём фикс.\" },\n          { \"id\": 8, \"userId\": 4, \"time\": \"09:58\", \"text\": \"Я ещё нашёл баг с кэшированием.\" },\n          { \"id\": 9, \"userId\": 2, \"time\": \"10:00\", \"text\": \"Ок, добавлю в список.\" }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"автоматизация\",\n        \"unreadCount\": 0,\n        \"messages\": [\n          { \"id\": 1, \"userId\": 4, \"time\": \"11:00\", \"text\": \"Дописал Selenium-тесты.\" },\n          { \"id\": 2, \"userId\": 1, \"time\": \"11:05\", \"text\": \"Запустил прогон — всё зелено.\" },\n          { \"id\": 3, \"userId\": 2, \"time\": \"11:10\", \"text\": \"Супер, можно добавить в CI.\" },\n          { \"id\": 4, \"userId\": 4, \"time\": \"11:10\", \"text\": \"Уже добавил в пайплайн.\" },\n          { \"id\": 5, \"userId\": 1, \"time\": \"11:15\", \"text\": \"Тогда можно мержить.\" }\n        ]\n      }\n    ]\n  }\n]"
+    },
+    {
+      "uuid": "0b227aee-0303-45be-be0f-f4722b051bd6",
+      "id": "hmnw",
+      "name": "Channels",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": \"general\",\n    \"groupId\": \"frontend\",\n    \"name\": \"главная\",\n    \"unreadCount\": 3\n  },\n  {\n    \"id\": \"random\",\n    \"groupId\": \"frontend\",\n    \"name\": \"рандом\",\n    \"unreadCount\": 0\n  },\n  {\n    \"id\": \"frontend-news\",\n    \"groupId\": \"frontend\",\n    \"name\": \"новости\",\n    \"unreadCount\": 2\n  },\n  {\n    \"id\": \"general-design\",\n    \"groupId\": \"design\",\n    \"name\": \"главная\",\n    \"unreadCount\": 0\n  },\n  {\n    \"id\": \"design-chat\",\n    \"groupId\": \"design\",\n    \"name\": \"дизайн\",\n    \"unreadCount\": 5\n  },\n  {\n    \"id\": \"design-feedback\",\n    \"groupId\": \"design\",\n    \"name\": \"обратная связь\",\n    \"unreadCount\": 1\n  },\n{\n    \"id\": \"general-backend\",\n    \"groupId\": \"backend\",\n    \"name\": \"главная\",\n    \"unreadCount\": 4\n  },\n  {\n    \"id\": \"backend-arch\",\n    \"groupId\": \"backend\",\n    \"name\": \"архитектура\",\n    \"unreadCount\": 2\n  },\n  {\n      \"id\": \"general-mobile\",\n      \"groupId\": \"mobile\",\n      \"name\": \"главная\",\n      \"unreadCount\": 0\n  },\n  {\n    \"id\": \"mobile-ios\",\n    \"groupId\": \"mobile\",\n    \"name\": \"ios\",\n    \"unreadCount\": 1\n  },\n  {\n    \"id\": \"mobile-android\",\n    \"groupId\": \"mobile\",\n    \"name\": \"android\",\n    \"unreadCount\": 3\n  },\n  {\n    \"id\": \"general-devops\",\n    \"groupId\": \"devops\",\n    \"name\": \"главная\",\n    \"unreadCount\": 0\n  },\n  {\n    \"id\": \"devops-k8s\",\n    \"groupId\": \"devops\",\n    \"name\": \"версии\",\n    \"unreadCount\": 2\n  },\n  {\n    \"id\": \"general-qa\",\n    \"groupId\": \"qa\",\n    \"name\": \"главная\",\n    \"unreadCount\": 5\n  },\n  {\n    \"id\": \"qa-automation\",\n    \"groupId\": \"qa\",\n    \"name\": \"автоматизация\",\n    \"unreadCount\": 0\n  }\n]"
+    },
+    {
+      "uuid": "35b5e4aa-ddef-41c2-bb95-ec5b2dc717cc",
+      "id": "nrc0",
+      "name": "DirectChats",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": 1,\n    \"userIds\": [1, 2],\n    \"messages\": [\n      {\n        \"id\": 1,\n        \"userId\": 1,\n        \"text\": \"Привет! Как дела?\",\n        \"time\": \"09:15\"\n      },\n      {\n        \"id\": 2,\n        \"userId\": 2,\n        \"text\": \"Привет! Всё отлично.\",\n        \"time\": \"09:16\"\n      },\n      {\n        \"id\": 3,\n        \"userId\": 1,\n        \"text\": \"Что сегодня по задачам?\",\n        \"time\": \"09:18\"\n      },\n      {\n        \"id\": 4,\n        \"userId\": 2,\n        \"text\": \"Надо закончить авторизацию и проверить API.\",\n        \"time\": \"09:20\"\n      },\n      {\n        \"id\": 5,\n        \"userId\": 1,\n        \"text\": \"Окей, тогда вечером посмотрю.\",\n        \"time\": \"09:22\"\n      }\n    ]\n  },\n  {\n    \"id\": 2,\n    \"userIds\": [2, 3],\n    \"messages\": [\n      {\n        \"id\": 6,\n        \"userId\": 3,\n        \"text\": \"Скинул тебе макеты.\",\n        \"time\": \"10:20\"\n      },\n      {\n        \"id\": 7,\n        \"userId\": 2,\n        \"text\": \"Вижу, сейчас посмотрю.\",\n        \"time\": \"10:21\"\n      },\n      {\n        \"id\": 8,\n        \"userId\": 3,\n        \"text\": \"Особенно глянь новый header.\",\n        \"time\": \"10:21\"\n      },\n      {\n        \"id\": 9,\n        \"userId\": 2,\n        \"text\": \"Да, выглядит намного лучше.\",\n        \"time\": \"10:34\"\n      },\n      {\n        \"id\": 10,\n        \"userId\": 3,\n        \"text\": \"Тогда оставляем этот вариант.\",\n        \"time\": \"10:36\"\n      },\n      {\n        \"id\": 11,\n        \"userId\": 2,\n        \"text\": \"Договорились.\",\n        \"time\": \"10:37\"\n      }\n    ]\n  },\n  {\n    \"id\": 3,\n    \"userIds\": [1, 4],\n    \"messages\": [\n      {\n        \"id\": 12,\n        \"userId\": 4,\n        \"text\": \"Ты сегодня будешь на созвоне?\",\n        \"time\": \"11:05\"\n      },\n      {\n        \"id\": 13,\n        \"userId\": 1,\n        \"text\": \"Да, буду.\",\n        \"time\": \"11:06\"\n      },\n      {\n        \"id\": 14,\n        \"userId\": 4,\n        \"text\": \"Окей, тогда до встречи.\",\n        \"time\": \"11:07\"\n      }\n    ]\n  },\n  {\n    \"id\": 4,\n    \"userIds\": [1, 5],\n    \"messages\": [\n      {\n        \"id\": 15,\n        \"userId\": 5,\n        \"text\": \"Я закончил свою задачу.\",\n        \"time\": \"12:30\"\n      },\n      {\n        \"id\": 16,\n        \"userId\": 1,\n        \"text\": \"Отлично. Можно отправлять на ревью.\",\n        \"time\": \"12:31\"\n      },\n      {\n        \"id\": 17,\n        \"userId\": 5,\n        \"text\": \"Уже отправил 👍\",\n        \"time\": \"12:32\"\n      },\n      {\n        \"id\": 18,\n        \"userId\": 1,\n        \"text\": \"Посмотрю в течение часа.\",\n        \"time\": \"12:40\"\n      }\n    ]\n  },\n  {\n    \"id\": 5,\n    \"userIds\": [2, 5],\n    \"messages\": [\n      {\n        \"id\": 19,\n        \"userId\": 2,\n        \"text\": \"У тебя случайно нет последней версии API?\",\n        \"time\": \"13:10\"\n      },\n      {\n        \"id\": 20,\n        \"userId\": 5,\n        \"text\": \"Есть, сейчас закину.\",\n        \"time\": \"13:12\"\n      },\n      {\n        \"id\": 21,\n        \"userId\": 2,\n        \"text\": \"Спасибо.\",\n        \"time\": \"13:13\"\n      }\n    ]\n  },\n  {\n    \"id\": 6,\n    \"userIds\": [3, 5],\n    \"messages\": [\n      {\n        \"id\": 22,\n        \"userId\": 3,\n        \"text\": \"Привет, можешь помочь с CSS?\",\n        \"time\": \"14:02\"\n      },\n      {\n        \"id\": 23,\n        \"userId\": 5,\n        \"text\": \"Да, кидай код.\",\n        \"time\": \"14:04\"\n      },\n      {\n        \"id\": 24,\n        \"userId\": 3,\n        \"text\": \"Вот, проблема с flex.\",\n        \"time\": \"14:06\"\n      },\n      {\n        \"id\": 25,\n        \"userId\": 5,\n        \"text\": \"Сейчас посмотрю.\",\n        \"time\": \"14:08\"\n      }\n    ]\n  },\n  {\n    \"id\": 7,\n    \"userIds\": [4, 5],\n    \"messages\": [\n      {\n        \"id\": 26,\n        \"userId\": 5,\n        \"text\": \"Когда будет готов новый дизайн?\",\n        \"time\": \"15:15\"\n      },\n      {\n        \"id\": 27,\n        \"userId\": 4,\n        \"text\": \"Думаю, к завтрашнему утру.\",\n        \"time\": \"15:18\"\n      }\n    ]\n  },\n  {\n    \"id\": 8,\n    \"userIds\": [1, 5],\n    \"messages\": [\n      {\n        \"id\": 28,\n        \"userId\": 1,\n        \"text\": \"Кстати, не забудь про новый канал.\",\n        \"time\": \"16:20\"\n      },\n      {\n        \"id\": 29,\n        \"userId\": 5,\n        \"text\": \"Точно, вечером создам.\",\n        \"time\": \"16:22\"\n      }\n    ]\n  }\n]"
+    }
+  ],
+  "callbacks": []
 }

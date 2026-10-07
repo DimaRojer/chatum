@@ -14,6 +14,7 @@ import { useUser } from "@/context/UserContext";
 interface ChatItemProps {
     message: Message;
     user: User;
+    users: User[];
     isGrouped: boolean;
     messages: Message[];
     onDelete: (messageId: number) => void;
@@ -29,6 +30,7 @@ export const ChatItem = ({
     onDelete,
     onEdit,
     onReply,
+    users,
 }: ChatItemProps) => {
     const { user: currentUser } = useUser();
     const { selectedMessageId, selectMessage } = useMessageSelection();
@@ -37,7 +39,9 @@ export const ChatItem = ({
     const replyMessage = message.replyToId
         ? messages.find((item) => item.id === message.replyToId)
         : null;
-
+        const replyUser = users.find(
+            (user) => user.id === replyMessage?.userId
+        );
     const imageAttachments =
         message.attachments?.filter((attachment) =>
             attachment.type.startsWith("image/")
@@ -108,6 +112,38 @@ export const ChatItem = ({
         }
     };
 
+    const handleReplyClick = (
+        messageId: number
+    ) => {
+        const element = document.getElementById(
+            `message-${messageId}`
+        );
+
+        if (!element) {
+            return;
+        }
+
+        element.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+        });
+
+        element.classList.remove(
+            "message--highlight"
+        );
+
+        requestAnimationFrame(() => {
+            element.classList.add(
+                "message--highlight"
+            );
+        });
+
+        setTimeout(() => {
+            element.classList.remove(
+                "message--highlight"
+            );
+        }, 2500);
+    };
     const contextMenuContent = (
         <>
             <button
@@ -150,129 +186,113 @@ export const ChatItem = ({
             )}
         </>
     );
-
     const shouldShowHeader = !isGrouped || replyMessage;
     return (
-        
         <ContextMenu menu={contextMenuContent}>
             <div
                 ref={messageRef}
                 id={`message-${message.id}`}
-                className={`message ${isSelected ? "message--selected" : ""}`}
+                className={`message ${ isSelected ? "message--selected" : ""}`}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchEnd}
             >
-                {shouldShowHeader && (
-                    <div className="message__image">
-                        <Image
-                            width={36}
-                            height={36}
-                            className="avatar-image"
-                            src={user.avatar || "/default-avatar.jpg"}
-                            alt={user.name}
-                            unoptimized
-                        />
-                    </div>
+                {replyMessage && (
+                    <button
+                        type="button"
+                        className="message__reply text-start"
+                        onClick={() =>handleReplyClick(replyMessage.id)}
+                    >
+                        <div className="message__reply-name">
+                            {replyUser?.name}
+                        </div>
+                        <p className="message__reply-text">{replyMessage.text}</p>
+                    </button>
                 )}
-
-                <div className="message-info">
-                    {replyMessage && (
-                        <div className="message__reply">
-                            <p className="message__reply-text">
-                                {replyMessage.text}
-                            </p>
-                        </div>
-                    )}
-
+                <div className="message__body">
                     {shouldShowHeader && (
-                        <div className="message-info__header">
-                            <div className="message-info__name">
-                                {user.name}
-                            </div>
-                            <span className="message-info__time">
-                                {message.time}
-                            </span>
+                        <div className="message__image">
+                            <Image
+                                width={36}
+                                height={36}
+                                className="avatar-image"
+                                src={ user.avatar || "/default-avatar.jpg"}
+                                alt={user.name}
+                                unoptimized
+                            />
                         </div>
                     )}
-
-                    <div className="message-info__content">
-                        <div className="message-info__text-time">
-                            {isGrouped && !replyMessage && (
-                                <span className="message-info__time">
-                                    {message.time}
-                                </span>
-                            )}
-
-                            <div className="message-item">
-                                {message.text && (
-                                    <div className="message-info__text-wrapper">
-                                        <p className="message-info__text">
-                                            {message.text}
-                                        </p>
-                                        {message.edited && (
-                                            <Icon
-                                                name="edit"
-                                                width={14}
-                                                height={14}
-                                            />
-                                        )}
-                                    </div>
+                    <div className="message-info">
+                        {shouldShowHeader && (
+                            <div className="message-info__header">
+                                <div className="message-info__name">{user.name}</div>
+                                <span className="message-info__time">{message.time}</span>
+                            </div>
+                        )}
+                        <div className="message-info__content">
+                            <div className="message-info__text-time">
+                                {isGrouped && !replyMessage && (
+                                    <span className="message-info__time">{message.time}</span>
                                 )}
+                                <div className="message-item">
+                                    {message.text && (
+                                        <div className="message-info__text-wrapper">
+                                            <p className="message-info__text">{message.text}</p>
+                                            {message.edited && (
+                                                <Icon name="edit" width={14} height={14}/>
+                                            )}
+                                        </div>
+                                    )}
+                                    {imageAttachments.length > 0 && (
+                                        <div className="attachment-container attachment-container--images">
+                                            {imageAttachments.map(
+                                                (attachment,index) => (
+                                                    <a key={index} href={attachment.url} target="_blank" rel="noreferrer">
+                                                        <Image
+                                                            width={320}
+                                                            height={320}
+                                                            className="message__attachment"
+                                                            src={attachment.url}
+                                                            alt={attachment.name}
+                                                        />
+                                                    </a>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
 
-                                {imageAttachments.length > 0 && (
-                                    <div className="attachment-container attachment-container--images">
-                                        {imageAttachments.map((attachment, index) => (
-                                            <a
-                                                key={index}
-                                                href={attachment.url}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <Image
-                                                    width={320}
-                                                    height={320}
-                                                    className="message__attachment"
-                                                    src={attachment.url}
-                                                    alt={attachment.name}
-                                                />
-                                            </a>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {fileAttachments.length > 0 && (
-                                    <div className="attachment-container attachment-container--files">
-                                        {fileAttachments.map((attachment, index) => {
-                                            const iconName = getFileIcon(attachment.name);
-
-                                            return (
-                                                <a
-                                                    key={index}
-                                                    className="message__attachment message__attachment--file"
-                                                    href={attachment.url}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                >
-                                                    <Image
-                                                        className="message__attachment-icon"
-                                                        src={`/icons/${iconName}.svg`}
-                                                        alt=""
-                                                        width={24}
-                                                        height={24}
-                                                    />
-                                                    <span className="message__attachment-name">
-                                                        {attachment.name}
-                                                    </span>
-                                                </a>
-                                            );
-                                        })}
-                                    </div>
-                                )}
+                                    {fileAttachments.length > 0 && (
+                                        <div className="attachment-container attachment-container--files">
+                                            {fileAttachments.map(( attachment, index) => {
+                                                    const iconName = getFileIcon(attachment.name);
+                                                    return (
+                                                        <a
+                                                            key={index}
+                                                            className="message__attachment message__attachment--file"
+                                                            href={attachment.url}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                        >
+                                                            <Image
+                                                                className="message__attachment-icon"
+                                                                src={`/icons/${iconName}.svg`}
+                                                                alt=""
+                                                                width={24}
+                                                                height={24}
+                                                            />
+                                                            <span className="message__attachment-name">{attachment.name}</span>
+                                                        </a>
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </ContextMenu>
     );

@@ -1,6 +1,9 @@
 .search-list {
 	display: flex;
 	gap: 16px;
+	@include md {
+		flex-direction: column;
+	}
 	&__item {
 		display: grid;
 		grid-template-columns: 72px 1fr 16px;

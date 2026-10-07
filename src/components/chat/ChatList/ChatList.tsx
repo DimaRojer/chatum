@@ -118,6 +118,7 @@ export const ChatList = ({
                             key={message.id}
                             message={message}
                             user={user}
+                            users={users}
                             isGrouped={isGrouped}
                             messages={messages}
                             onDelete={handleDeleteRequest}

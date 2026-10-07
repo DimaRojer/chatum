@@ -44,18 +44,6 @@ export const MeSidebar = ({
             }`}
         >
             <div className="flex flex-col h-full">
-                <div className="me-sidebar__mobile-head">
-                    <button
-                        type="button"
-                        className="me-sidebar__mobile-search"
-                    >
-                        <Icon
-                            name="search"
-                            width={18}
-                            height={18}
-                        />
-                    </button>
-                </div>
 
                 <div className="chats-sidebar__messages me-sidebar__messages">
                     <div className="chats-sidebar__title-head me-sidebar__desktop-title">

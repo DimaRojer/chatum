@@ -25,7 +25,9 @@ export const Sessions = () => {
         return null;
     }
 
-    const selectedSession = user.sessions.find(
+    const sessions = user.sessions ?? [];
+
+    const selectedSession = sessions.find(
         (session) =>
             session.id === selectedSessionId
     );
@@ -41,7 +43,7 @@ export const Sessions = () => {
         }
 
         updateUser({
-            sessions: user.sessions.filter(
+            sessions: sessions.filter(
                 (session) =>
                     session.id !== selectedSessionId
             ),
@@ -67,7 +69,7 @@ export const Sessions = () => {
             </div>
 
             <div className="sessions__list">
-                {user.sessions.map((session) => (
+                {sessions.map((session) => (
                     <div
                         className="sessions__item"
                         key={session.id}

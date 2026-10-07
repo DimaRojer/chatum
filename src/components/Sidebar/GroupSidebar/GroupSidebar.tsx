@@ -24,24 +24,10 @@ export const GroupSidebar = ({
 }: GroupSidebarProps) => {
     const router = useRouter();
     const pathname = usePathname();
-
-    const {
-        groups,
-        leaveGroup,
-    } = useGroups();
-
-    const { user: currentUser } =
-        useUser();
-
-    const [
-        isLeaveModalOpen,
-        setIsLeaveModalOpen,
-    ] = useState(false);
-
-    const [
-        leaveGroupId,
-        setLeaveGroupId,
-    ] = useState<number | null>(null);
+    const { groups,leaveGroup,} = useGroups();
+    const { user: currentUser } = useUser();
+    const [ isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
+    const [ leaveGroupId, setLeaveGroupId] = useState<number | null>(null);
 
     const myGroups = currentUser
         ? groups.filter((group) =>
@@ -59,9 +45,7 @@ export const GroupSidebar = ({
                         <Link
                             href="/me"
                             className={`group-sidebar__link ${
-                                pathname.startsWith(
-                                    "/me"
-                                )
+                                pathname.startsWith("/me")
                                     ? "group-sidebar__link--active"
                                     : ""
                             }`}
@@ -80,29 +64,18 @@ export const GroupSidebar = ({
                     <ul className="group-sidebar__list group-sidebar__list--group">
                         {myGroups.map(
                             (group) => {
-                                const firstChannel =
-                                    group.channels[0];
-
+                                const firstChannel = group.channels[0];
                                 return (
                                     <ContextMenu
-                                        key={
-                                            group.id
-                                        }
+                                        key={group.id}
                                         menu={
                                             <>
-                                                <button type="button">
-                                                    Настройки группы
-                                                </button>
-
+                                                <button type="button">Настройки группы</button>
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        setLeaveGroupId(
-                                                            group.id
-                                                        );
-                                                        setIsLeaveModalOpen(
-                                                            true
-                                                        );
+                                                        setLeaveGroupId(group.id);
+                                                        setIsLeaveModalOpen(true);
                                                     }}
                                                 >
                                                     Выйти из группы
@@ -147,49 +120,24 @@ export const GroupSidebar = ({
                                 href="/settings"
                                 className="group-sidebar__link group-sidebar__link--menu"
                             >
-                                <Icon
-                                    name="settings"
-                                    width={24}
-                                    height={24}
-                                />
+                                <Icon name="settings" width={24} height={24}/>
                             </Link>
                         </li>
                     </ul>
                 </div>
             </div>
-
             <RemoveModal
-                isOpen={
-                    isLeaveModalOpen
-                }
+                isOpen={isLeaveModalOpen}
                 onClose={() => {
-                    setIsLeaveModalOpen(
-                        false
-                    );
-                    setLeaveGroupId(
-                        null
-                    );
+                    setIsLeaveModalOpen( false);
+                    setLeaveGroupId(null);
                 }}
                 onConfirm={() => {
-                    if (
-                        leaveGroupId ===
-                        null
-                    ) {
-                        return;
-                    }
-
-                    leaveGroup(
-                        leaveGroupId
-                    );
-
+                    if (leaveGroupId ===null) return;
+                    leaveGroup(leaveGroupId);
                     router.push("/me");
-
-                    setIsLeaveModalOpen(
-                        false
-                    );
-                    setLeaveGroupId(
-                        null
-                    );
+                    setIsLeaveModalOpen(false);
+                    setLeaveGroupId(null);
                 }}
                 title="Вы точно хотите выйти из беседы?"
                 description="После выхода вы больше не сможете отправлять сообщения в этой беседе."
