@@ -94,7 +94,7 @@
         },
         {
           "uuid": "a06e7617-68c7-41a9-b392-a161aafb6d00",
-          "body": "{\r\n  \"access\": \"fake-access-token-sara\",\r\n  \"refresh\": \"fake-refresh-token-sara\",\r\n  \"user\": {\r\n    \"id\": 1,\r\n    \"name\": \"Сара Ким\",\r\n    \"email\": \"sara.kim@acmecorp.com\",\r\n    \"avatar\": \"/2.jpg\",\r\n    \"status\": \"online\"\r\n  }\r\n}",
+          "body": "{\n  \"access\": \"fake-access-token-sara\",\n  \"refresh\": \"fake-refresh-token-sara\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Сара Ким\",\n    \"email\": \"sara.kim@acmecorp.com\",\n    \"avatar\": \"/2.jpg\",\n    \"status\": \"online\",\n    \"sessions\": [\n      {\n        \"id\": 4,\n        \"device\": \"MacBook Pro\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.42\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 5,\n        \"device\": \"iPhone 15 Pro\",\n        \"browser\": \"Safari\",\n        \"location\": \"Москва, Россия\",\n        \"ip\": \"192.168.1.43\",\n        \"lastActive\": \"1 час назад\",\n        \"current\": false\n      }\n    ]\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -121,7 +121,7 @@
         },
         {
           "uuid": "42911fac-1f7f-4fd8-903c-43d84fda4da6",
-          "body": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 6,\n    \"name\": \"Ivan Mihai\",\n    \"email\": \"ivan@main.ru\",\n    \"avatar\": \"\",\n    \"status\": \"online\"\n  }\n}",
+          "body": "{\n  \"access\": \"fake-access-token\",\n  \"refresh\": \"fake-refresh-token\",\n  \"user\": {\n    \"id\": 6,\n    \"name\": \"Ivan Mihai\",\n    \"email\": \"ivan@main.ru\",\n    \"avatar\": \"\",\n    \"status\": \"online\",\n    \"sessions\": [\n      {\n        \"id\": 6,\n        \"device\": \"Windows PC\",\n        \"browser\": \"Firefox\",\n        \"location\": \"Бухарест, Румыния\",\n        \"ip\": \"192.168.1.56\",\n        \"lastActive\": \"Сейчас\",\n        \"current\": true\n      },\n      {\n        \"id\": 7,\n        \"device\": \"Samsung Galaxy S24\",\n        \"browser\": \"Chrome\",\n        \"location\": \"Бухарест, Румыния\",\n        \"ip\": \"192.168.1.57\",\n        \"lastActive\": \"Вчера\",\n        \"current\": false\n      }\n    ]\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
