@@ -133,8 +133,8 @@
                     "rules": [
                         {
                             "target": "body",
-                            "modifier": "token",
-                            "value": "Bearer fake-access-token",
+                            "modifier": "email",
+                            "value": "ivan@main.ru",
                             "invert": false,
                             "operator": "equals"
                         }
